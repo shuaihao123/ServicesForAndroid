@@ -30,7 +30,10 @@
         <activity android:name=".MedicalAccomPanyActivity" />
         <activity android:name=".MedicalTreatmentActivity" />
         <activity android:name=".HomeNurseActivity" />
-        <activity android:name=".HouseBaojActivity"></activity>
+        <activity android:name=".HouseBaojActivity"/>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".UserdetailActivity"/>
+        <activity android:name=".RegisterActivity" />
     </application>
 
 </manifest>
