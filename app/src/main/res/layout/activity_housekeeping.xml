@@ -135,58 +135,64 @@
                 android:src="@drawable/phonezh" />
 
         </org.freecoding.servicesmanager.view.RoundLinearLayout>
-
-        <org.freecoding.servicesmanager.view.RoundLinearLayout
-            android:id="@+id/baojie"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="8dp"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="16dp"
-            app:rv_backgroundColor="#ffffff"
-            app:rv_cornerRadius="5dp">
+            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
-                android:background="@drawable/baojie" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
+            <org.freecoding.servicesmanager.view.RoundLinearLayout
+                android:id="@+id/baojie"
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:text="保洁"
-                    android:textColor="#4d5c70"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingRight="32dp"
-                    android:text="常规清洁服务：扫地、擦桌子、卫生间等" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/baojiephone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left|top"
-                android:src="@drawable/phonezh"/>
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                app:rv_backgroundColor="#ffffff"
+                app:rv_cornerRadius="5dp">
 
-        </org.freecoding.servicesmanager.view.RoundLinearLayout>
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/baojie" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:text="保洁"
+                        android:textColor="#4d5c70"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="32dp"
+                        android:text="常规清洁服务：扫地、擦桌子、卫生间等" />
+
+                </LinearLayout>
+
+
+            </org.freecoding.servicesmanager.view.RoundLinearLayout>
+            <ImageView
+                android:layout_weight="0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_cktd"
+                />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
