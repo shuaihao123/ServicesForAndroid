@@ -102,12 +102,13 @@
         </LinearLayout>
 
 
-        <Button
+        <TextView
+            android:gravity="center"
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
             android:layout_gravity="center_horizontal"
             android:text="注册"
-            android:background="@drawable/loginanniu"
+            android:background="@drawable/ic_commit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

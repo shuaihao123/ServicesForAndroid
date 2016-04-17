@@ -107,13 +107,13 @@
 
         </LinearLayout>
 
-        <Button
+        <TextView
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
             android:layout_gravity="center_horizontal"
             android:text="登录"
-
-            android:background="@drawable/loginanniu"
+            android:gravity="center"
+            android:background="@drawable/ic_commit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

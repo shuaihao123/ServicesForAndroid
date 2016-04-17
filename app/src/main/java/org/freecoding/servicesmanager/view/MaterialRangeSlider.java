@@ -36,7 +36,7 @@ public class MaterialRangeSlider extends View {
 
     //Padding that is always added to both sides of slider, in addition to layout_margin
     private static final int HORIZONTAL_PADDING = 80;
-    private static final int DEFAULT_TOUCH_TARGET_SIZE = 10;
+    private static final int DEFAULT_TOUCH_TARGET_SIZE = 100;
     private static final int DEFAULT_UNPRESSED_RADIUS = 15;
     private static final int DEFAULT_PRESSED_RADIUS = 40;
     private static final int DEFAULT_INSIDE_RANGE_STROKE_WIDTH = 8;
