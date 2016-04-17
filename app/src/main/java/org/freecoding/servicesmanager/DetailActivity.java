@@ -19,8 +19,6 @@ public class DetailActivity extends AppCompatActivity {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.riqi)
-    RoundLinearLayout yuesaoriqi;
     @Bind(R.id.age)
     SeekBar yuesaoage;
     @Bind(R.id.name)
