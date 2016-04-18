@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.widget.EditText;
 
 import org.freecoding.servicesmanager.view.RoundLinearLayout;
+import org.freecoding.servicesmanager.view.RoundTextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,6 +28,10 @@ public class MedicaladviceActivity extends AppCompatActivity {
     EditText yiliaophone;
     @Bind(R.id.yiliaodizhi)
     EditText yiliaodizhi;
+    @Bind(R.id.yiliaoadd)
+    RoundTextView yiliaoadd;
+    @Bind(R.id.yiliaofinsh)
+    RoundTextView yiliaofinsh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

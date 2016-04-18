@@ -30,10 +30,26 @@
         <activity android:name=".MedicalAccomPanyActivity" />
         <activity android:name=".MedicalTreatmentActivity" />
         <activity android:name=".HomeNurseActivity" />
-        <activity android:name=".HouseBaojActivity"/>
+        <activity android:name=".HouseBaojActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".UserdetailActivity"/>
+        <activity android:name=".UserdetailActivity" />
         <activity android:name=".RegisterActivity" />
+        <activity android:name=".UserSettingActivity" />
+        <activity android:name=".HomeOrderActivity" />
+        <activity android:name=".NursingOrderActivity" />
+        <activity android:name=".MedicalOrderActivity" />
+        <activity android:name=".HomeCleaningOrderActivity" />
+        <activity android:name=".HomeDetailOrderActivity" />
+        <activity android:name=".HomeNurseOrderActivity" />
+        <activity android:name=".HomeSpaOrderActivity" />
+        <activity android:name=".HomeChastityOrderActivity" />
+        <activity android:name=".HomeScalingOrderActivity" />
+        <activity android:name=".HomeSkincareOrderActivity" />
+        <activity android:name=".HomeMedicaladviceOrderActivity" />
+        <activity android:name=".HomeMedicalinjectionOrderActivity" />
+        <activity android:name=".HomeMedicalregistrOrderActivity" />
+        <activity android:name=".HomeMedicalaccompanyOrderActivity" />
+        <activity android:name=".HomeMedicaltreatmentOrderActivity"></activity>
     </application>
 
 </manifest>

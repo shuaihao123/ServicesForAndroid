@@ -1,44 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EDF5F7"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="196dp"
-        android:background="@drawable/yonghubj">
-
-        <ImageView
-            android:id="@+id/imagetx"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/yonghutouxiang"
-            android:paddingBottom="10dp" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:navigationIcon="@drawable/fanhui"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <TextView
-            android:id="@+id/grname"
+            android:id="@+id/dazhen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imagetx"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="20dp"
-            android:text="甘道夫"
-            android:textColor="#ffffff"
-            android:textSize="16dp" />
-
-        <ImageView
-            android:id="@+id/imageshezhi"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/yonghushezhi"
-
-            />
-    </RelativeLayout>
+            android:layout_gravity="center"
+            android:text="修改资料"
+            android:textColor="#4D5C70"
+            android:textSize="36px"
+            android:textStyle="bold" />
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,25 +36,19 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/detaildiancan"
+                android:id="@+id/settingtx"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="16dp"
-                    android:background="@drawable/wodediancan" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="36dp"
                     android:layout_weight="1"
-                    android:text="我的点餐"
+                    android:text="头像"
                     android:textColor="@color/text_second_color"
                     android:textSize="16sp" />
 
@@ -94,29 +73,30 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/detailjiazhen"
+                android:id="@+id/settingname"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="16dp"
-                    android:background="@drawable/ic_xiaojz" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="36dp"
                     android:layout_weight="1"
-                    android:text="我的家政"
+                    android:text="姓名"
                     android:textColor="@color/text_second_color"
                     android:textSize="16sp" />
 
-                <ImageView
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="甘道夫"
+                    android:layout_marginRight="32dp"
+                    android:textColor="@color/text_second_color" />
+
+                ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
@@ -137,29 +117,30 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/detailhuli"
+                android:id="@+id/settingsex"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="16dp"
-                    android:background="@drawable/ic_xiaohl" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="36dp"
                     android:layout_weight="1"
-                    android:text="我的护理"
+                    android:text="性别"
                     android:textColor="@color/text_second_color"
                     android:textSize="16sp" />
 
-                <ImageView
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="男"
+                    android:layout_marginRight="32dp"
+                    android:textColor="@color/text_second_color" />
+
+                ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
@@ -180,70 +161,30 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/detailyiliao"
+                android:id="@+id/settingzjian"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="16dp"
-                    android:background="@drawable/ic_xiaoyl" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="36dp"
                     android:layout_weight="1"
-                    android:text="我的医疗"
+                    android:text="证件类型"
                     android:textColor="@color/text_second_color"
                     android:textSize="16sp" />
 
-                <ImageView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
+                    android:text="身份证"
                     android:layout_marginRight="32dp"
-                    android:src="@drawable/ic_next" />
+                    android:textColor="@color/text_second_color" />
 
-            </LinearLayout>
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/detailupdatepwd"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="34dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_weight="1"
-                    android:text="修改密码"
-                    android:textColor="@color/text_second_color"
-                    android:textSize="16sp" />
-
-                <ImageView
+                ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
@@ -264,7 +205,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/detailfankui"
+                android:id="@+id/settingzjianhao"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:gravity="center_vertical"
@@ -274,14 +215,20 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="34dp"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="36dp"
                     android:layout_weight="1"
-                    android:text="意见反馈"
+                    android:text="证件号"
                     android:textColor="@color/text_second_color"
                     android:textSize="16sp" />
 
-                <ImageView
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="323323232232323232"
+                    android:layout_marginRight="32dp"
+                    android:textColor="@color/text_second_color" />
+
+                ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
@@ -302,7 +249,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/detailgywomen"
+                android:id="@+id/settingphone"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:gravity="center_vertical"
@@ -312,32 +259,32 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="34dp"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="36dp"
                     android:layout_weight="1"
-                    android:text="关于我们"
+                    android:text="手机"
                     android:textColor="@color/text_second_color"
                     android:textSize="16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="13854383845"
+                    android:layout_marginRight="32dp"
+                    android:textColor="@color/text_second_color" />
 
-                <ImageView
+                ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="32dp"
                     android:src="@drawable/ic_next" />
+
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:background="@drawable/ic_driver"></View>
         </LinearLayout>
-        <TextView
-            android:background="#ffffff"
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:gravity="center"
-            android:id="@+id/finshlogin"
-            android:text="退出登录"
-            android:textColor="@color/text_second_color"
-            android:textSize="16sp" />
     </LinearLayout>
 
 </LinearLayout>

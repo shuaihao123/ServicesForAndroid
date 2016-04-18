@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 
 import org.freecoding.servicesmanager.view.RoundLinearLayout;
+import org.freecoding.servicesmanager.view.RoundTextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,6 +31,10 @@ public class MedicalInjectionActivity extends AppCompatActivity {
     EditText yuyuephone;
     @Bind(R.id.yuyuedizhi)
     EditText yuyuedizhi;
+    @Bind(R.id.yuyueadd)
+    RoundTextView yuyueadd;
+    @Bind(R.id.yuyuefinsh)
+    RoundTextView yuyuefinsh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

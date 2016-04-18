@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.widget.EditText;
 import android.widget.SeekBar;
 
+import org.freecoding.servicesmanager.view.LinedEditText;
 import org.freecoding.servicesmanager.view.RoundLinearLayout;
 
 import butterknife.Bind;
@@ -27,6 +28,8 @@ public class DetailActivity extends AppCompatActivity {
     EditText yuesaophone;
     @Bind(R.id.dizhi)
     EditText yuesaodizhi;
+    @Bind(R.id.beizhu)
+    LinedEditText beizhu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

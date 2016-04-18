@@ -245,7 +245,6 @@
                     android:text="提交订单"
                     android:textColor="#FFFFFF"
                     android:background="@drawable/ic_commit"/>
-
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

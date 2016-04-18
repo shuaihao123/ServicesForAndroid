@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import org.freecoding.servicesmanager.view.RoundLinearLayout;
 
@@ -18,15 +19,15 @@ public class MedicalActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.yiliao)
-    RoundLinearLayout yiliao;
+   LinearLayout yiliao;
     @Bind(R.id.yuyue)
-    RoundLinearLayout yuyue;
+    LinearLayout yuyue;
     @Bind(R.id.guahao)
-    RoundLinearLayout guahao;
+    LinearLayout guahao;
     @Bind(R.id.peizhen)
-    RoundLinearLayout peizhen;
+    LinearLayout peizhen;
     @Bind(R.id.gotozhiliao)
-    RoundLinearLayout gotozhiliao;
+    LinearLayout gotozhiliao;
     @Bind(R.id.yiliaophone)
     ImageView yiliaophone;
     @Bind(R.id.yuyuephone)
@@ -50,5 +51,6 @@ public class MedicalActivity extends AppCompatActivity {
     private void init() {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+
     }
 }

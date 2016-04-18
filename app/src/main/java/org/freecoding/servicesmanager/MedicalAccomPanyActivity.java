@@ -6,9 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.EditText;
 import android.widget.SeekBar;
-
 import org.freecoding.servicesmanager.view.RoundLinearLayout;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 

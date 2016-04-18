@@ -78,7 +78,7 @@
                 </RelativeLayout>
 
                 <SeekBar
-                    android:id="@+id/baomuriqi"
+                    android:id="@+id/baomutime"
                     android:padding="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

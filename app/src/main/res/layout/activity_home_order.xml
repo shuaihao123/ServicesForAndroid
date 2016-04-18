@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EDF5F7"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
+
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -15,30 +16,34 @@
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <TextView
+            android:id="@+id/baomu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="家政服务"
-            android:textColor="#4D5C6F"
-            android:textSize="20sp"
+            android:text="我的家政"
+            android:textColor="#4D5C70"
+            android:textSize="36px"
             android:textStyle="bold" />
-    </android.support.v7.widget.Toolbar>
 
+    </android.support.v7.widget.Toolbar>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        >
 
         <LinearLayout
-            android:id="@+id/baomu"
-            android:layout_width="match_parent"
+            android:id="@+id/baomuorder"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:clickable="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp"
+
             android:background="@drawable/ic_jiazhen_bg">
 
             <ImageView
@@ -66,39 +71,43 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingRight="32dp"
-                    android:text="做饭、洗衣、照顾老、孩子等"
-                    android:textColor="#9098a3"
-                    android:textSize="24px" />、
+                    android:text="暂无订单" />
 
             </LinearLayout>
-
-            <ImageView
-                android:id="@+id/baomuphone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|top"
-                android:src="@drawable/phonezh" />
-
         </LinearLayout>
+        <ImageView
+            android:id="@+id/cxbmorder"
+            android:layout_weight="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_cktd"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        >
 
         <LinearLayout
-            android:id="@+id/yuesao"
-            android:layout_width="match_parent"
+            android:id="@+id/yuesaoorder"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:clickable="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp"
-           android:background="@drawable/ic_jiazhen_bg"
-            >
+
+            android:background="@drawable/ic_jiazhen_bg">
 
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginLeft="16dp"
-                android:background="@drawable/naiping" />
+                android:background="@drawable/naiping"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -119,32 +128,37 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingRight="32dp"
-                    android:textColor="#9098a3"
-                    android:textSize="24px"
-                    android:text="月子护理、新生儿、产妇护理" />
+                    android:text="暂无订单" />
 
             </LinearLayout>
-
-            <ImageView
-                android:id="@+id/yuesaophone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|top"
-                android:src="@drawable/phonezh" />
-
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/baojie"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/cxysorder"
+            android:layout_weight="0"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:background="@drawable/ic_cktd"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/baojieorder"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:clickable="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp"
-            android:background="@drawable/ic_jiazhen_bg"
-            >
+
+            android:background="@drawable/ic_jiazhen_bg">
 
             <ImageView
                 android:layout_width="48dp"
@@ -171,20 +185,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingRight="32dp"
-                    android:textColor="#9098a3"
-                    android:textSize="24px"
-                    android:text="常规清洁服务:扫地、擦桌子、卫生间等" />
+                    android:text="已下订单" />
 
             </LinearLayout>
-
-            <ImageView
-                android:id="@+id/baojiephone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|top"
-                android:src="@drawable/phonezh" />
-
         </LinearLayout>
-
+        <ImageView
+            android:layout_weight="0"
+            android:id="@+id/cxbjorder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_cktd"
+            />
     </LinearLayout>
 </LinearLayout>

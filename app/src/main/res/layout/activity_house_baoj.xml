@@ -62,7 +62,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/jinruanniu" />
+                    android:src="@drawable/ic_next" />
             </org.freecoding.servicesmanager.view.RoundLinearLayout>
 
             <org.freecoding.servicesmanager.view.RoundLinearLayout
