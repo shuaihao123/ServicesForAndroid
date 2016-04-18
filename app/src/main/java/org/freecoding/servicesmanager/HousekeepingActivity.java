@@ -1,5 +1,6 @@
 package org.freecoding.servicesmanager;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,7 @@ import org.freecoding.servicesmanager.view.RoundLinearLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 家政服务
@@ -39,8 +41,34 @@ public class HousekeepingActivity extends AppCompatActivity {
         init();
     }
 
+
     private void init() {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
     }
+    /**
+     * 跳转到保姆
+     */
+    @OnClick(R.id.baomu)
+    void btnbaomu() {
+        Intent it=new Intent(this,HomeNurseActivity.class);
+        startActivity(it);
+    }
+    /**
+     * 跳转到保洁
+     */
+    @OnClick(R.id.baojie)
+    void btnbaojie() {
+        Intent it=new Intent(this,HouseBaojActivity.class);
+        startActivity(it);
+    }
+    /**
+     * 跳转到月嫂
+     */
+    @OnClick(R.id.yuesao)
+    void btnyuesao() {
+        Intent it=new Intent(this,DetailActivity.class);
+        startActivity(it);
+    }
+
 }

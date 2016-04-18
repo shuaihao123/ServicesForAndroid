@@ -14,19 +14,21 @@ import org.freecoding.servicesmanager.view.RoundTextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
+/**
+ * 主页面
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.orderView)
-    View orderView;
+    RoundTextView orderView;
     @Bind(R.id.houseView)
-    View houseView;
+    RoundTextView houseView;
     @Bind(R.id.nursingView)
-    View nursingView;
+    RoundTextView nursingView;
     @Bind(R.id.medicalView)
-    View medicalView;
+    RoundTextView medicalView;
     @Bind(R.id.gukefuwutai)
     RoundTextView gukefuwutai;
 
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         orderView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,DetailActivity.class);
+                Intent intent = new Intent(MainActivity.this,OrderActivity.class);
                 startActivity(intent);
             }
         });
