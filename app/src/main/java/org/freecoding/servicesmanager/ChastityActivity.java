@@ -20,17 +20,17 @@ import butterknife.OnClick;
 public class ChastityActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.timerq)
+    @Bind(R.id.timerq)//洁身沐浴日期
     RoundLinearLayout timerq;
-    @Bind(R.id.jieshentime)
+    @Bind(R.id.jieshentime)//洁身沐浴时间
     SeekBar jieshentime;
-    @Bind(R.id.beizhu)
+    @Bind(R.id.beizhu)//备注
     EditText beizhu;
-    @Bind(R.id.lianxiname)
+    @Bind(R.id.lianxiname)//姓名
     EditText lianxiname;
-    @Bind(R.id.lianxiphone)
+    @Bind(R.id.lianxiphone)//电话
     EditText lianxiphone;
-    @Bind(R.id.baomufuwudizhi)
+    @Bind(R.id.baomufuwudizhi)//地址
     EditText baomufuwudizhi;
 
     @Override
@@ -69,6 +69,11 @@ public class ChastityActivity extends AppCompatActivity {
         String phone = lianxiphone.getText().toString().trim();
         if (phone.length() == 0) {
             msg("请输入手机号");
+            lianxiphone.requestFocus();
+            return;
+        }
+        if (phone.length() !=11) {
+            msg("请输入正确的手机号");
             lianxiphone.requestFocus();
             return;
         }

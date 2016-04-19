@@ -76,7 +76,6 @@ public class ShadowLayout extends FrameLayout {
 
     private void initView(Context context, AttributeSet attrs) {
         initAttributes(context, attrs);
-
         int xPadding = (int) (mShadowRadius + Math.abs(mDx));
         int yPadding = (int) (mShadowRadius + Math.abs(mDy));
         setPadding(xPadding, yPadding, xPadding, yPadding);
@@ -153,7 +152,6 @@ public class ShadowLayout extends FrameLayout {
         }
 
         canvas.drawRoundRect(shadowRect, cornerRadius, cornerRadius, shadowPaint);
-
         return output;
     }
 
