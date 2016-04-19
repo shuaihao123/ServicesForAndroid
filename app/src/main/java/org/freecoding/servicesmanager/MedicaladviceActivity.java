@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.freecoding.servicesmanager.view.RoundLinearLayout;
 import org.freecoding.servicesmanager.view.RoundTextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 医疗/医疗咨询
@@ -44,7 +46,48 @@ public class MedicaladviceActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
     }
+    void msg(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
 
+    /**
+     * 提交
+     */
+    @OnClick(R.id.yiliaoadd)
+    void btntijiao() {
+        String name = yiliaoname.getText().toString().trim();
+        if (name.length() == 0) {
+            msg("请输入姓名");
+            yiliaoname.requestFocus();
+            return;
+        }
+        String phone = yiliaophone.getText().toString().trim();
+        if (phone.length() == 0) {
+            msg("请输入手机号");
+            yiliaophone.requestFocus();
+            return;
+        }
+        String dizhi = yiliaodizhi.getText().toString().trim();
+        if (dizhi.length() == 0) {
+            msg("请选择地址");
+            yiliaodizhi.requestFocus();
+            return;
+        }
+        String bz = yiliaobeizhu.getText().toString().trim();
+        if (bz.length() == 0) {
+            msg("请选择备注");
+            yiliaobeizhu.requestFocus();
+            return;
+        }
+    }
+
+    /**
+     * 取消
+     */
+    @OnClick(R.id.yiliaofinsh)
+    void btnqxfinsh() {
+        this.finish();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detail_menu, menu);

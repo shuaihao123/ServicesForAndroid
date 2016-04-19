@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     void msg(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
+
     /**
      * 登录
      */
@@ -61,21 +62,25 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        Intent it=new Intent(this,MainActivity.class);
+        Intent it = new Intent(this, MainActivity.class);
         startActivity(it);
     }
+
     /**
      * 忘记密码
      */
-@OnClick(R.id.forgetpwd) void btnforgepwd(){
-    Intent it=new Intent(this,RegisterActivity.class);
-    startActivity(it);
-}
+    @OnClick(R.id.forgetpwd)
+    void btnforgepwd() {
+        Intent it = new Intent(this, RegisterActivity.class);
+        startActivity(it);
+    }
+
     /**
      * 快速注册
      */
-    @OnClick(R.id.fastpwd) void btnfastpwd(){
-        Intent it=new Intent(this,RegisterActivity.class);
+    @OnClick(R.id.fastpwd)
+    void btnfastpwd() {
+        Intent it = new Intent(this, RegisterActivity.class);
         startActivity(it);
     }
 }

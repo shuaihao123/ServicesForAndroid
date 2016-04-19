@@ -6,11 +6,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import org.freecoding.servicesmanager.view.RoundLinearLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 护理/皮肤护理
@@ -43,7 +45,47 @@ public class Skin_Care_Activity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
     }
+    void msg(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
 
+    /**
+     * 提交
+     */
+    @OnClick(R.id.pifuadd)
+    void btntijiao() {
+        String name = pifuname.getText().toString().trim();
+        if (name.length() == 0) {
+            msg("请输入姓名");
+            pifuname.requestFocus();
+            return;
+        }
+        String phone = pifuphone.getText().toString().trim();
+        if (phone.length() == 0) {
+            msg("请输入手机号");
+            pifuphone.requestFocus();
+            return;
+        }
+        String dizhi = pifudizhi.getText().toString().trim();
+        if (dizhi.length() == 0) {
+            msg("请选择地址");
+            pifudizhi.requestFocus();
+            return;
+        }
+        String bz = pifubeizhu.getText().toString().trim();
+        if (bz.length() == 0) {
+            msg("请选择备注");
+            pifubeizhu.requestFocus();
+            return;
+        }
+    }
+    /**
+     * 取消
+     */
+    @OnClick(R.id.pifufinsh)
+    void btnqxfinsh() {
+        this.finish();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detail_menu, menu);

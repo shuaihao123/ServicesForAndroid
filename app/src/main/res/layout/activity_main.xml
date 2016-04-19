@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#EDF5F7">
+    android:background="#EDF5F7"
+    android:orientation="vertical">
 
 
     <android.support.v7.widget.Toolbar
@@ -30,17 +30,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <org.freecoding.servicesmanager.view.MaterialRangeSlider
-            android:minHeight="96dp"
-            app:outsideRangeLineStrokeWidth="2dp"
-            app:insideRangeLineStrokeWidth="4dp"
-            app:pressedTargetRadius="12dp"
-            app:unpressedTargetRadius="4dp"
-            app:outsideRangeLineColor="@color/tms_gray"
-            app:insideRangeLineColor="@color/tms_blue"
-            app:targetColor="@color/tms_blue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -60,9 +49,11 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:layout_weight="1"
+                    android:background="@drawable/diancan"
                     android:clickable="true"
                     app:rv_backgroundColor="#00B7D6"
                     app:rv_cornerRadius="5dp">
+
 
                     <org.freecoding.servicesmanager.view.RoundTextView
                         android:layout_width="match_parent"
@@ -71,8 +62,8 @@
                         android:gravity="center"
                         android:padding="8dp"
                         android:text="点菜送餐"
-                        android:textSize="30px"
                         android:textColor="#ffffff"
+                        android:textSize="30px"
                         app:rv_backgroundColor="#1ABEDA"
                         app:rv_cornerRadius_BL="5dp"
                         app:rv_cornerRadius_BR="5dp" />
@@ -85,6 +76,7 @@
                     android:layout_margin="8dp"
                     android:layout_weight="1"
                     android:clickable="true"
+                    android:background="@drawable/ic_xiaojiazheng"
                     app:rv_backgroundColor="#02D2B0"
                     app:rv_cornerRadius="5dp">
 
@@ -95,8 +87,8 @@
                         android:gravity="center"
                         android:padding="8dp"
                         android:text="家政服务"
-                        android:textSize="30px"
                         android:textColor="#FFFFFF"
+                        android:textSize="30px"
                         app:rv_backgroundColor="#1BD6B7"
                         app:rv_cornerRadius_BL="5dp"
                         app:rv_cornerRadius_BR="5dp" />
@@ -118,6 +110,7 @@
                     android:layout_margin="8dp"
                     android:layout_weight="1"
                     android:clickable="true"
+                    android:background="@drawable/huli"
                     app:rv_backgroundColor="#D59300"
                     app:rv_cornerRadius="5dp">
 
@@ -128,8 +121,8 @@
                         android:gravity="center"
                         android:padding="8dp"
                         android:text="护理"
-                        android:textSize="30px"
                         android:textColor="#FFFFFF"
+                        android:textSize="30px"
                         app:rv_backgroundColor="#D99F1A"
                         app:rv_cornerRadius_BL="5dp"
                         app:rv_cornerRadius_BR="5dp" />
@@ -142,6 +135,7 @@
                     android:layout_margin="8dp"
                     android:layout_weight="1"
                     android:clickable="true"
+                    android:background="@drawable/yiliao"
                     app:rv_backgroundColor="#FF7143"
                     app:rv_cornerRadius="5dp">
 
@@ -152,8 +146,8 @@
                         android:gravity="center"
                         android:padding="8dp"
                         android:text="医疗"
-                        android:textSize="30px"
                         android:textColor="#FFFFFF"
+                        android:textSize="30px"
                         app:rv_backgroundColor="#FD7F58"
                         app:rv_cornerRadius_BL="5dp"
                         app:rv_cornerRadius_BR="5dp" />
@@ -169,6 +163,7 @@
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
             android:layout_weight="0"
+            android:background="@drawable/yijianphone"
             android:clickable="true"
             android:ellipsize="end"
             android:gravity="center"
@@ -179,7 +174,6 @@
             android:singleLine="true"
             android:text="呼叫服务台"
             android:textColor="#FFFFFF"
-            android:background="@drawable/yijianphone"
             app:rv_cornerRadius="10dp" />
     </LinearLayout>
 

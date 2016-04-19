@@ -6,11 +6,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import org.freecoding.servicesmanager.view.RoundLinearLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 家政服务/保洁
@@ -30,6 +32,7 @@ public class HouseBaojActivity extends AppCompatActivity {
     EditText baojiephone;
     @Bind(R.id.baojiedizhi)
     EditText baojiedizhi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +44,49 @@ public class HouseBaojActivity extends AppCompatActivity {
     private void init() {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+    }
+
+    void msg(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * 提交
+     */
+    @OnClick(R.id.baojieadd)
+    void btntijiao() {
+        String name = baojiename.getText().toString().trim();
+        if (name.length() == 0) {
+            msg("请输入姓名");
+            baojiename.requestFocus();
+            return;
+        }
+        String phone = baojiephone.getText().toString().trim();
+        if (phone.length() == 0) {
+            msg("请输入手机号");
+            baojiephone.requestFocus();
+            return;
+        }
+        String dizhi = baojiedizhi.getText().toString().trim();
+        if (dizhi.length() == 0) {
+            msg("请选择地址");
+            baojiedizhi.requestFocus();
+            return;
+        }
+        String bz = baojiebeizhu.getText().toString().trim();
+        if (bz.length() == 0) {
+            msg("请选择备注");
+            baojiebeizhu.requestFocus();
+            return;
+        }
+    }
+
+    /**
+     * 取消
+     */
+    @OnClick(R.id.baojiefinsh)
+    void btnqxfinsh() {
+        this.finish();
     }
 
     @Override

@@ -6,11 +6,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import org.freecoding.servicesmanager.view.RoundLinearLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * 护理/洗发
  */
@@ -42,7 +45,47 @@ public class SpaActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
     }
+    void msg(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
 
+    /**
+     * 提交
+     */
+    @OnClick(R.id.xifaadd)
+    void btntijiao() {
+        String name = xifaname.getText().toString().trim();
+        if (name.length() == 0) {
+            msg("请输入姓名");
+            xifaname.requestFocus();
+            return;
+        }
+        String phone = xifaphone.getText().toString().trim();
+        if (phone.length() == 0) {
+            msg("请输入手机号");
+            xifaphone.requestFocus();
+            return;
+        }
+        String dizhi = xifadizhi.getText().toString().trim();
+        if (dizhi.length() == 0) {
+            msg("请选择地址");
+            xifadizhi.requestFocus();
+            return;
+        }
+        String bz = xifabeizhu.getText().toString().trim();
+        if (bz.length() == 0) {
+            msg("请选择备注");
+            xifabeizhu.requestFocus();
+            return;
+        }
+    }
+    /**
+     * 取消
+     */
+    @OnClick(R.id.xifafinsh)
+    void btnqxfinsh() {
+        this.finish();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detail_menu, menu);
