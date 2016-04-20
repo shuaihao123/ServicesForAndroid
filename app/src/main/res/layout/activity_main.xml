@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <TextView
@@ -23,6 +22,7 @@
             android:textColor="#4D5C70"
             android:textSize="36px"
             android:textStyle="bold" />
+
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout

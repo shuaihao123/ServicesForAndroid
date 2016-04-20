@@ -36,16 +36,13 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <org.freecoding.servicesmanager.view.RoundLinearLayout
+            <LinearLayout
                 android:id="@+id/yiliaoriqi"
-                android:layout_marginBottom="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="8dp"
-                app:rv_backgroundColor="#ffffff"
-                app:rv_cornerRadius="5dp">
+                android:background="@drawable/ic_order_option_bg_03">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -61,19 +58,15 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:src="@drawable/ic_next" />
-            </org.freecoding.servicesmanager.view.RoundLinearLayout>
+            </LinearLayout>
 
-            <org.freecoding.servicesmanager.view.RoundLinearLayout
-                android:layout_marginBottom="16dp"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="8dp"
-                app:rv_backgroundColor="#ffffff"
-                app:rv_cornerRadius="5dp">
+                android:background="@drawable/ic_order_option_bg_03">
 
                 <TextView
                     android:textStyle="bold"
@@ -92,17 +85,14 @@
                 android:textSize="27px"
                 android:hint="需求更多服务请补充" />
 
-            </org.freecoding.servicesmanager.view.RoundLinearLayout>
+            </LinearLayout>
 
-            <org.freecoding.servicesmanager.view.RoundLinearLayout
-                android:layout_marginBottom="16dp"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
-                android:padding="8dp"
-                app:rv_backgroundColor="#ffffff"
-                app:rv_cornerRadius="5dp">
+                android:background="@drawable/ic_order_option_bg_04">
 
                 <TextView
                     android:textStyle="bold"
@@ -143,7 +133,7 @@
                     android:textColor="#b9bec4"
                     android:drawableRight="@drawable/ic_location"
                     android:hint="服务地址：" />
-            </org.freecoding.servicesmanager.view.RoundLinearLayout>
+            </LinearLayout>
 
 
             <LinearLayout
@@ -153,7 +143,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:padding="8dp">
-                <org.freecoding.servicesmanager.view.RoundTextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
@@ -162,7 +152,7 @@
                     android:ellipsize="end"
                     android:gravity="center"
                     android:paddingBottom="10dp"
-                    android:background="@drawable/finshanniu"
+                    android:background="@drawable/ic_cancel"
                     android:paddingLeft="18dp"
                     android:paddingRight="18dp"
                     android:paddingTop="10dp"
@@ -170,9 +160,9 @@
                     android:id="@+id/yiliaofinsh"
                     android:text="取消订单"
                     android:textColor="#000000"
-                    app:rv_cornerRadius="10dp" />
+                   />
 
-                <org.freecoding.servicesmanager.view.RoundTextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
@@ -187,9 +177,9 @@
                     android:paddingTop="10dp"
                     android:singleLine="true"
                     android:text="提交订单"
-                    android:background="@drawable/loginanniu"
+                    android:background="@drawable/ic_commit"
                     android:textColor="#FFFFFF"
-                    app:rv_cornerRadius="10dp" />
+                  />
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

@@ -36,16 +36,14 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <org.freecoding.servicesmanager.view.RoundLinearLayout
+            <LinearLayout
                 android:id="@+id/pifuriqi"
-                android:layout_marginBottom="16dp"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="8dp"
-                app:rv_backgroundColor="#ffffff"
-                app:rv_cornerRadius="5dp">
+                android:background="@drawable/ic_order_option_bg_03">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -63,17 +61,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_next" />
-            </org.freecoding.servicesmanager.view.RoundLinearLayout>
+            </LinearLayout>
 
-            <org.freecoding.servicesmanager.view.RoundLinearLayout
-                android:layout_marginBottom="16dp"
+            <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
-                android:padding="8dp"
-                app:rv_backgroundColor="#ffffff"
-                app:rv_cornerRadius="5dp">
+                android:background="@drawable/ic_order_option_bg_03">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -121,17 +117,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                 </LinearLayout>
-            </org.freecoding.servicesmanager.view.RoundLinearLayout>
+            </LinearLayout>
 
-            <org.freecoding.servicesmanager.view.RoundLinearLayout
-                android:layout_marginBottom="16dp"
+            <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="8dp"
-                app:rv_backgroundColor="#ffffff"
-                app:rv_cornerRadius="5dp">
+                android:background="@drawable/ic_order_option_bg_03">
 
                 <TextView
                     android:textStyle="bold"
@@ -149,18 +143,14 @@
                     android:textColor="#e5e6e9"
                     android:textSize="27px"
                     android:hint="需求更多服务请补充" />
-            </org.freecoding.servicesmanager.view.RoundLinearLayout>
+            </LinearLayout>
 
-            <org.freecoding.servicesmanager.view.RoundLinearLayout
-                android:layout_marginBottom="16dp"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
-                android:padding="8dp"
-                app:rv_backgroundColor="#ffffff"
-                app:rv_cornerRadius="5dp">
-
+                android:background="@drawable/ic_order_option_bg_04">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
@@ -200,7 +190,7 @@
                     android:textColor="#b9bec4"
                     android:drawableRight="@drawable/ic_location"
                     android:hint="服务地址：" />
-            </org.freecoding.servicesmanager.view.RoundLinearLayout>
+            </LinearLayout>
 
 
             <LinearLayout
@@ -210,7 +200,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:padding="8dp">
-                <org.freecoding.servicesmanager.view.RoundTextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
@@ -226,10 +216,10 @@
                     android:id="@+id/pifufinsh"
                     android:text="取消订单"
                     android:textColor="#000000"
-                    android:background="@drawable/finshanniu"
-                    app:rv_cornerRadius="10dp" />
+                    android:background="@drawable/ic_cancel"
+                  />
 
-                <org.freecoding.servicesmanager.view.RoundTextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
@@ -245,8 +235,8 @@
                     android:id="@+id/pifuadd"
                     android:text="提交订单"
                     android:textColor="#FFFFFF"
-                    android:background="@drawable/loginanniu"
-                    app:rv_cornerRadius="10dp" />
+                    android:background="@drawable/ic_commit"
+                  />
 
             </LinearLayout>
         </LinearLayout>

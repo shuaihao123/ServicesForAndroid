@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
 
-        app:navigationIcon="@drawable/fanhui"
         android:background="#EDF5F7"
+        app:navigationIcon="@drawable/fanhui"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <TextView
@@ -26,6 +26,7 @@
             android:textStyle="bold" />
 
     </android.support.v7.widget.Toolbar>
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -34,86 +35,84 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="16dp"
-            >
+            android:padding="16dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="服务内容(已包含日常保洁)"
-                android:textSize="28px"
-                android:textColor="#4d5c70"
                 android:layout_marginBottom="10dp"
-                />
+                android:text="服务内容(已包含日常保洁)"
+                android:textColor="#4d5c70"
+                android:textSize="28px" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
+
                 <CheckBox
                     android:id="@+id/baomucheckzf"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/chekboxxx"
+                    android:button="@null"
+                    android:gravity="center"
                     android:text="做饭"
                     android:textColor="#4d5c70"
-                    android:textSize="28px"
-                    android:gravity="center"
-                    android:button="@null"
-                    />
+                    android:textSize="28px" />
+
                 <CheckBox
                     android:id="@+id/baomucheckzgxh"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/chekboxxx"
+                    android:button="@null"
+                    android:gravity="center"
                     android:text="照顾小孩"
                     android:textColor="#4d5c70"
-                    android:textSize="28px"
-                    android:gravity="center"
-                    android:button="@null"
-                    />
+                    android:textSize="28px" />
+
                 <CheckBox
                     android:id="@+id/baomucheckzglr"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/chekboxxx"
+                    android:button="@null"
+                    android:gravity="center"
                     android:text="照顾老人"
                     android:textColor="#4d5c70"
-                    android:textSize="28px"
-                    android:gravity="center"
-                    android:button="@null"
-                    />
+                    android:textSize="28px" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/chekbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
-               >
+                android:orientation="horizontal">
+
                 <CheckBox
                     android:id="@+id/baomucheckzgbr"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/chekboxxx"
+                    android:button="@null"
+                    android:gravity="center"
                     android:text="照顾病人"
                     android:textColor="#4d5c70"
                     android:textSize="28px"
-                    android:gravity="center"
-                    android:button="@null"
 
                     />
             </LinearLayout>
-            <org.freecoding.servicesmanager.view.RoundLinearLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:background="@drawable/ic_order_option_bg_03"
                 android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:padding="8dp"
-                app:rv_backgroundColor="#ffffff"
-                app:rv_cornerRadius="5dp">
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -163,17 +162,14 @@
 
 
                 </LinearLayout>
-            </org.freecoding.servicesmanager.view.RoundLinearLayout>
+            </LinearLayout>
 
-            <org.freecoding.servicesmanager.view.RoundLinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:background="@drawable/ic_order_option_bg_03"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                app:rv_backgroundColor="#ffffff"
-                app:rv_cornerRadius="5dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -191,17 +187,14 @@
                     android:hint="需求更多服务请补充"
                     android:minLines="2"
                     android:textSize="12sp" />
-            </org.freecoding.servicesmanager.view.RoundLinearLayout>
+            </LinearLayout>
 
-            <org.freecoding.servicesmanager.view.RoundLinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:background="@drawable/ic_order_option_bg_04"
                 android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:padding="8dp"
-                app:rv_backgroundColor="#ffffff"
-                app:rv_cornerRadius="5dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -240,7 +233,7 @@
                     android:hint="服务地址："
                     android:minLines="5"
                     android:textSize="12sp" />
-            </org.freecoding.servicesmanager.view.RoundLinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -250,13 +243,13 @@
                 android:orientation="horizontal"
                 android:padding="8dp">
 
-                <org.freecoding.servicesmanager.view.RoundTextView
+                <TextView
                     android:id="@+id/baomufinsh"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:layout_weight="1"
-                    android:background="@drawable/finshanniu"
+                    android:background="@drawable/ic_cancel"
                     android:clickable="true"
                     android:ellipsize="end"
                     android:gravity="center"
@@ -266,17 +259,15 @@
                     android:paddingTop="10dp"
                     android:singleLine="true"
                     android:text="取消订单"
-                    android:textColor="#000000"
+                    android:textColor="#000000" />
 
-                    app:rv_cornerRadius="10dp" />
-
-                <org.freecoding.servicesmanager.view.RoundTextView
+                <TextView
                     android:id="@+id/baomuadd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:layout_weight="1"
-                    android:background="@drawable/loginanniu"
+                    android:background="@drawable/ic_commit"
                     android:clickable="true"
                     android:ellipsize="end"
                     android:gravity="center"
@@ -287,7 +278,7 @@
                     android:singleLine="true"
                     android:text="提交订单"
                     android:textColor="#FFFFFF"
-                    app:rv_cornerRadius="10dp" />
+                />
 
             </LinearLayout>
         </LinearLayout>
