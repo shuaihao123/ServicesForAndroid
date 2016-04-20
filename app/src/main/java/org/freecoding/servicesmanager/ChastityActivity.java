@@ -92,7 +92,7 @@ public class ChastityActivity extends AppCompatActivity {
             return;
         }
         if (phone.length() !=11) {
-            msg("请输入正确的手机号");
+            msg("手机号输入错误");
             lianxiphone.requestFocus();
             return;
         }

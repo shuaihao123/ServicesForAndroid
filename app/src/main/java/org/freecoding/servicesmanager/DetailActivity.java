@@ -78,6 +78,11 @@ public class DetailActivity extends AppCompatActivity {
             yuesaophone.requestFocus();
             return;
         }
+        if (phone.length() !=11) {
+            msg("手机号输入错误");
+            yuesaophone.requestFocus();
+            return;
+        }
         String dizhi = yuesaodizhi.getText().toString().trim();
         if (dizhi.length() == 0) {
             msg("请选择地址");

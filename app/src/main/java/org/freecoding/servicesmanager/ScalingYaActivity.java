@@ -80,6 +80,11 @@ public class ScalingYaActivity extends AppCompatActivity {
             jieyaphone.requestFocus();
             return;
         }
+        if (phone.length() !=11) {
+            msg("手机号输入错误");
+            jieyaphone.requestFocus();
+            return;
+        }
         String dizhi = jieyadizhi.getText().toString().trim();
         if (dizhi.length() == 0) {
             msg("请选择地址");

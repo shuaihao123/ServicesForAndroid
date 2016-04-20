@@ -79,6 +79,11 @@ public class MedicalTreatmentActivity extends AppCompatActivity {
             msg("请输入手机号");
             shangmenphone.requestFocus();
             return;
+    }
+        if (phone.length() !=11) {
+            msg("手机号输入错误");
+            shangmenphone.requestFocus();
+            return;
         }
         String dizhi = shangmendizhi.getText().toString().trim();
         if (dizhi.length() == 0) {

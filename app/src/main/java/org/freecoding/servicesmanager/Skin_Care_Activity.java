@@ -80,6 +80,11 @@ public class Skin_Care_Activity extends AppCompatActivity {
             pifuphone.requestFocus();
             return;
         }
+        if (phone.length() !=11) {
+            msg("手机号输入错误");
+            pifuphone.requestFocus();
+            return;
+        }
         String dizhi = pifudizhi.getText().toString().trim();
         if (dizhi.length() == 0) {
             msg("请选择地址");

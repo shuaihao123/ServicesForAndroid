@@ -99,6 +99,11 @@ public class HomeNurseActivity extends AppCompatActivity {
             baomuphone.requestFocus();
             return;
         }
+        if (phone.length() !=11) {
+            msg("手机号输入错误");
+            baomuphone.requestFocus();
+            return;
+        }
         String dizhi = baomufuwudizhi.getText().toString().trim();
         if (dizhi.length() == 0) {
             msg("请选择地址");

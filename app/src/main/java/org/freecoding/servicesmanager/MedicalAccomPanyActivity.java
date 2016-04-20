@@ -80,6 +80,11 @@ public class MedicalAccomPanyActivity extends AppCompatActivity {
             peizhenphone.requestFocus();
             return;
         }
+        if (phone.length() !=11) {
+            msg("手机号输入错误");
+            peizhenphone.requestFocus();
+            return;
+        }
         String dizhi = peizhendizhi.getText().toString().trim();
         if (dizhi.length() == 0) {
             msg("请选择地址");

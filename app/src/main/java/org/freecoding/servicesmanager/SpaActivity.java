@@ -80,12 +80,18 @@ public class SpaActivity extends AppCompatActivity {
             xifaphone.requestFocus();
             return;
         }
+        if (phone.length() !=11) {
+            msg("手机号输入错误");
+            xifaphone.requestFocus();
+            return;
+        }
         String dizhi = xifadizhi.getText().toString().trim();
         if (dizhi.length() == 0) {
             msg("请选择地址");
             xifadizhi.requestFocus();
             return;
         }
+
         String bz = xifabeizhu.getText().toString().trim();
         if (bz.length() == 0) {
             msg("请选择备注");

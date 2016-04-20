@@ -85,6 +85,11 @@ public class MedicalInjectionActivity extends AppCompatActivity {
             yuyuephone.requestFocus();
             return;
         }
+        if (phone.length() !=11) {
+            msg("手机号输入错误");
+            yuyuephone.requestFocus();
+            return;
+        }
         String dizhi = yuyuedizhi.getText().toString().trim();
         if (dizhi.length() == 0) {
             msg("请选择地址");
