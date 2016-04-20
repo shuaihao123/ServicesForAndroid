@@ -64,16 +64,16 @@ public class HomeNurseActivity extends AppCompatActivity {
      */
     @OnClick(R.id.baomuadd)
     void btntijiao() {
-        if (baomucheckzf.isChecked()==true) {
+        if (baomucheckzf.isChecked() == true) {
             String checkzf = baomucheckzf.getText().toString().trim();
         }
-        if (baomucheckzgxh.isChecked()==true) {
+        if (baomucheckzgxh.isChecked() == true) {
             String checkzgxh = baomucheckzgxh.getText().toString().trim();
         }
-        if (baomucheckzglr.isChecked()==true) {
+        if (baomucheckzglr.isChecked() == true) {
             String checkzglr = baomucheckzglr.getText().toString().trim();
         }
-        if (baomucheckzgbr.isChecked()==true) {
+        if (baomucheckzgbr.isChecked() == true) {
             String checkzgbr = baomucheckzgbr.getText().toString().trim();
         }
         String name = baomuname.getText().toString().trim();

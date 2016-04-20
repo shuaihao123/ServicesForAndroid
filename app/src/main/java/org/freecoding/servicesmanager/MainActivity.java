@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import org.freecoding.servicesmanager.view.RoundRelativeLayout;
 import org.freecoding.servicesmanager.view.RoundTextView;
 
 import butterknife.Bind;
@@ -22,13 +23,13 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.orderView)
-    RoundTextView orderView;
+    RoundRelativeLayout orderView;
     @Bind(R.id.houseView)
-    RoundTextView houseView;
+    RoundRelativeLayout houseView;
     @Bind(R.id.nursingView)
-    RoundTextView nursingView;
+    RoundRelativeLayout nursingView;
     @Bind(R.id.medicalView)
-    RoundTextView medicalView;
+    RoundRelativeLayout medicalView;
     @Bind(R.id.gukefuwutai)
     RoundTextView gukefuwutai;
 

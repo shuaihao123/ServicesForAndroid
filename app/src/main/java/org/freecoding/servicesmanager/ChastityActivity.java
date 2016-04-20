@@ -1,5 +1,6 @@
 package org.freecoding.servicesmanager;
 
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -24,12 +25,16 @@ public class ChastityActivity extends AppCompatActivity {
     RoundLinearLayout timerq;
     @Bind(R.id.jieshentime)//洁身沐浴时间
     SeekBar jieshentime;
+    @Nullable
     @Bind(R.id.beizhu)//备注
     EditText beizhu;
+    @Nullable
     @Bind(R.id.lianxiname)//姓名
     EditText lianxiname;
+    @Nullable
     @Bind(R.id.lianxiphone)//电话
     EditText lianxiphone;
+    @Nullable
     @Bind(R.id.baomufuwudizhi)//地址
     EditText baomufuwudizhi;
 

@@ -45,7 +45,6 @@
                 android:layout_marginBottom="10dp"
                 />
             <LinearLayout
-                android:id="@+id/baomuriqi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -135,7 +134,7 @@
                 </RelativeLayout>
 
                 <SeekBar
-                    android:id="@+id/baomutime"
+                    android:id="@+id/baomuriqi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="8dp" />
