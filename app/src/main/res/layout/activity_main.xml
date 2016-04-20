@@ -29,127 +29,94 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="197dp" >
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="197dp"
+                    android:background="@drawable/ic_xiaojiazheng" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="15dp"
+                    android:textSize="30px"
+                    android:textColor="#ffffff"
+                    android:text="点餐送餐" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="197dp" >
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="197dp"
+                    android:background="@drawable/diancan" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="15dp"
+                    android:textSize="30px"
+                    android:textColor="#ffffff"
+                    android:text="家政服务" />
+            </FrameLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="16dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="197dp" >
 
-                <org.freecoding.servicesmanager.view.RoundRelativeLayout
-                    android:id="@+id/orderView"
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="197dp"
+                    android:background="@drawable/yiliao" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/diancan"
-                    android:clickable="true"
-                    app:rv_backgroundColor="#00B7D6"
-                    app:rv_cornerRadius="5dp">
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="15dp"
+                    android:textSize="30px"
+                    android:textColor="#ffffff"
+                    android:text="护理" />
+            </FrameLayout>
 
-                    <org.freecoding.servicesmanager.view.RoundTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="center"
-                        android:padding="8dp"
-                        android:text="点菜送餐"
-                        android:textColor="#ffffff"
-                        android:textSize="30px"
-                        app:rv_backgroundColor="#1ABEDA"
-                        app:rv_cornerRadius_BL="5dp"
-                        app:rv_cornerRadius_BR="5dp" />
-                </org.freecoding.servicesmanager.view.RoundRelativeLayout>
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="197dp" >
 
-                <org.freecoding.servicesmanager.view.RoundRelativeLayout
-                    android:id="@+id/houseView"
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="197dp"
+                    android:background="@drawable/huli" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:background="@drawable/ic_xiaojiazheng"
-                    app:rv_backgroundColor="#02D2B0"
-                    app:rv_cornerRadius="5dp">
-
-                    <org.freecoding.servicesmanager.view.RoundTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="center"
-                        android:padding="8dp"
-                        android:text="家政服务"
-                        android:textColor="#FFFFFF"
-                        android:textSize="30px"
-                        app:rv_backgroundColor="#1BD6B7"
-                        app:rv_cornerRadius_BL="5dp"
-                        app:rv_cornerRadius_BR="5dp" />
-                </org.freecoding.servicesmanager.view.RoundRelativeLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-                <org.freecoding.servicesmanager.view.RoundRelativeLayout
-                    android:id="@+id/nursingView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:background="@drawable/huli"
-                    app:rv_backgroundColor="#D59300"
-                    app:rv_cornerRadius="5dp">
-
-                    <org.freecoding.servicesmanager.view.RoundTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="center"
-                        android:padding="8dp"
-                        android:text="护理"
-                        android:textColor="#FFFFFF"
-                        android:textSize="30px"
-                        app:rv_backgroundColor="#D99F1A"
-                        app:rv_cornerRadius_BL="5dp"
-                        app:rv_cornerRadius_BR="5dp" />
-                </org.freecoding.servicesmanager.view.RoundRelativeLayout>
-
-                <org.freecoding.servicesmanager.view.RoundRelativeLayout
-                    android:id="@+id/medicalView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:background="@drawable/yiliao"
-                    app:rv_backgroundColor="#FF7143"
-                    app:rv_cornerRadius="5dp">
-
-                    <org.freecoding.servicesmanager.view.RoundTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="center"
-                        android:padding="8dp"
-                        android:text="医疗"
-                        android:textColor="#FFFFFF"
-                        android:textSize="30px"
-                        app:rv_backgroundColor="#FD7F58"
-                        app:rv_cornerRadius_BL="5dp"
-                        app:rv_cornerRadius_BR="5dp" />
-                </org.freecoding.servicesmanager.view.RoundRelativeLayout>
-            </LinearLayout>
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="15dp"
+                    android:textSize="30px"
+                    android:textColor="#ffffff"
+                    android:text="医疗" />
+            </FrameLayout>
         </LinearLayout>
 
         <TextView
@@ -157,8 +124,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="54dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
+            android:layout_marginLeft="36dp"
+            android:layout_marginRight="36dp"
             android:layout_weight="0"
             android:background="@drawable/yijianphone"
             android:clickable="true"

@@ -49,7 +49,8 @@
         <activity android:name=".HomeMedicalinjectionOrderActivity" />
         <activity android:name=".HomeMedicalregistrOrderActivity" />
         <activity android:name=".HomeMedicalaccompanyOrderActivity" />
-        <activity android:name=".HomeMedicaltreatmentOrderActivity"></activity>
+        <activity android:name=".HomeMedicaltreatmentOrderActivity" />
+        <activity android:name=".SelectedMenuOrderActivity"></activity>
     </application>
 
 </manifest>
