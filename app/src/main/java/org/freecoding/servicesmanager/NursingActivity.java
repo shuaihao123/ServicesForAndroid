@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import org.freecoding.servicesmanager.view.RoundLinearLayout;
@@ -43,7 +44,18 @@ public class NursingActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         init();
     }
-
+    /**
+     * 返回
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     /**
      * 跳转到洗发
      */

@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.SeekBar;
@@ -32,7 +33,6 @@ public class HomeNurseActivity extends AppCompatActivity {
     @Bind(R.id.baomucheckzgbr)//照顾病人
             CheckBox baomucheckzgbr;
 
-
     @Bind(R.id.baomubeizhu)//备注
             EditText baomubeizhu;
     @Bind(R.id.baomuname)//姓名
@@ -54,7 +54,18 @@ public class HomeNurseActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
     }
-
+    /**
+     * 返回
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     void msg(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }

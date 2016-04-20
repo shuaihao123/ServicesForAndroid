@@ -3,6 +3,7 @@ package org.freecoding.servicesmanager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,5 +27,17 @@ public class OrderActivity extends AppCompatActivity {
     private void init() {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+    }
+    /**
+     * 返回
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

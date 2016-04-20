@@ -3,6 +3,7 @@ package org.freecoding.servicesmanager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,8 +37,20 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void init() {
 
-
     }
+    /**
+     * 返回
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     void msg (String msg){
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }

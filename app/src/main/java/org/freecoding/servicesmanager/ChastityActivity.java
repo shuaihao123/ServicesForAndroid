@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -50,6 +51,18 @@ public class ChastityActivity extends AppCompatActivity {
     private void init() {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+    }
+    /**
+     * 返回
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     void msg(String msg) {
@@ -102,7 +115,7 @@ public class ChastityActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detail_menu, menu);
-        
+
         return true;
     }
 

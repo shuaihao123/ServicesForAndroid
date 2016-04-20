@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -46,7 +47,18 @@ public class MedicalAccomPanyActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
     }
-
+    /**
+     * 返回
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     void msg(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
