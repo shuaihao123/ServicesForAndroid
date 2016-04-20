@@ -124,19 +124,19 @@
                     android:textSize="30px" />
             </FrameLayout>
         </LinearLayout>
-
         <TextView
             android:id="@+id/gukefuwutai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="54dp"
-            android:layout_marginLeft="31dp"
-            android:layout_marginRight="31dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
             android:layout_weight="0"
             android:background="@drawable/yijianphone"
             android:clickable="true"
             android:ellipsize="end"
             android:gravity="center"
+
             android:paddingBottom="10dp"
             android:paddingLeft="18dp"
             android:paddingRight="18dp"
