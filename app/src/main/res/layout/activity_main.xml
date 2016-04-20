@@ -10,6 +10,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
+
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/AppTheme.PopupOverlay">
@@ -29,19 +30,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <FrameLayout
-                android:layout_width="150dp"
-                android:layout_height="197dp" >
+                android:id="@+id/orderView"
+                android:layout_width="160dp"
+                android:layout_height="197dp">
 
                 <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="197dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/ic_xiaojiazheng" />
 
                 <TextView
@@ -49,18 +52,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center_horizontal"
                     android:layout_marginBottom="15dp"
-                    android:textSize="30px"
+                    android:text="点餐送餐"
                     android:textColor="#ffffff"
-                    android:text="点餐送餐" />
+                    android:textSize="30px" />
             </FrameLayout>
 
             <FrameLayout
-                android:layout_width="150dp"
-                android:layout_height="197dp" >
+                android:id="@+id/houseView"
+                android:layout_width="160dp"
+                android:layout_height="197dp">
 
                 <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="197dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/diancan" />
 
                 <TextView
@@ -68,9 +72,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center_horizontal"
                     android:layout_marginBottom="15dp"
-                    android:textSize="30px"
+                    android:text="家政服务"
                     android:textColor="#ffffff"
-                    android:text="家政服务" />
+                    android:textSize="30px" />
             </FrameLayout>
         </LinearLayout>
 
@@ -78,15 +82,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <FrameLayout
-                android:layout_width="150dp"
-                android:layout_height="197dp" >
+                android:id="@+id/nursingView"
+                android:layout_width="160dp"
+                android:layout_height="197dp">
 
                 <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="197dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/yiliao" />
 
                 <TextView
@@ -94,18 +99,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center_horizontal"
                     android:layout_marginBottom="15dp"
-                    android:textSize="30px"
+                    android:text="护理"
                     android:textColor="#ffffff"
-                    android:text="护理" />
+                    android:textSize="30px" />
             </FrameLayout>
 
             <FrameLayout
-                android:layout_width="150dp"
-                android:layout_height="197dp" >
+                android:id="@+id/medicalView"
+                android:layout_width="160dp"
+                android:layout_height="197dp">
 
                 <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="197dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/huli" />
 
                 <TextView
@@ -113,9 +119,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center_horizontal"
                     android:layout_marginBottom="15dp"
-                    android:textSize="30px"
+                    android:text="医疗"
                     android:textColor="#ffffff"
-                    android:text="医疗" />
+                    android:textSize="30px" />
             </FrameLayout>
         </LinearLayout>
 
@@ -124,8 +130,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="54dp"
-            android:layout_marginLeft="36dp"
-            android:layout_marginRight="36dp"
+            android:layout_marginLeft="31dp"
+            android:layout_marginRight="31dp"
             android:layout_weight="0"
             android:background="@drawable/yijianphone"
             android:clickable="true"
@@ -137,8 +143,7 @@
             android:paddingTop="10dp"
             android:singleLine="true"
             android:text="呼叫服务台"
-            android:textColor="#FFFFFF"
-         />
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 
 

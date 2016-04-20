@@ -47,18 +47,7 @@ public class HouseBaojActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
     }
-    /**
-     * 返回
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 
     void msg(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
@@ -108,6 +97,18 @@ public class HouseBaojActivity extends AppCompatActivity {
         this.finish();
     }
 
+    /**
+     * 返回
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detail_menu, menu);

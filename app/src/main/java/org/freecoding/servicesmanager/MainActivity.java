@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import org.freecoding.servicesmanager.view.RoundRelativeLayout;
@@ -26,13 +27,13 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.orderView)
-    RoundRelativeLayout orderView;
+    FrameLayout orderView;
     @Bind(R.id.houseView)
-    RoundRelativeLayout houseView;
+    FrameLayout houseView;
     @Bind(R.id.nursingView)
-    RoundRelativeLayout nursingView;
+    FrameLayout nursingView;
     @Bind(R.id.medicalView)
-    RoundRelativeLayout medicalView;
+    FrameLayout medicalView;
     @Bind(R.id.gukefuwutai)
     TextView gukefuwutai;
 
