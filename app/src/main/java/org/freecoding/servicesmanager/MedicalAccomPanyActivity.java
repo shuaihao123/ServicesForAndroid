@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -21,7 +22,7 @@ public class MedicalAccomPanyActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.peizhenriqi)
-    RoundLinearLayout peizhenriqi;
+    LinearLayout peizhenriqi;
     @Bind(R.id.peizhentime)
     SeekBar peizhentime;
     @Bind(R.id.peizhenbeizhu)

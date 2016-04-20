@@ -155,7 +155,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <org.freecoding.servicesmanager.view.RoundTextView
+        <TextView
             android:id="@+id/gukefuwutai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -174,7 +174,7 @@
             android:singleLine="true"
             android:text="呼叫服务台"
             android:textColor="#FFFFFF"
-            app:rv_cornerRadius="10dp" />
+         />
     </LinearLayout>
 
 

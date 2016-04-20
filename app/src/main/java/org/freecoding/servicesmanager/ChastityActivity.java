@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ public class ChastityActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.timerq)//洁身沐浴日期
-    RoundLinearLayout timerq;
+            LinearLayout timerq;
     @Bind(R.id.jieshentime)//洁身沐浴时间
     SeekBar jieshentime;
     @Nullable
@@ -101,6 +102,7 @@ public class ChastityActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detail_menu, menu);
+        
         return true;
     }
 

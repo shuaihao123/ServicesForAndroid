@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.freecoding.servicesmanager.view.RoundLinearLayout;
@@ -22,7 +24,7 @@ public class MedicalInjectionActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.yuyueriqi)
-    RoundLinearLayout yuyueriqi;
+    LinearLayout yuyueriqi;
     @Bind(R.id.yuyuetime)
     SeekBar yuyuetime;
     @Bind(R.id.yuyuebeizhu)
@@ -34,9 +36,9 @@ public class MedicalInjectionActivity extends AppCompatActivity {
     @Bind(R.id.yuyuedizhi)
     EditText yuyuedizhi;
     @Bind(R.id.yuyueadd)
-    RoundTextView yuyueadd;
+    TextView yuyueadd;
     @Bind(R.id.yuyuefinsh)
-    RoundTextView yuyuefinsh;
+    TextView yuyuefinsh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

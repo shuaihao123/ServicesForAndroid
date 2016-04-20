@@ -18,12 +18,24 @@ import butterknife.OnClick;
 public class UserdetailActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
+    /**
+     * 点餐订单
+     */
     @Bind(R.id.detaildiancan)
     LinearLayout detaildiancan;
+    /**
+     * 护理订单
+     */
     @Bind(R.id.detailhuli)
     LinearLayout detailhuli;
+    /**
+     * 医疗订单
+     */
     @Bind(R.id.detailyiliao)
     LinearLayout detailyiliao;
+    /**
+     * 家政订单
+     */
     @Bind(R.id.detailjiazhen)
     LinearLayout detailjiazhen;
     @Bind(R.id.detailupdatepwd)
@@ -36,6 +48,7 @@ public class UserdetailActivity extends AppCompatActivity {
     TextView finshlogin;
     @Bind(R.id.imageshezhi)
     ImageView imageshezhi;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +91,4 @@ public class UserdetailActivity extends AppCompatActivity {
         Intent intent = new Intent(this, NursingOrderActivity.class);
         startActivity(intent);
     }
-
-
 }

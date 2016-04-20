@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ public class Skin_Care_Activity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
    @Bind(R.id.pifuriqi)
-    RoundLinearLayout pifuriqi;
+   LinearLayout pifuriqi;
     @Bind(R.id.pifutime)
     SeekBar pifutime;
     @Bind(R.id.pifubeizhu)

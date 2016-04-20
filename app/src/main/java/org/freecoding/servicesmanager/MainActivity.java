@@ -9,12 +9,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import org.freecoding.servicesmanager.view.RoundRelativeLayout;
 import org.freecoding.servicesmanager.view.RoundTextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * 主页面
  */
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.medicalView)
     RoundRelativeLayout medicalView;
     @Bind(R.id.gukefuwutai)
-    RoundTextView gukefuwutai;
+    TextView gukefuwutai;
 
 
 
@@ -86,5 +89,4 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
-
 }

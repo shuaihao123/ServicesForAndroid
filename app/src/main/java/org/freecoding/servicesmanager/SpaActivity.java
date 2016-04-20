@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ public class SpaActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.xifariqi)
-    RoundLinearLayout xifariqi;
+    LinearLayout xifariqi;
     @Bind(R.id.xifatime)
     SeekBar xifatime;
     @Bind(R.id.xifabeizhu)

@@ -74,6 +74,7 @@
                     android:text="暂无订单" />
 
             </LinearLayout>
+
         </LinearLayout>
         <ImageView
             android:id="@+id/cxbmorder"
@@ -83,6 +84,7 @@
             android:background="@drawable/ic_cktd"
             />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

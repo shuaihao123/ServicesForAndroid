@@ -24,6 +24,7 @@ public class HomeOrderActivity extends AppCompatActivity {
     LinearLayout yuesaoorder;
     @Bind(R.id.baojieorder)
     LinearLayout baojieorder;
+
     @Bind(R.id.cxbmorder)
     ImageView cxbmorder;
     @Bind(R.id.cxbjorder)
@@ -46,6 +47,12 @@ public class HomeOrderActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+    @OnClick(R.id.cxbmorder)
+    void btncxbmorder() {
+        Intent intent = new Intent(this, HomeNurseOrderActivity.class);
+        startActivity(intent);
+
+    }
 
     /**
      * 我的家政订单跳转到我的保洁订单
@@ -56,12 +63,24 @@ public class HomeOrderActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+    @OnClick(R.id.cxbjorder)
+    void btncxbjorder() {
+        Intent intent = new Intent(this, HomeCleaningOrderActivity.class);
+        startActivity(intent);
+
+    }
 
     /**
      * 我的家政订单跳转到我的月嫂订单
      */
     @OnClick(R.id.yuesaoorder)
     void btnyuesaoorder() {
+        Intent intent = new Intent(this, HomeDetailOrderActivity.class);
+        startActivity(intent);
+
+    }
+    @OnClick(R.id.cxysorder)
+    void btncxysorder() {
         Intent intent = new Intent(this, HomeDetailOrderActivity.class);
         startActivity(intent);
 
