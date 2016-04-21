@@ -101,7 +101,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -111,46 +111,36 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:background="@drawable/ic_canpin" />
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:orientation="vertical">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="潮悦世家"
                     android:textColor="#4c5f72"
                     android:textSize="28px" />
-                -
-
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/ic_xingxing" />
 
-
                 <TextView
+                    android:textColor="#4c5f72"
+                    android:textSize="28px"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="男山中心区  粤菜  ￥144/人" />
-
-
-
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="289/人" />
-
+                    android:text="男山中心区  粤菜  ￥144/人     < 100m" />
 
                 <TextView
                     android:id="@+id/price0"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="368元 欢聚套餐" />
+                    android:textColor="#4c5f72"
+                    android:textSize="28px"
+                    android:text="368元 欢聚套餐,588经典套餐 " />
 
             </LinearLayout>
         </LinearLayout>
