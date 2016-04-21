@@ -1,16 +1,15 @@
 package org.freecoding.servicesmanager;
 
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.SeekBar;
 import android.widget.Toast;
 
-import org.freecoding.servicesmanager.view.LinedEditText;
-
+import org.freecoding.servicesmanager.view.MultiLineEditText;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -23,8 +22,8 @@ public class DetailActivity extends AppCompatActivity {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.age)
-    SeekBar yuesaoage;
+   // @Bind(R.id.age)
+    //SeekBar yuesaoage;
     @Bind(R.id.name)
     EditText yuesaoname;
     @Bind(R.id.phone)
@@ -32,7 +31,7 @@ public class DetailActivity extends AppCompatActivity {
     @Bind(R.id.dizhi)
     EditText yuesaodizhi;
     @Bind(R.id.beizhu)
-    LinedEditText beizhu;
+    MultiLineEditText beizhu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
