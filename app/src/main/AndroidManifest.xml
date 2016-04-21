@@ -9,17 +9,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".OrderActivity" />
         <activity android:name=".HousekeepingActivity" />
         <activity android:name=".NursingActivity" />
         <activity android:name=".MedicalActivity" />
-        <activity android:name=".DetailActivity" />
+        <activity android:name=".DetailActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter></activity>
         <activity android:name=".SpaActivity" />
         <activity android:name=".ChastityActivity" />
         <activity android:name=".ScalingYaActivity" />

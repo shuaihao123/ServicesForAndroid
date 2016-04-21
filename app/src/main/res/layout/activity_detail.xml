@@ -15,7 +15,7 @@
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <TextView
-           android:id="@+id/yuesao"
+            android:id="@+id/yuesao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -40,9 +40,9 @@
                 android:id="@+id/riqi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/ic_order_option_bg_03"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:background="@drawable/ic_order_option_bg_03">
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -67,30 +67,29 @@
                 android:id="@+id/yuesaocheck"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-               >
+                android:orientation="horizontal">
+
                 <CheckBox
                     android:id="@+id/yuesaozheng"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/chekboxxx"
+                    android:background="@drawable/checkbox_bg"
+                    android:button="@null"
+                    android:gravity="center"
                     android:text="月嫂证"
                     android:textColor="#4d5c70"
-                    android:textSize="28px"
-                    android:gravity="center"
-                    android:button="@null"
-                    />
+                    android:textSize="28px" />
+
                 <CheckBox
                     android:id="@+id/yuesaoshizheng"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/chekboxxx"
+                    android:background="@drawable/checkbox_bg"
+                    android:button="@null"
+                    android:gravity="center"
                     android:text="育婴师证"
                     android:textColor="#4d5c70"
-                    android:textSize="28px"
-                    android:gravity="center"
-                    android:button="@null"
-                    />
+                    android:textSize="28px" />
 
             </LinearLayout>
 
@@ -98,20 +97,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/ic_order_option_bg_03"
                 android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:background="@drawable/ic_order_option_bg_03">
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="年龄" />
+                        android:text="年龄"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -120,11 +119,16 @@
                         android:text="40岁-50岁" />
                 </RelativeLayout>
 
-                <SeekBar
-                    android:id="@+id/age"
-                    android:padding="8dp"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <org.freecoding.servicesmanager.view.SeekBarPressure
+                        android:id="@+id/age"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -142,14 +146,17 @@
                         android:layout_alignParentRight="true"
                         android:text="60" />
                 </RelativeLayout>
+
                 <LinearLayout
-                    android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="籍贯："/>
+                        android:text="籍贯：" />
+
                     <org.freecoding.servicesmanager.view.RoundTextView
                         android:id="@+id/jiguai"
 
@@ -160,54 +167,58 @@
                         android:padding="8dp"
                         android:text="不限"
                         android:textColor="#aaaaaa"
-                        app:rv_cornerRadius="10dp"
                         app:rv_backgroundColor="#ffffff"
+                        app:rv_cornerRadius="10dp"
                         app:rv_strokeColor="#cccccc"
-                        app:rv_strokeWidth="1dp"/>
+                        app:rv_strokeWidth="1dp" />
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/ic_order_option_bg_03"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:background="@drawable/ic_order_option_bg_03">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_margin="8dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="top"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="备注：" />
+                    android:layout_gravity="top"
+                    android:layout_margin="8dp"
+                    android:text="备注："
+                    android:textStyle="bold" />
 
-                <org.freecoding.servicesmanager.view.LinedEditText
+                <org.freecoding.servicesmanager.view.MultiLineEditText
                     android:id="@+id/beizhu"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:gravity="top"
-                    android:inputType="textMultiLine"
-                    android:layout_alignParentRight="true"
-                    android:textSize="12sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:background="@null"
-                    android:hint="需求更多服务请补充" />
+                    android:gravity="top|left"
+                    android:hint="需求更多服务请补充"
+                    android:inputType="textMultiLine"
+                    android:lineSpacingMultiplier="1.2"
+                    android:lines="3"
+                    android:scrollHorizontally="false"
+                    android:textSize="13sp" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/ic_order_option_bg_04"
                 android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:background="@drawable/ic_order_option_bg_04">
+                android:orientation="vertical">
 
                 <TextView
-                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="联系方式：" />
+                    android:text="联系方式："
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/name"
@@ -215,9 +226,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:background="@null"
+                    android:hint="联系人姓名："
                     android:minLines="2"
-                    android:textSize="12sp"
-                    android:hint="联系人姓名：" />
+                    android:textSize="12sp" />
 
                 <EditText
                     android:id="@+id/phone"
@@ -225,9 +236,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:background="@null"
+                    android:hint="联系人电话："
                     android:minLines="2"
-                    android:textSize="12sp"
-                    android:hint="联系人电话：" />
+                    android:textSize="12sp" />
 
                 <EditText
                     android:id="@+id/dizhi"
@@ -235,10 +246,10 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:background="@null"
-                    android:minLines="5"
-                    android:textSize="12sp"
                     android:drawableRight="@drawable/ic_location"
-                    android:hint="服务地址：" />
+                    android:hint="服务地址："
+                    android:minLines="5"
+                    android:textSize="12sp" />
             </LinearLayout>
 
 
@@ -247,8 +258,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:gravity="center_vertical"
-                android:padding="8dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="8dp">
+
                 <TextView
                     android:id="@+id/yuesaofinsh"
                     android:layout_width="match_parent"
@@ -264,8 +276,7 @@
                     android:paddingTop="10dp"
                     android:singleLine="true"
                     android:text="取消订单"
-                    android:textColor="#000000"
-                    />
+                    android:textColor="#000000" />
 
                 <TextView
                     android:id="@+id/yuesaoadd"
@@ -282,8 +293,7 @@
                     android:paddingTop="10dp"
                     android:singleLine="true"
                     android:text="提交订单"
-                    android:textColor="#FFFFFF"
-                    />
+                    android:textColor="#FFFFFF" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
