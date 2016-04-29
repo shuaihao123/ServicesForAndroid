@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "org.freecoding.servicesmanager"
-        minSdkVersion 8
+        minSdkVersion 9
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -28,6 +28,9 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.zhy:okhttputils:2.3.9'
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.code-troopers.betterpickers:library:2.5.3'
     compile files('libs/Android_Map_V2.7.20151124.jar')
     compile files('libs/AMap_Location_V2.4.1_20160414.jar')
     compile files('libs/AMap_Search_V3.2.1_20160308.jar')
