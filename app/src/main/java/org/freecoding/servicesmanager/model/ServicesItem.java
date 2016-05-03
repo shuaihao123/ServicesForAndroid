@@ -6,11 +6,11 @@ import java.io.Serializable;
  * Created by Wowser on 2016/4/28.
  */
 public class ServicesItem implements Serializable {
-    int id;
-    String createTime;
-    String updateTime;
-    String remark;
-    String name;
-    String serviceItem;
-    int type;
+    public int id;
+    public String createTime;
+    public String updateTime;
+    public String remark;
+    public String name;
+    public String serviceItem;
+    public int type;
 }

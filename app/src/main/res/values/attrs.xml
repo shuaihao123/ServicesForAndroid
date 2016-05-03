@@ -109,4 +109,8 @@
     <declare-styleable name="FlowLayout_Layout">
         <attr name="android:layout_gravity" />
     </declare-styleable>
+
+    <declare-styleable name="SeekBarPressure">
+        <attr name="seekbar_screen" format="integer"/>
+    </declare-styleable>
 </resources>

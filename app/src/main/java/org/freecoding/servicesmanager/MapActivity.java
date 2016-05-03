@@ -3,8 +3,10 @@ package org.freecoding.servicesmanager;
 import android.location.Geocoder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.RadioGroup;
@@ -34,7 +36,7 @@ import com.amap.api.services.geocoder.RegeocodeResult;
 
 import java.util.List;
 
-public class MapActivity extends AppCompatActivity implements AMap.OnMapLoadedListener, AMap.OnCameraChangeListener, GeocodeSearch.OnGeocodeSearchListener, LocationSource,AMapLocationListener {
+public class MapActivity extends AppCompatActivity implements AMap.OnMapLoadedListener, AMap.OnCameraChangeListener, GeocodeSearch.OnGeocodeSearchListener, LocationSource, AMapLocationListener {
 
 
     private GeocodeSearch geocoderSearch;
@@ -46,6 +48,8 @@ public class MapActivity extends AppCompatActivity implements AMap.OnMapLoadedLi
 
     private AMap aMap;
     private MapView mapView;
+    private RecyclerView recyclerView;
+    private MapAdapter adapter;
     private int x;
     private int y;
 
@@ -55,6 +59,9 @@ public class MapActivity extends AppCompatActivity implements AMap.OnMapLoadedLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        adapter = new MapAdapter();
         mapView = (MapView) findViewById(R.id.map);
         mapView.onCreate(savedInstanceState); // 此方法必须重写
 
@@ -66,6 +73,7 @@ public class MapActivity extends AppCompatActivity implements AMap.OnMapLoadedLi
                 addMarkersToMap();
             }
         });
+
 
         init();
     }
@@ -265,6 +273,31 @@ public class MapActivity extends AppCompatActivity implements AMap.OnMapLoadedLi
             mlocationClient.onDestroy();
         }
         mlocationClient = null;
+    }
+
+    class MapViewHolder extends RecyclerView.ViewHolder {
+
+        public MapViewHolder(View itemView) {
+            super(itemView);
+        }
+    }
+
+    class MapAdapter extends RecyclerView.Adapter<MapViewHolder> {
+
+        @Override
+        public MapViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            return null;
+        }
+
+        @Override
+        public void onBindViewHolder(MapViewHolder holder, int position) {
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return 0;
+        }
     }
 
 }

@@ -32,6 +32,12 @@
             android:value="42e1bb62f2191daa45ea463933605b9c" />
 
         <activity android:name=".MainActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".OrderActivity"/>
         <activity android:name=".HousekeepingActivity"/>
@@ -72,12 +78,6 @@
         <activity android:name=".SelectedMenuOrderActivity"/>
         <activity android:name=".GreenRestaurantActivity"/>
         <activity android:name=".MapActivity">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
     </application>
 

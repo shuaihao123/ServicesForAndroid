@@ -2,6 +2,7 @@ package org.freecoding.servicesmanager.view;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -49,7 +50,7 @@ public class SeekBarPressure extends View {
 
     private double defaultScreenLow = 0;    //默认前滑块位置百分比
     private double defaultScreenHigh = 20;  //默认后滑块位置百分比
-    private int screen = 50;
+    private int screen = 100;
 
     private boolean isEdit = false;     //输入框是否正在输入
 
@@ -63,7 +64,13 @@ public class SeekBarPressure extends View {
 
     public SeekBarPressure(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-//        this.setBackgroundColor(Color.BLACK);
+        TypedArray a = context.obtainStyledAttributes(attrs,
+                R.styleable.SeekBarPressure, defStyle, 0);
+        try {
+            screen = a.getInt(R.styleable.SeekBarPressure_seekbar_screen, -1);
+        } finally {
+            a.recycle();
+        }
 
         Resources resources = getResources();
         notScrollBarBg = resources.getDrawable(R.drawable.seekbarpressure_bg_normal);
@@ -157,8 +164,8 @@ public class SeekBarPressure extends View {
 
         double progressLow = formatDouble((mOffsetLow - mThumbWidth / 2) * screen / mDistance);
         double progressHigh = formatDouble((mOffsetHigh - mThumbWidth / 2) * screen / mDistance);
-        canvas.drawText((int) progressLow + "", (int) mOffsetLow - 2 - 2, 15, text_Paint);
-        canvas.drawText((int) progressHigh + "", (int) mOffsetHigh - 2, 15, text_Paint);
+        //canvas.drawText((int) progressLow + "", (int) mOffsetLow - 2 - 2, 15, text_Paint);
+        //canvas.drawText((int) progressHigh + "", (int) mOffsetHigh - 2, 15, text_Paint);
 
         if (mBarChangeListener != null) {
             if (!isEdit) {

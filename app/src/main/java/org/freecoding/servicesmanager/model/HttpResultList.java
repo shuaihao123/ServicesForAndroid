@@ -7,8 +7,8 @@ import java.util.List;
  * Created by Wowser on 2016/4/28.
  */
 public class HttpResultList<T> implements Serializable {
-    boolean success;
-    int totalCount;
-    String message;
-    List<T> rows;
+    public boolean success;
+    public int totalCount;
+    public String message;
+    public List<T> rows;
 }
