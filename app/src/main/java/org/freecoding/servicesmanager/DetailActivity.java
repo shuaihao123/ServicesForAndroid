@@ -93,10 +93,10 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void save() {
-        HttpUtils.saveServiceItemJiaZheng(info.id, "", info.serviceItem, "", "", "", new StringCallback() {
+        HttpUtils.saveServiceItemJiaZheng(info.id, info.createTime, info.updateTime,info.serviceItem, info.name, info.remark, new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
-
+                 msg("请检查网络");
             }
 
             @Override

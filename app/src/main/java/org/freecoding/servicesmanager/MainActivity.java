@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import org.freecoding.servicesmanager.view.RoundRelativeLayout;
@@ -38,13 +39,23 @@ public class MainActivity extends AppCompatActivity {
     TextView gukefuwutai;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         init();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.userButton:
+                Intent intent = new Intent(MainActivity.this, UserdetailActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void init() {
@@ -54,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         orderView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,OrderActivity.class);
+                Intent intent = new Intent(MainActivity.this, OrderActivity.class);
                 startActivity(intent);
             }
         });
@@ -62,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         houseView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,HousekeepingActivity.class);
+                Intent intent = new Intent(MainActivity.this, HousekeepingActivity.class);
                 startActivity(intent);
             }
         });
@@ -70,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         nursingView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,NursingActivity.class);
+                Intent intent = new Intent(MainActivity.this, NursingActivity.class);
                 startActivity(intent);
             }
         });
@@ -78,15 +89,18 @@ public class MainActivity extends AppCompatActivity {
         medicalView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,MedicalActivity.class);
+                Intent intent = new Intent(MainActivity.this, MedicalActivity.class);
                 startActivity(intent);
             }
         });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
+
+
 }

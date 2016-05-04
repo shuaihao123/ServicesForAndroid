@@ -1,5 +1,7 @@
 package org.freecoding.servicesmanager;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,9 +10,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.freecoding.servicesmanager.model.HttpResult;
+import org.freecoding.servicesmanager.utils.HttpUtils;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 /**
  * 注册密码
@@ -26,18 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText reisteragainpwd;
     @Bind(R.id.reisterButton)
     TextView reisterButton;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        ButterKnife.bind(this);
-    init();
-    }
-
-    private void init() {
-
-    }
+    HttpResult info;
     /**
      * 返回
      */
@@ -51,21 +49,22 @@ public class RegisterActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    void msg (String msg){
+    void msg(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
+
     /**
      * 判断手机号
      */
     @OnClick(R.id.reisterButton)
     void btnreister() {
         String phone = reisterphone.getText().toString().trim();
-        if (phone.length()==0){
+        if (phone.length() == 0) {
             msg("手机号不能为空");
             reisterphone.requestFocus();
             return;
         }
-        if (phone.length()!=11){
+        if (phone.length() != 11) {
             msg("手机号输入错误");
             reisterphone.requestFocus();
             return;
@@ -74,8 +73,8 @@ public class RegisterActivity extends AppCompatActivity {
          * 判断密码
          */
         String pwd = reisterpwd.getText().toString().trim();
-        if (phone.length()==0){
-            msg("密码不能为空");
+        if (phone.length() < 6) {
+            msg("密码长度太短");
             reisterpwd.requestFocus();
             return;
         }
@@ -83,15 +82,33 @@ public class RegisterActivity extends AppCompatActivity {
          * 判断确认密码
          */
         String zcpwd = reisteragainpwd.getText().toString().trim();
-        if (phone.length()==0){
-            msg("确认密码不能为空");
+        if (!zcpwd.equals(pwd)) {
+            msg("密码不一致");
             reisteragainpwd.requestFocus();
             return;
         }
-       if(pwd.length()!=zcpwd.length()){
-           msg("密码不一致");
-           reisteragainpwd.requestFocus();
-           return;
-       }
+        Register();
+    }
+
+    private void Register() {
+        HttpUtils.register(info.message, info.success, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e) {
+                msg("请检查网络");
+            }
+
+            @Override
+            public void onResponse(String response) {
+                Gson gson = new Gson();
+                HttpResult result = gson.fromJson(response, HttpResult.class);
+                if (result.success) {
+                    msg("注册成功");
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                } else {
+                    msg("注册失败");
+                }
+            }
+        });
     }
 }

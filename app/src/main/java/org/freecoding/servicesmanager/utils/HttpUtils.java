@@ -11,12 +11,11 @@ public class HttpUtils {
 
     /**
      * 登录
-     *
-     * @param loginId
+     *  @param loginId
      * @param password
      * @param callback
      */
-    public static void login(String loginId, String password, StringCallback callback) {
+    public static void login(String loginId, boolean password, StringCallback callback) {
         String url = BASE_URL + "member.do?method=login&loginId=" + loginId + "&password=" + password;
         OkHttpUtils
                 .get()
@@ -27,12 +26,11 @@ public class HttpUtils {
 
     /**
      * 注册
-     *
-     * @param loginId
+     *  @param loginId
      * @param password
      * @param callback
      */
-    public static void register(String loginId, String password, StringCallback callback) {
+    public static void register(String loginId, boolean password, StringCallback callback) {
         String url = BASE_URL + "member.do?method=register&loginId=" + loginId + "&password=" + password;
         OkHttpUtils
                 .get()

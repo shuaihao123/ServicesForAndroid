@@ -16,8 +16,6 @@ import butterknife.OnClick;
  * 个人信息页
  */
 public class UserdetailActivity extends AppCompatActivity {
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
     /**
      * 点餐订单
      */
@@ -39,7 +37,7 @@ public class UserdetailActivity extends AppCompatActivity {
     @Bind(R.id.detailjiazhen)
     LinearLayout detailjiazhen;
     @Bind(R.id.detailupdatepwd)
-    LinearLayout detailupdatepwd;
+    LinearLayout detailupdatepwd;//忘记密码
     @Bind(R.id.detailfankui)
     LinearLayout detailfankui;
     @Bind(R.id.detailgywomen)
@@ -89,6 +87,13 @@ public class UserdetailActivity extends AppCompatActivity {
      */
     @OnClick(R.id.detailhuli) void btndetailhuli(){
         Intent intent = new Intent(this, NursingOrderActivity.class);
+        startActivity(intent);
+    }
+    /**
+     * 忘记密码
+     */
+    @OnClick(R.id.detailupdatepwd) void btndetailupdatepwd(){
+        Intent intent = new Intent(this, Forgot_password_Activity.class);
         startActivity(intent);
     }
 }

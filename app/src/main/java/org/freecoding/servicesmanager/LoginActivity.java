@@ -9,9 +9,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.freecoding.servicesmanager.model.HttpResult;
+import org.freecoding.servicesmanager.utils.HttpUtils;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 /**
  * 登录
@@ -29,13 +36,14 @@ public class LoginActivity extends AppCompatActivity {
     TextView fastpwd;
     @Bind(R.id.loginbutton)
     TextView loginbutton;
-
+    HttpResult info;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         init();
+
     }
 
     private void init() {
@@ -53,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     void msg(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
@@ -74,9 +83,30 @@ public class LoginActivity extends AppCompatActivity {
             loginpwd.requestFocus();
             return;
         }
+        login();
+    }
 
-        Intent it = new Intent(this, MainActivity.class);
-        startActivity(it);
+    private void login() {
+
+        HttpUtils.login(info.message,info.success,new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e) {
+                msg("请检查网络");
+            }
+
+            @Override
+            public void onResponse(String response) {
+                Gson gson = new Gson();
+                HttpResult result = gson.fromJson(response, HttpResult.class);
+                if (result.success) {
+                  msg("登陆成功");
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    msg("登陆成功");
+                }
+            }
+        });
     }
 
     /**
