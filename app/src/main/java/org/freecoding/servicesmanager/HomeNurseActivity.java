@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.freecoding.servicesmanager.model.HttpResult;
+import org.freecoding.servicesmanager.model.JiaZhengOrder;
 import org.freecoding.servicesmanager.model.ServicesItem;
 import org.freecoding.servicesmanager.utils.HttpUtils;
 import org.freecoding.servicesmanager.view.MultiLineEditText;
@@ -55,6 +56,7 @@ public class HomeNurseActivity extends AppCompatActivity {
     @Bind(R.id.baomufuwudizhi)//地址
             EditText baomufuwudizhi;
     ServicesItem info;
+    JiaZhengOrder jiaZhengOrder;
     Handler hd;
 
     String shijian;
@@ -63,6 +65,7 @@ public class HomeNurseActivity extends AppCompatActivity {
     String phone;
     String dizhi;
     StringBuffer sb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +87,8 @@ public class HomeNurseActivity extends AppCompatActivity {
         };
     }
 
+    private String serviceTime;
+
     private void init() {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
@@ -95,6 +100,7 @@ public class HomeNurseActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBarPressure seekBar, double progressLow, double progressHigh) {
                 textviewshijian.setText(String.format(getString(R.string.seekbar_time_title), String.valueOf((int) (12 + progressLow) / 2 + ":00"), String.valueOf((int) (12 + progressHigh) / 2 + ":00")));
+                serviceTime = String.format(getString(R.string.seekbar_time_title_inner), String.valueOf((int) (12 + progressLow) / 2 + ":00"), String.valueOf((int) (12 + progressHigh) / 2 + ":00"));
             }
 
             @Override
@@ -102,8 +108,39 @@ public class HomeNurseActivity extends AppCompatActivity {
 
             }
         });
-        info = (ServicesItem) getIntent().getSerializableExtra("info");
+        if (getIntent() != null && getIntent().getSerializableExtra("info") != null) {
+            info = (ServicesItem) getIntent().getSerializableExtra("info");
+        } else if (getIntent() != null && getIntent().getSerializableExtra("order") != null) {
+            jiaZhengOrder = (JiaZhengOrder) getIntent().getSerializableExtra("order");
+            loadOrder();
+        }
     }
+
+    public void loadOrder() {
+        String serviceItem = jiaZhengOrder.serviceItem;
+        if (serviceItem.contains("1")) {
+            baomucheckzf.setChecked(true);
+        }
+        if (serviceItem.contains("2")) {
+            baomucheckzgxh.setChecked(true);
+        }
+        if (serviceItem.contains("3")) {
+            baomucheckzglr.setChecked(true);
+        }
+        if (serviceItem.contains("4")) {
+            baomucheckzgbr.setChecked(true);
+        }
+        String date=jiaZhengOrder.serviceTime;
+        String [] dates=date.split("---");
+        int kaishi=Integer.parseInt(dates[0].split(":")[0]);
+        int end=Integer.parseInt(dates[1].split(":")[0]);
+        baomushijian.setProgressLow(kaishi);
+        baomushijian.setProgressHigh(end);
+        textviewshijian.setText(kaishi+":00-"+end+":00");
+        baomuname.setText(jiaZhengOrder.customerName);
+        baomuphone.setText(jiaZhengOrder.custmerPhone);
+        baomufuwudizhi.setText(jiaZhengOrder.address);
+        }
 
     /**
      * 返回
@@ -122,15 +159,18 @@ public class HomeNurseActivity extends AppCompatActivity {
     }
 
     private void save() {
-         sb=new StringBuffer();
-        if(baomucheckzf.isChecked()){
-            sb.append(baomucheckzf.getText().toString().trim()+",");
-        }else if(baomucheckzgxh.isChecked()){
-            sb.append(baomucheckzgxh.getText().toString().trim()+",");
-        }else if(baomucheckzglr.isChecked()){
-            sb.append(baomucheckzglr.getText().toString().trim()+",");
-        }else if(baomucheckzgbr.isChecked()){
-            sb.append(baomucheckzgbr.getText().toString().trim());
+        sb = new StringBuffer();
+        if (baomucheckzf.isChecked()) {
+            sb.append("1:" + baomucheckzf.getText().toString().trim() + ";");
+        }
+        if (baomucheckzgxh.isChecked()) {
+            sb.append("2:" + baomucheckzgxh.getText().toString().trim() + ";");
+        }
+        if (baomucheckzglr.isChecked()) {
+            sb.append("3:" + baomucheckzglr.getText().toString().trim() + ";");
+        }
+        if (baomucheckzgbr.isChecked()) {
+            sb.append("4:" + baomucheckzgbr.getText().toString().trim() + ";");
         }
 
         name = baomuname.getText().toString().trim();
@@ -158,7 +198,7 @@ public class HomeNurseActivity extends AppCompatActivity {
         }
         bz = baomubeizhu.getText().toString().trim();
         shijian = textviewshijian.getText().toString().trim();
-        HttpUtils.saveServiceItemJiaZheng(info.id, bz,shijian, name, phone, dizhi, new StringCallback() {
+        HttpUtils.saveServiceItemJiaZheng(info.id, shijian, sb.toString(), name, dizhi, phone, new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
             }
@@ -186,10 +226,7 @@ public class HomeNurseActivity extends AppCompatActivity {
      */
     @OnClick(R.id.baomuadd)
     void btntijiao() {
-        String checkzf = baomucheckzf.getText().toString().trim();
-        String checkzgxh = baomucheckzgxh.getText().toString().trim();
-        String checkzglr = baomucheckzglr.getText().toString().trim();
-        String checkzgbr = baomucheckzgbr.getText().toString().trim();
+
 
         name = baomuname.getText().toString().trim();
         if (name.length() == 0) {

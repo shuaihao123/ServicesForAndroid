@@ -66,7 +66,7 @@ public class HttpUtils {
      * @param orderNo
      * @param callback
      */
-    public static void getMemberOrderByNo(String phoneNo, String orderNo, StringCallback callback) {
+        public static void getMemberOrderByNo(String phoneNo, String orderNo, StringCallback callback) {
         String url = BASE_URL + "member.do?method=getMemberOrderByNo&phoneNo=" + phoneNo + "&orderNo=" + orderNo;
         OkHttpUtils
                 .get()

@@ -48,8 +48,8 @@ public class SeekBarPressure extends View {
     private OnSeekBarChangeListener mBarChangeListener;
 
 
-    private double defaultScreenLow = 0;    //默认前滑块位置百分比
-    private double defaultScreenHigh = 20;  //默认后滑块位置百分比
+    private double defaultScreenLow = 0;    //默认前滑块位置百分比后滑块位置百分
+    private double defaultScreenHigh = 20;  //默认比
     private int screen = 100;
 
     private boolean isEdit = false;     //输入框是否正在输入

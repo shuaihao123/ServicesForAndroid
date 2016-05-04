@@ -2,4 +2,5 @@
     <string name="app_name">ServicesManager</string>
     <string name="seekbar_age_title">%1$s岁-%2$s岁</string>
     <string name="seekbar_time_title">%1$s-%2$s</string>
+    <string name="seekbar_time_title_inner">%1$s---%2$s</string>
 </resources>
