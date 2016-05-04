@@ -2,6 +2,8 @@ package org.freecoding.servicesmanager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -37,18 +39,33 @@ public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.loginbutton)
     TextView loginbutton;
     HttpResult info;
+    String phone;
+    String pwd;
+    Handler hd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         init();
-
+        hd=new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if(msg.what==0){
+                    msg("登陆成功");
+                }else if(msg.what==1){
+                    msg("登陆失败");
+                }else{
+                    msg("请检查网络");
+                }
+            }
+        };
     }
 
     private void init() {
-    }
 
+    }
     /**
      * 返回
      */
@@ -71,15 +88,15 @@ public class LoginActivity extends AppCompatActivity {
      */
     @OnClick(R.id.loginbutton)
     void btnlogin() {
-        String phone = loginname.getText().toString().trim();
-        if (phone.length() == 0) {
-            msg("手机号不能为空");
+         phone = loginname.getText().toString().trim();
+        if (phone.length() != 11) {
+            msg("手机号错误");
             loginname.requestFocus();
             return;
         }
-        String pwd = loginpwd.getText().toString().trim();
+         pwd = loginpwd.getText().toString().trim();
         if (pwd.length() == 0) {
-            msg("手机号不能为空");
+            msg("密码不能为空");
             loginpwd.requestFocus();
             return;
         }
@@ -87,11 +104,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login() {
-
-        HttpUtils.login(info.message,info.success,new StringCallback() {
+        HttpUtils.login(phone,pwd,new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
-                msg("请检查网络");
+                hd.sendEmptyMessage(2);
             }
 
             @Override
@@ -99,11 +115,11 @@ public class LoginActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 HttpResult result = gson.fromJson(response, HttpResult.class);
                 if (result.success) {
-                  msg("登陆成功");
+                    hd.sendEmptyMessage(0);
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else {
-                    msg("登陆成功");
+                    hd.sendEmptyMessage(1);
                 }
             }
         });

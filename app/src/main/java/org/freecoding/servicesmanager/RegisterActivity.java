@@ -3,6 +3,8 @@ package org.freecoding.servicesmanager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -36,6 +38,28 @@ public class RegisterActivity extends AppCompatActivity {
     @Bind(R.id.reisterButton)
     TextView reisterButton;
     HttpResult info;
+    String phone;
+    String pwd;
+    Handler hd;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
+        ButterKnife.bind(this);
+        hd=new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if(msg.what==0){
+                    msg("注册成功");
+                }else if(msg.what==1){
+                    msg("注册失败");
+                }else{
+                    msg("请检查网络");
+                }
+            }
+        };
+    }
     /**
      * 返回
      */
@@ -58,7 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
      */
     @OnClick(R.id.reisterButton)
     void btnreister() {
-        String phone = reisterphone.getText().toString().trim();
+         phone = reisterphone.getText().toString().trim();
         if (phone.length() == 0) {
             msg("手机号不能为空");
             reisterphone.requestFocus();
@@ -72,8 +96,13 @@ public class RegisterActivity extends AppCompatActivity {
         /**
          * 判断密码
          */
-        String pwd = reisterpwd.getText().toString().trim();
-        if (phone.length() < 6) {
+         pwd = reisterpwd.getText().toString().trim();
+        if (pwd.length()==0) {
+            msg("密码不能为空");
+            reisterpwd.requestFocus();
+            return;
+        }
+        if (pwd.length() < 6) {
             msg("密码长度太短");
             reisterpwd.requestFocus();
             return;
@@ -91,10 +120,11 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void Register() {
-        HttpUtils.register(info.message, info.success, new StringCallback() {
+        HttpUtils ht=new HttpUtils();
+        ht.register(phone, pwd , new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
-                msg("请检查网络");
+                hd.sendEmptyMessage(2);
             }
 
             @Override
@@ -102,11 +132,11 @@ public class RegisterActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 HttpResult result = gson.fromJson(response, HttpResult.class);
                 if (result.success) {
-                    msg("注册成功");
+                    hd.sendEmptyMessage(0);
                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(intent);
                 } else {
-                    msg("注册失败");
+                    hd.sendEmptyMessage(1);
                 }
             }
         });

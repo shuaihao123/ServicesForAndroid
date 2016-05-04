@@ -83,17 +83,19 @@
                         android:text="时间" />
 
                     <TextView
+                        android:id="@+id/pifuhulishowshijian"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:text="60:00-12;00" />
+                        android:text="6:00-21;00" />
                 </RelativeLayout>
 
-                <SeekBar
-                    android:id="@+id/pifutime"
-                    android:padding="8dp"
+                <org.freecoding.servicesmanager.view.SeekBarPressure
+                    android:id="@+id/pifuhulishijian"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    app:seekbar_screen="30" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -128,21 +130,28 @@
                 android:background="@drawable/ic_order_option_bg_03">
 
                 <TextView
+                    android:layout_gravity="top"
+                    android:layout_marginTop="8dp"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:text="备注：" />
 
-                <EditText
-                    android:id="@+id/pifubeizhu"
+
+                <org.freecoding.servicesmanager.view.MultiLineEditText
+                    android:id="@+id/pifuhulibeizhu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:minLines="2"
-                    android:textColor="#e5e6e9"
-                    android:textSize="27px"
-                    android:hint="需求更多服务请补充" />
+                    android:layout_marginTop="4dp"
+                    android:background="@null"
+                    android:gravity="top|left"
+                    android:hint="需求更多服务请补充"
+                    android:inputType="textMultiLine"
+                    android:lineSpacingMultiplier="1.2"
+                    android:lines="3"
+                    android:scrollHorizontally="false"
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <LinearLayout

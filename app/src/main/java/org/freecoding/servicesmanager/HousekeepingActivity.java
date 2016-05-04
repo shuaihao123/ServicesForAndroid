@@ -50,7 +50,6 @@ public class HousekeepingActivity extends AppCompatActivity implements AdapterVi
         ButterKnife.bind(this);
         serviceAdapter = new ServiceAdapter(HousekeepingActivity.this);
         serviceitemid.setAdapter(serviceAdapter);
-
         serviceitemid.setOnItemClickListener(this);
 
         init();
@@ -106,6 +105,9 @@ public class HousekeepingActivity extends AppCompatActivity implements AdapterVi
                 startActivity(intent);
                 break;
             case 3:
+                Intent inte = new Intent(this, HouseBaojActivity.class);
+                inte.putExtra("info", info);
+                startActivity(inte);
                 break;
         }
 

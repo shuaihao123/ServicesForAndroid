@@ -15,7 +15,7 @@ public class HttpUtils {
      * @param password
      * @param callback
      */
-    public static void login(String loginId, boolean password, StringCallback callback) {
+    public static void login(String loginId, String password, StringCallback callback) {
         String url = BASE_URL + "member.do?method=login&loginId=" + loginId + "&password=" + password;
         OkHttpUtils
                 .get()
@@ -30,7 +30,7 @@ public class HttpUtils {
      * @param password
      * @param callback
      */
-    public static void register(String loginId, boolean password, StringCallback callback) {
+    public static void register(String loginId, String password, StringCallback callback) {
         String url = BASE_URL + "member.do?method=register&loginId=" + loginId + "&password=" + password;
         OkHttpUtils
                 .get()
@@ -176,5 +176,38 @@ public class HttpUtils {
                 .build()
                 .execute(callback);
     }
+    /**
+     * 保存医疗服务
+     *
+     * @param serviceId
+     * @param serviceDate
+     * @param serviceTime
+     * @param serviceItem
+     * @param name
+     * @param address
+     * @param phone
+     * @param callback
+     */
+    public static void saveServiceItemYiLiao(int serviceId, String serviceDate, String serviceTime, String serviceItem, String name, String address, String phone, StringCallback callback) {
+        String url = BASE_URL + "yiliaoitem.do?method=saveServiceItemYiLiao&serviceId="+serviceId+"&serviceDate="+serviceDate+"&serviceTime="+serviceTime+"&serviceItem="+serviceItem+"&name="+name+"&address="+address+"&phone="+"phone";
+        OkHttpUtils
+                .get()
+                .url(url)
+                .build()
+                .execute(callback);
+    }
 
+    /**
+     * 菜单医疗
+     *
+     * @param callback
+     */
+    public static void getAllYiLiaoItem(StringCallback callback) {
+        String url = BASE_URL + "yiliaotem.do?method=getAllYiLiaoItem";
+        OkHttpUtils
+                .get()
+                .url(url)
+                .build()
+                .execute(callback);
+    }
 }

@@ -1,5 +1,7 @@
 package org.freecoding.servicesmanager;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,7 +30,6 @@ import okhttp3.Call;
  * 家政服务/月嫂
  */
 public class DetailActivity extends AppCompatActivity {
-
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.age)
@@ -39,20 +40,31 @@ public class DetailActivity extends AppCompatActivity {
     EditText yuesaophone;
     @Bind(R.id.dizhi)
     EditText yuesaodizhi;
-    @Bind(R.id.beizhu)
-    MultiLineEditText beizhu;
+    @Bind(R.id.yuesaobeizhu)
+    MultiLineEditText yuesaobeizhu;
     @Bind(R.id.seekBarAgeTextView)
     TextView seekBarAgeTextView;
-
     ServicesItem info;
-
+    Handler hd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
-
         init();
+        hd=new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if(msg.what==0){
+                    msg("登陆成功");
+                }else if(msg.what==1){
+                    msg("登陆失败");
+                }else{
+                    msg("请检查网络");
+                }
+            }
+        };
     }
 
     private void init() {
@@ -144,12 +156,8 @@ public class DetailActivity extends AppCompatActivity {
             yuesaodizhi.requestFocus();
             return;
         }
-        String bz = beizhu.getText().toString().trim();
-        if (bz.length() == 0) {
-            msg("请选择备注");
-            beizhu.requestFocus();
-            return;
-        }
+        String ysbz = yuesaobeizhu.getText().toString().trim();
+
     }
 
 

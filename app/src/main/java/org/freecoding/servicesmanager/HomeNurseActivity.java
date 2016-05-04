@@ -1,5 +1,7 @@
 package org.freecoding.servicesmanager;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -17,6 +19,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import org.freecoding.servicesmanager.model.HttpResult;
 import org.freecoding.servicesmanager.model.ServicesItem;
 import org.freecoding.servicesmanager.utils.HttpUtils;
+import org.freecoding.servicesmanager.view.MultiLineEditText;
 import org.freecoding.servicesmanager.view.RoundLinearLayout;
 import org.freecoding.servicesmanager.view.SeekBarPressure;
 
@@ -44,7 +47,7 @@ public class HomeNurseActivity extends AppCompatActivity {
     @Bind(R.id.textviewshijian)
     TextView textviewshijian;
     @Bind(R.id.baomubeizhu)//备注
-            EditText baomubeizhu;
+            MultiLineEditText baomubeizhu;
     @Bind(R.id.baomuname)//姓名
             EditText baomuname;
     @Bind(R.id.baomuphone)//电话
@@ -52,13 +55,33 @@ public class HomeNurseActivity extends AppCompatActivity {
     @Bind(R.id.baomufuwudizhi)//地址
             EditText baomufuwudizhi;
     ServicesItem info;
+    Handler hd;
 
+    String shijian;
+    String bz;
+    String name;
+    String phone;
+    String dizhi;
+    StringBuffer sb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_nurse);
         ButterKnife.bind(this);
         init();
+        hd = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if (msg.what == 0) {
+                    msg("提交成功");
+                } else if (msg.what == 1) {
+                    msg("提交失败");
+                } else {
+                    msg("请检查网络");
+                }
+            }
+        };
     }
 
     private void init() {
@@ -71,7 +94,7 @@ public class HomeNurseActivity extends AppCompatActivity {
 
             @Override
             public void onProgressChanged(SeekBarPressure seekBar, double progressLow, double progressHigh) {
-                textviewshijian.setText(String.format(getString(R.string.seekbar_time_title), String.valueOf((int) (12 + progressLow)/2+":00"), String.valueOf((int) (12 + progressHigh)/2+":00")));
+                textviewshijian.setText(String.format(getString(R.string.seekbar_time_title), String.valueOf((int) (12 + progressLow) / 2 + ":00"), String.valueOf((int) (12 + progressHigh) / 2 + ":00")));
             }
 
             @Override
@@ -99,10 +122,45 @@ public class HomeNurseActivity extends AppCompatActivity {
     }
 
     private void save() {
-        HttpUtils.saveServiceItemJiaZheng(info.id, "", info.serviceItem, "", "", "", new StringCallback() {
+         sb=new StringBuffer();
+        if(baomucheckzf.isChecked()){
+            sb.append(baomucheckzf.getText().toString().trim()+",");
+        }else if(baomucheckzgxh.isChecked()){
+            sb.append(baomucheckzgxh.getText().toString().trim()+",");
+        }else if(baomucheckzglr.isChecked()){
+            sb.append(baomucheckzglr.getText().toString().trim()+",");
+        }else if(baomucheckzgbr.isChecked()){
+            sb.append(baomucheckzgbr.getText().toString().trim());
+        }
+
+        name = baomuname.getText().toString().trim();
+        if (name.length() == 0) {
+            msg("请输入姓名");
+            baomuname.requestFocus();
+            return;
+        }
+        phone = baomuphone.getText().toString().trim();
+        if (phone.length() == 0) {
+            msg("请输入手机号");
+            baomuphone.requestFocus();
+            return;
+        }
+        if (phone.length() != 11) {
+            msg("手机号输入错误");
+            baomuphone.requestFocus();
+            return;
+        }
+        dizhi = baomufuwudizhi.getText().toString().trim();
+        if (dizhi.length() == 0) {
+            msg("请选择地址");
+            baomufuwudizhi.requestFocus();
+            return;
+        }
+        bz = baomubeizhu.getText().toString().trim();
+        shijian = textviewshijian.getText().toString().trim();
+        HttpUtils.saveServiceItemJiaZheng(info.id, bz,shijian, name, phone, dizhi, new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
-
             }
 
             @Override
@@ -110,9 +168,10 @@ public class HomeNurseActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 HttpResult result = gson.fromJson(response, HttpResult.class);
                 if (result.success) {
-                    //成功
+                    hd.sendEmptyMessage(0);
+                    finish();
                 } else {
-                    //保存失败
+                    hd.sendEmptyMessage(1);
                 }
             }
         });
@@ -127,25 +186,18 @@ public class HomeNurseActivity extends AppCompatActivity {
      */
     @OnClick(R.id.baomuadd)
     void btntijiao() {
-        if (baomucheckzf.isChecked() == true) {
-            String checkzf = baomucheckzf.getText().toString().trim();
-        }
-        if (baomucheckzgxh.isChecked() == true) {
-            String checkzgxh = baomucheckzgxh.getText().toString().trim();
-        }
-        if (baomucheckzglr.isChecked() == true) {
-            String checkzglr = baomucheckzglr.getText().toString().trim();
-        }
-        if (baomucheckzgbr.isChecked() == true) {
-            String checkzgbr = baomucheckzgbr.getText().toString().trim();
-        }
-        String name = baomuname.getText().toString().trim();
+        String checkzf = baomucheckzf.getText().toString().trim();
+        String checkzgxh = baomucheckzgxh.getText().toString().trim();
+        String checkzglr = baomucheckzglr.getText().toString().trim();
+        String checkzgbr = baomucheckzgbr.getText().toString().trim();
+
+        name = baomuname.getText().toString().trim();
         if (name.length() == 0) {
             msg("请输入姓名");
             baomuname.requestFocus();
             return;
         }
-        String phone = baomuphone.getText().toString().trim();
+        phone = baomuphone.getText().toString().trim();
         if (phone.length() == 0) {
             msg("请输入手机号");
             baomuphone.requestFocus();
@@ -156,18 +208,15 @@ public class HomeNurseActivity extends AppCompatActivity {
             baomuphone.requestFocus();
             return;
         }
-        String dizhi = baomufuwudizhi.getText().toString().trim();
+        dizhi = baomufuwudizhi.getText().toString().trim();
         if (dizhi.length() == 0) {
             msg("请选择地址");
             baomufuwudizhi.requestFocus();
             return;
         }
-        String bz = baomubeizhu.getText().toString().trim();
-        if (bz.length() == 0) {
-            msg("请选择备注");
-            baomubeizhu.requestFocus();
-            return;
-        }
+        bz = baomubeizhu.getText().toString().trim();
+        shijian = textviewshijian.getText().toString().trim();
+
     }
 
     /**

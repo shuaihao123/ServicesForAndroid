@@ -1,5 +1,7 @@
 package org.freecoding.servicesmanager;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -8,13 +10,23 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.freecoding.servicesmanager.model.HttpResult;
+import org.freecoding.servicesmanager.model.ServicesItem;
+import org.freecoding.servicesmanager.utils.HttpUtils;
+import org.freecoding.servicesmanager.view.MultiLineEditText;
 import org.freecoding.servicesmanager.view.RoundLinearLayout;
+import org.freecoding.servicesmanager.view.SeekBarPressure;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 /**
  * 医疗/挂号
@@ -24,28 +36,59 @@ public class MedicalRegistrActivity extends AppCompatActivity {
     Toolbar toolbar;
     @Bind(R.id.guahaoriqi)
     LinearLayout guahaoriqi;
-    @Bind(R.id.guahaotime)
-    SeekBar guahaotime;
+    @Bind(R.id.guahaoshijian)
+    SeekBarPressure guahaoshijian;
+    @Bind(R.id.guahaoshowshijian)
+    TextView guahaoshowshijian;
     @Bind(R.id.guahaobeizhu)
-    EditText guahaobeizhu;
+    MultiLineEditText guahaobeizhu;
     @Bind(R.id.guahaoname)
     EditText guahaoname;
     @Bind(R.id.guahaophone)
     EditText guahaophone;
     @Bind(R.id.guahaodizhi)
     EditText guahaodizhi;
-
+    Handler hd;
+    ServicesItem info;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical_registr);
         ButterKnife.bind(this);
         init();
+        hd=new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if(msg.what==0){
+                    msg("登陆成功");
+                }else if(msg.what==1){
+                    msg("登陆失败");
+                }else{
+                    msg("请检查网络");
+                }
+            }
+        };
     }
-
     private void init() {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+        guahaoshijian.setOnSeekBarChangeListener(new SeekBarPressure.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressBefore() {
+            }
+
+            @Override
+            public void onProgressChanged(SeekBarPressure seekBar, double progressLow, double progressHigh) {
+                guahaoshowshijian.setText(String.format(getString(R.string.seekbar_time_title), String.valueOf((int) (12 + progressLow)/2+":00"), String.valueOf((int) (12 + progressHigh)/2+":00")));
+            }
+
+            @Override
+            public void onProgressAfter() {
+
+            }
+        });
+        info = (ServicesItem) getIntent().getSerializableExtra("info");
     }
     /**
      * 返回
@@ -56,9 +99,31 @@ public class MedicalRegistrActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 break;
+            case R.id.saveButton:
+                save();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void save() {
+        HttpUtils.saveServiceItemYiLiao(info.id, "", info.serviceItem, "", "", "", "", new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e) {
+            }
+            @Override
+            public void onResponse(String response) {
+                Gson gson = new Gson();
+                HttpResult result = gson.fromJson(response, HttpResult.class);
+                if (result.success) {
+                    //保存成功
+                } else {
+                    //保存失败
+                }
+            }
+        });
+    }
+
     void msg(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
@@ -92,11 +157,7 @@ public class MedicalRegistrActivity extends AppCompatActivity {
             return;
         }
         String bz = guahaobeizhu.getText().toString().trim();
-        if (bz.length() == 0) {
-            msg("请选择备注");
-            guahaobeizhu.requestFocus();
-            return;
-        }
+
     }
 
     /**
