@@ -58,7 +58,6 @@ public class HomeNurseActivity extends AppCompatActivity {
     ServicesItem info;
     JiaZhengOrder jiaZhengOrder;
     Handler hd;
-
     String shijian;
     String bz;
     String name;
