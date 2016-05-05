@@ -19,6 +19,8 @@
     <!-- 写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -75,11 +77,8 @@
         <activity android:name=".GreenRestaurantActivity" />
         <activity android:name=".MapActivity" />
         <activity android:name=".Forgot_password_Activity" />
-        <activity android:name=".Set_new_password_Activity"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+        <activity android:name=".Set_new_password_Activity" />
+        <activity android:name=".DateActivity"/>
     </application>
 
 </manifest>
