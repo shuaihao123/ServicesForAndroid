@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -48,8 +49,17 @@ public class MedicaladviceActivity extends AppCompatActivity {
     TextView yiliaoadd;
     @Bind(R.id.yiliaofinsh)
     TextView yiliaofinsh;
+    @Bind(R.id.zixunfuwu)
+    CheckBox zixunfuwu;
+    @Bind(R.id.jinjizixun)
+    CheckBox jinjizixun;
     Handler hd;
     ServicesItem info;
+    String name;
+    String phone;
+    String dizhi;
+    String bz;
+    StringBuffer sb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,9 +71,9 @@ public class MedicaladviceActivity extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 if(msg.what==0){
-                    msg("登陆成功");
+                    msg("保存成功");
                 }else if(msg.what==1){
-                    msg("登陆失败");
+                    msg("保存失败");
                 }else{
                     msg("请检查网络");
                 }
@@ -93,18 +103,52 @@ public class MedicaladviceActivity extends AppCompatActivity {
     }
 
     private void save() {
-        HttpUtils.saveServiceItemYiLiao(info.id, "", info.serviceItem, "", "", "", "", new StringCallback() {
+        sb = new StringBuffer();
+        if (zixunfuwu.isChecked()) {
+            sb.append("1:" + zixunfuwu.getText().toString().trim() + ";");
+        }
+        if (jinjizixun.isChecked()) {
+            sb.append("2:" + jinjizixun.getText().toString().trim() + ";");
+        }
+         name = yiliaoname.getText().toString().trim();
+        if (name.length() == 0) {
+            msg("请输入姓名");
+            yiliaoname.requestFocus();
+            return;
+        }
+         phone = yiliaophone.getText().toString().trim();
+        if (phone.length() == 0) {
+            msg("请输入手机号");
+            yiliaophone.requestFocus();
+            return;
+        }
+        if (phone.length() !=11) {
+            msg("手机号输入错误");
+            yiliaophone.requestFocus();
+            return;
+        }
+         dizhi = yiliaodizhi.getText().toString().trim();
+        if (dizhi.length() == 0) {
+            msg("请选择地址");
+            yiliaodizhi.requestFocus();
+            return;
+        }
+         bz = zixunbeizhu.getText().toString().trim();
+
+        HttpUtils.saveServiceItemYiLiao(info.type,"2016-5-5", info.serviceItem, "","", "", "", "", new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
+                hd.sendEmptyMessage(2);
             }
             @Override
             public void onResponse(String response) {
                 Gson gson = new Gson();
                 HttpResult result = gson.fromJson(response, HttpResult.class);
                 if (result.success) {
-                    //成功
+                    hd.sendEmptyMessage(0);
+                    finish();
                 } else {
-                    //保存失败
+                    hd.sendEmptyMessage(1);
                 }
             }
         });

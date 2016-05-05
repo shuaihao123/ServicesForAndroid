@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -50,7 +51,16 @@ public class Skin_Care_Activity extends AppCompatActivity {
     @Bind(R.id.pifudizhi)
     EditText pifudizhi;
     ServicesItem info;
+    @Bind(R.id.pifuhulifuwu)
+    CheckBox pifuhulifuwu;
     Handler hd;
+    StringBuffer sb;
+    String shijian;
+    String name;
+    String phone;
+    String dizhi;
+    String bz;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,9 +72,9 @@ public class Skin_Care_Activity extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 if(msg.what==0){
-                    msg("登陆成功");
+                    msg("保存成功");
                 }else if(msg.what==1){
-                    msg("登陆失败");
+                    msg("保存失败");
                 }else{
                     msg("请检查网络");
                 }
@@ -109,10 +119,40 @@ public class Skin_Care_Activity extends AppCompatActivity {
     }
 
     private void save() {
-        HttpUtils.saveServiceItemHuLi(info.id,"","","","","","",new StringCallback() {
+        bz = pifuhulibeizhu.getText().toString().trim();
+        shijian=pifuhulishowshijian.getText().toString().trim();
+         name = pifuname.getText().toString().trim();
+        if (name.length() == 0) {
+            msg("请输入姓名");
+            pifuname.requestFocus();
+            return;
+        }
+         phone = pifuphone.getText().toString().trim();
+        if (phone.length() == 0) {
+            msg("请输入手机号");
+            pifuphone.requestFocus();
+            return;
+        }
+        if (phone.length() !=11) {
+            msg("手机号输入错误");
+            pifuphone.requestFocus();
+            return;
+        }
+         dizhi = pifudizhi.getText().toString().trim();
+        if (dizhi.length() == 0) {
+            msg("请选择地址");
+            pifudizhi.requestFocus();
+            return;
+        }
+
+        sb = new StringBuffer();
+        if (pifuhulifuwu.isChecked()) {
+            sb.append("1:" + pifuhulifuwu.getText().toString().trim() + ";");
+        }
+        HttpUtils.saveServiceItemHuLi(info.id,"2016-5-5",shijian,sb.toString(),bz,name,dizhi,phone,new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
-                msg("请检查网络");
+                hd.sendEmptyMessage(2);
             }
 
             @Override
@@ -120,9 +160,10 @@ public class Skin_Care_Activity extends AppCompatActivity {
                 Gson gson = new Gson();
                 HttpResult result = gson.fromJson(response, HttpResult.class);
                 if (result.success) {
-                    //成功
+                    hd.sendEmptyMessage(0);
+                    finish();
                 } else {
-                    //保存失败
+                    hd.sendEmptyMessage(1);
                 }
             }
         });
@@ -137,13 +178,13 @@ public class Skin_Care_Activity extends AppCompatActivity {
      */
     @OnClick(R.id.pifuadd)
     void btntijiao() {
-        String name = pifuname.getText().toString().trim();
+         name = pifuname.getText().toString().trim();
         if (name.length() == 0) {
             msg("请输入姓名");
             pifuname.requestFocus();
             return;
         }
-        String phone = pifuphone.getText().toString().trim();
+         phone = pifuphone.getText().toString().trim();
         if (phone.length() == 0) {
             msg("请输入手机号");
             pifuphone.requestFocus();
@@ -154,13 +195,13 @@ public class Skin_Care_Activity extends AppCompatActivity {
             pifuphone.requestFocus();
             return;
         }
-        String dizhi = pifudizhi.getText().toString().trim();
+         dizhi = pifudizhi.getText().toString().trim();
         if (dizhi.length() == 0) {
             msg("请选择地址");
             pifudizhi.requestFocus();
             return;
         }
-        String bz = pifuhulibeizhu.getText().toString().trim();
+         bz = pifuhulibeizhu.getText().toString().trim();
 
     }
     /**

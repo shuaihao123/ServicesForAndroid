@@ -61,7 +61,48 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_next" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <CheckBox
+                    android:id="@+id/xifaxijianchui"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/checkbox_bg"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="洗剪吹"
+                    android:textColor="#4d5c70"
+                    android:textSize="28px"
+                    android:checked="false" />
+
+                <CheckBox
+                    android:id="@+id/xifataishixitou"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/checkbox_bg"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="泰式洗头"
+                    android:textColor="#4d5c70"
+                    android:textSize="28px" />
+
+                <CheckBox
+                    android:id="@+id/xifafazhibaohu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/checkbox_bg"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="发质保护"
+                    android:textColor="#4d5c70"
+                    android:textSize="28px" />
+            </LinearLayout>
             <LinearLayout
 
                 android:layout_width="match_parent"
@@ -176,10 +217,12 @@
                     android:layout_alignParentRight="true"
                     android:minLines="2"
                     android:textSize="24px"
+                    android:background="@null"
                     android:textColor="#b9bec4"
                     android:hint="联系人姓名：" />
 
                 <EditText
+                    android:background="@null"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

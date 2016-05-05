@@ -62,7 +62,48 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_next" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <CheckBox
+                    android:id="@+id/jieyabaya"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/checkbox_bg"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="拔牙"
+                    android:textColor="#4d5c70"
+                    android:textSize="28px"
+                    android:checked="false" />
+
+                <CheckBox
+                    android:id="@+id/jieyabuya"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/checkbox_bg"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="补牙"
+                    android:textColor="#4d5c70"
+                    android:textSize="28px" />
+
+                <CheckBox
+                    android:id="@+id/jieyazhengxing"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/checkbox_bg"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="牙齿整形"
+                    android:textColor="#4d5c70"
+                    android:textSize="28px" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -136,15 +177,19 @@
                     android:text="备注："
                     android:textStyle="bold" />
 
-                <EditText
+                <org.freecoding.servicesmanager.view.MultiLineEditText
                     android:id="@+id/jieyabeizhu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="4dp"
+                    android:background="@null"
+                    android:gravity="top|left"
                     android:hint="需求更多服务请补充"
-                    android:minLines="2"
-                    android:textColor="#e5e6e9"
-                    android:textSize="27px" />
+                    android:inputType="textMultiLine"
+                    android:lineSpacingMultiplier="1.2"
+                    android:lines="3"
+                    android:scrollHorizontally="false"
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -171,6 +216,7 @@
                     android:layout_alignParentRight="true"
                     android:hint="联系人姓名："
                     android:minLines="2"
+                    android:background="@null"
                     android:textColor="#b9bec4"
                     android:textSize="24px" />
 
@@ -178,6 +224,7 @@
                     android:id="@+id/jieyaphone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@null"
                     android:layout_alignParentRight="true"
                     android:hint="联系人电话："
                     android:minLines="2"

@@ -62,7 +62,35 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_next" />
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/chekbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <CheckBox
+                    android:id="@+id/baojiefuwu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/checkbox_bg"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="保洁"
+                    android:textColor="#4d5c70"
+                    android:textSize="28px" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"></View>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"></View>
+
+            </LinearLayout>
             <LinearLayout
 
                 android:layout_width="match_parent"

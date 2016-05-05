@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -48,23 +49,32 @@ public class MedicalAccomPanyActivity extends AppCompatActivity {
     EditText peizhenphone;
     @Bind(R.id.peizhendizhi)
     EditText peizhendizhi;
+    @Bind(R.id.peitongzhiliao)
+    CheckBox peitongzhiliao;
     Handler hd;
     ServicesItem info;
+    StringBuffer sb;
+    String shijian;
+    String name;
+    String phone;
+    String dizhi;
+    String peizhenbz;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical_accom_pany);
         ButterKnife.bind(this);
         init();
-        hd=new Handler(){
+        hd = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                if(msg.what==0){
-                    msg("登陆成功");
-                }else if(msg.what==1){
-                    msg("登陆失败");
-                }else{
+                if (msg.what == 0) {
+                    msg("保存成功");
+                } else if (msg.what == 1) {
+                    msg("保存失败");
+                } else {
                     msg("请检查网络");
                 }
             }
@@ -81,7 +91,7 @@ public class MedicalAccomPanyActivity extends AppCompatActivity {
 
             @Override
             public void onProgressChanged(SeekBarPressure seekBar, double progressLow, double progressHigh) {
-                peizhenshowshijian.setText(String.format(getString(R.string.seekbar_time_title), String.valueOf((int) (12 + progressLow)/2+":00"), String.valueOf((int) (12 + progressHigh)/2+":00")));
+                peizhenshowshijian.setText(String.format(getString(R.string.seekbar_time_title), String.valueOf((int) (12 + progressLow) / 2 + ":00"), String.valueOf((int) (12 + progressHigh) / 2 + ":00")));
             }
 
             @Override
@@ -91,6 +101,7 @@ public class MedicalAccomPanyActivity extends AppCompatActivity {
         });
         info = (ServicesItem) getIntent().getSerializableExtra("info");
     }
+
     /**
      * 返回
      */
@@ -108,18 +119,50 @@ public class MedicalAccomPanyActivity extends AppCompatActivity {
     }
 
     private void save() {
-        HttpUtils.saveServiceItemYiLiao(info.id, "", info.serviceItem, "", "", "", "", new StringCallback() {
+         shijian = peizhenshowshijian.getText().toString().trim();
+         name = peizhenname.getText().toString().trim();
+        if (name.length() == 0) {
+            msg("请输入姓名");
+            peizhenname.requestFocus();
+            return;
+        }
+         phone = peizhenphone.getText().toString().trim();
+        if (phone.length() == 0) {
+            msg("请输入手机号");
+            peizhenphone.requestFocus();
+            return;
+        }
+        if (phone.length() != 11) {
+            msg("手机号输入错误");
+            peizhenphone.requestFocus();
+            return;
+        }
+         dizhi = peizhendizhi.getText().toString().trim();
+        if (dizhi.length() == 0) {
+            msg("请选择地址");
+            peizhendizhi.requestFocus();
+            return;
+        }
+         peizhenbz = peizhenbeizhu.getText().toString().trim();
+        sb = new StringBuffer();
+        if (peitongzhiliao.isChecked()) {
+            sb.append("1:" + peitongzhiliao.getText().toString().trim() + ";");
+        }
+        HttpUtils.saveServiceItemYiLiao(info.id, "2016-5-5", shijian, sb.toString(), peizhenbz, name, dizhi, phone , new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
+                hd.sendEmptyMessage(2);
             }
+
             @Override
             public void onResponse(String response) {
                 Gson gson = new Gson();
                 HttpResult result = gson.fromJson(response, HttpResult.class);
                 if (result.success) {
-                    //保存成功
+                    hd.sendEmptyMessage(0);
+                    finish();
                 } else {
-                    //保存失败
+                    hd.sendEmptyMessage(1);
                 }
             }
         });
@@ -134,30 +177,30 @@ public class MedicalAccomPanyActivity extends AppCompatActivity {
      */
     @OnClick(R.id.peizhenadd)
     void btntijiao() {
-        String name = peizhenname.getText().toString().trim();
+         name = peizhenname.getText().toString().trim();
         if (name.length() == 0) {
             msg("请输入姓名");
             peizhenname.requestFocus();
             return;
         }
-        String phone = peizhenphone.getText().toString().trim();
+         phone = peizhenphone.getText().toString().trim();
         if (phone.length() == 0) {
             msg("请输入手机号");
             peizhenphone.requestFocus();
             return;
         }
-        if (phone.length() !=11) {
+        if (phone.length() != 11) {
             msg("手机号输入错误");
             peizhenphone.requestFocus();
             return;
         }
-        String dizhi = peizhendizhi.getText().toString().trim();
+         dizhi = peizhendizhi.getText().toString().trim();
         if (dizhi.length() == 0) {
             msg("请选择地址");
             peizhendizhi.requestFocus();
             return;
         }
-        String peizhenbz = peizhenbeizhu.getText().toString().trim();
+         peizhenbz = peizhenbeizhu.getText().toString().trim();
     }
 
     /**

@@ -61,7 +61,48 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_next" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <CheckBox
+                    android:id="@+id/muyutaishixiyu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/checkbox_bg"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="泰式洗浴"
+                    android:textColor="#4d5c70"
+                    android:textSize="28px"
+                    android:checked="false" />
+
+                <CheckBox
+                    android:id="@+id/muyuanmo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/checkbox_bg"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="按摩"
+                    android:textColor="#4d5c70"
+                    android:textSize="28px" />
+
+                <CheckBox
+                    android:id="@+id/muyuyanyu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/checkbox_bg"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="盐浴"
+                    android:textColor="#4d5c70"
+                    android:textSize="28px" />
+            </LinearLayout>
             <LinearLayout
 
                 android:layout_width="match_parent"
@@ -175,12 +216,14 @@
                     android:layout_alignParentRight="true"
                     android:hint="联系人姓名："
                     android:minLines="2"
+                    android:background="@null"
                     android:textColor="#b9bec4"
                     android:textSize="24px" />
 
                 <EditText
                     android:id="@+id/jieshnelianxiphone"
                     android:layout_width="match_parent"
+                    android:background="@null"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:hint="联系人电话："

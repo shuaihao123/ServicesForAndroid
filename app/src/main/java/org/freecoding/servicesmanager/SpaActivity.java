@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -47,24 +48,35 @@ public class SpaActivity extends AppCompatActivity {
     EditText xifaphone;
     @Bind(R.id.xifadizhi)
     EditText xifadizhi;
+    @Bind(R.id.xifaxijianchui)
+    CheckBox xifaxijianchui;
+    @Bind(R.id.xifataishixitou)
+    CheckBox xifataishixitou;
+    @Bind(R.id.xifafazhibaohu)
+    CheckBox xifafazhibaohu;
     ServicesItem info;
     Handler hd;
-
+    StringBuffer sb;
+    String showshijian;
+    String name;
+    String phone;
+    String dizhi;
+    String bz;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spa);
         ButterKnife.bind(this);
         init();
-        hd=new Handler(){
+        hd = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                if(msg.what==0){
-                    msg("登陆成功");
-                }else if(msg.what==1){
-                    msg("登陆失败");
-                }else{
+                if (msg.what == 0) {
+                    msg("保存成功");
+                } else if (msg.what == 1) {
+                    msg("保存失败");
+                } else {
                     msg("请检查网络");
                 }
             }
@@ -81,7 +93,7 @@ public class SpaActivity extends AppCompatActivity {
 
             @Override
             public void onProgressChanged(SeekBarPressure seekBar, double progressLow, double progressHigh) {
-                xifashowshijian.setText(String.format(getString(R.string.seekbar_time_title), String.valueOf((int) (12 + progressLow)/2+":00"), String.valueOf((int) (12 + progressHigh)/2+":00")));
+                xifashowshijian.setText(String.format(getString(R.string.seekbar_time_title), String.valueOf((int) (12 + progressLow) / 2 + ":00"), String.valueOf((int) (12 + progressHigh) / 2 + ":00")));
             }
 
             @Override
@@ -109,59 +121,98 @@ public class SpaActivity extends AppCompatActivity {
     }
 
     private void save() {
-        HttpUtils.saveServiceItemHuLi(info.id,"","","","","","",new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e) {
-                msg("请检查网络");
-            }
+        showshijian = xifashowshijian.getText().toString().trim();
+        sb = new StringBuffer();
+        if (xifaxijianchui.isChecked()) {
+            sb.append("1:" + xifaxijianchui.getText().toString().trim() + ";");
+        }
+        if (xifataishixitou.isChecked()) {
+            sb.append("2:" + xifataishixitou.getText().toString().trim() + ";");
+        }
+        if (xifafazhibaohu.isChecked()) {
+            sb.append("3:" + xifafazhibaohu.getText().toString().trim() + ";");
+        }
 
-            @Override
-            public void onResponse(String response) {
-                Gson gson = new Gson();
-                HttpResult result = gson.fromJson(response, HttpResult.class);
-                if (result.success) {
-                    //成功
-                } else {
-                    //保存失败
-                }
-            }
-        });
-    }
-    void msg(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-    }
-    /**
-     * 提交
-     */
-    @OnClick(R.id.xifaadd)
-    void btntijiao() {
-        String name = xifaname.getText().toString().trim();
+         name = xifaname.getText().toString().trim();
         if (name.length() == 0) {
             msg("请输入姓名");
             xifaname.requestFocus();
             return;
         }
-        String phone = xifaphone.getText().toString().trim();
+         phone = xifaphone.getText().toString().trim();
         if (phone.length() == 0) {
             msg("请输入手机号");
             xifaphone.requestFocus();
             return;
         }
-        if (phone.length() !=11) {
+        if (phone.length() != 11) {
             msg("手机号输入错误");
             xifaphone.requestFocus();
             return;
         }
-        String dizhi = xifadizhi.getText().toString().trim();
+         dizhi = xifadizhi.getText().toString().trim();
+        if (dizhi.length() == 0) {
+            msg("请输入地址");
+            xifadizhi.requestFocus();
+            return;
+        }
+         bz = xifabeizhu.getText().toString().trim();
+        HttpUtils.saveServiceItemHuLi(info.id, "2016-5-5",showshijian, sb.toString(),bz, name, dizhi, phone, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e) {
+                hd.sendEmptyMessage(2);
+            }
+            @Override
+            public void onResponse(String response) {
+                Gson gson = new Gson();
+                HttpResult result = gson.fromJson(response, HttpResult.class);
+                if (result.success) {
+                    hd.sendEmptyMessage(0);
+                    finish();
+                } else {
+                    hd.sendEmptyMessage(1);
+                }
+            }
+        });
+    }
+
+    void msg(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * 提交
+     */
+    @OnClick(R.id.xifaadd)
+    void btntijiao() {
+         name = xifaname.getText().toString().trim();
+        if (name.length() == 0) {
+            msg("请输入姓名");
+            xifaname.requestFocus();
+            return;
+        }
+         phone = xifaphone.getText().toString().trim();
+        if (phone.length() == 0) {
+            msg("请输入手机号");
+            xifaphone.requestFocus();
+            return;
+        }
+        if (phone.length() != 11) {
+            msg("手机号输入错误");
+            xifaphone.requestFocus();
+            return;
+        }
+         dizhi = xifadizhi.getText().toString().trim();
         if (dizhi.length() == 0) {
             msg("请选择地址");
             xifadizhi.requestFocus();
             return;
         }
-
-        String bz = xifabeizhu.getText().toString().trim();
+         showshijian = xifashowshijian.getText().toString().trim();
+         String bz = xifabeizhu.getText().toString().trim();
 
     }
+
     /**
      * 取消
      */

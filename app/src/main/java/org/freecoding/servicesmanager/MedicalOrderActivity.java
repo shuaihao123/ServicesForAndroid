@@ -26,7 +26,6 @@ public class MedicalOrderActivity extends AppCompatActivity {
     ImageView yiliaochaxun;
     @Bind(R.id.yuyueorder)
     LinearLayout yuyueorder;
-
     @Bind(R.id.yuyuechaxun)
     ImageView yuyuechaxun;
     @Bind(R.id.guahaoorder)

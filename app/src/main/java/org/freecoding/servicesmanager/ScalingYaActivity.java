@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -47,23 +48,35 @@ public class ScalingYaActivity extends AppCompatActivity {
     EditText jieyaphone;
     @Bind(R.id.jieyadizhi)
     EditText jieyadizhi;
+    @Bind(R.id.jieyabaya)
+    CheckBox jieyabaya;
+    @Bind(R.id.jieyabuya)
+    CheckBox jieyabuya;
+    @Bind(R.id.jieyazhengxing)
+    CheckBox jieyazhengxing;
     Handler hd;
     ServicesItem info;
+    StringBuffer sb;
+    String shijian;
+    String name;
+    String phone;
+    String dizhi;
+    String bz;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scaling_ya);
         ButterKnife.bind(this);
         init();
-        hd=new Handler(){
+        hd = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                if(msg.what==0){
-                    msg("登陆成功");
-                }else if(msg.what==1){
-                    msg("登陆失败");
-                }else{
+                if (msg.what == 0) {
+                    msg("保存成功");
+                } else if (msg.what == 1) {
+                    msg("保存失败");
+                } else {
                     msg("请检查网络");
                 }
             }
@@ -80,7 +93,7 @@ public class ScalingYaActivity extends AppCompatActivity {
 
             @Override
             public void onProgressChanged(SeekBarPressure seekBar, double progressLow, double progressHigh) {
-                jieyashowtime.setText(String.format(getString(R.string.seekbar_time_title), String.valueOf((int) (12 + progressLow)/2+":00"), String.valueOf((int) (12 + progressHigh)/2+":00")));
+                jieyashowtime.setText(String.format(getString(R.string.seekbar_time_title), String.valueOf((int) (12 + progressLow) / 2 + ":00"), String.valueOf((int) (12 + progressHigh) / 2 + ":00")));
             }
 
             @Override
@@ -90,6 +103,7 @@ public class ScalingYaActivity extends AppCompatActivity {
         });
         info = (ServicesItem) getIntent().getSerializableExtra("info");
     }
+
     /**
      * 返回
      */
@@ -107,20 +121,55 @@ public class ScalingYaActivity extends AppCompatActivity {
     }
 
     private void save() {
-        HttpUtils.saveServiceItemHuLi(info.id,"","","","","","",new StringCallback() {
+         shijian=jieyashowtime.getText().toString().trim();
+        sb = new StringBuffer();
+        if (jieyabaya.isChecked()) {
+            sb.append("1:" + jieyabaya.getText().toString().trim() + ";");
+        }
+        if (jieyabuya.isChecked()) {
+            sb.append("2:" + jieyabuya.getText().toString().trim() + ";");
+        }
+        if (jieyazhengxing.isChecked()) {
+            sb.append("3:" + jieyazhengxing.getText().toString().trim() + ";");
+        }
+         name = jieyaname.getText().toString().trim();
+        if (name.length() == 0) {
+            msg("请输入姓名");
+            jieyaname.requestFocus();
+            return;
+        }
+         phone = jieyaphone.getText().toString().trim();
+        if (phone.length() == 0) {
+            msg("请输入手机号");
+            jieyaphone.requestFocus();
+            return;
+        }
+        if (phone.length() != 11) {
+            msg("手机号输入错误");
+            jieyaphone.requestFocus();
+            return;
+        }
+         dizhi = jieyadizhi.getText().toString().trim();
+        if (dizhi.length() == 0) {
+            msg("请选择地址");
+            jieyadizhi.requestFocus();
+            return;
+        }
+         bz = jieyabeizhu.getText().toString().trim();
+        HttpUtils.saveServiceItemHuLi(info.id,"2016-5-5",shijian, sb.toString(),bz, name, dizhi, phone, new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
-                msg("请检查网络");
+                hd.sendEmptyMessage(2);
             }
-
             @Override
             public void onResponse(String response) {
                 Gson gson = new Gson();
                 HttpResult result = gson.fromJson(response, HttpResult.class);
                 if (result.success) {
-                    //成功
+                    hd.sendEmptyMessage(0);
+                    finish();
                 } else {
-                    //保存失败
+                    hd.sendEmptyMessage(1);
                 }
             }
         });
@@ -135,35 +184,32 @@ public class ScalingYaActivity extends AppCompatActivity {
      */
     @OnClick(R.id.jieyaadd)
     void btntijiao() {
-        String name = jieyaname.getText().toString().trim();
+        shijian=jieyashowtime.getText().toString().trim();
+         name = jieyaname.getText().toString().trim();
         if (name.length() == 0) {
             msg("请输入姓名");
             jieyaname.requestFocus();
             return;
         }
-        String phone = jieyaphone.getText().toString().trim();
+         phone = jieyaphone.getText().toString().trim();
         if (phone.length() == 0) {
             msg("请输入手机号");
             jieyaphone.requestFocus();
             return;
         }
-        if (phone.length() !=11) {
+        if (phone.length() != 11) {
             msg("手机号输入错误");
             jieyaphone.requestFocus();
             return;
         }
-        String dizhi = jieyadizhi.getText().toString().trim();
+         dizhi = jieyadizhi.getText().toString().trim();
         if (dizhi.length() == 0) {
             msg("请选择地址");
             jieyadizhi.requestFocus();
             return;
         }
-        String bz = jieyabeizhu.getText().toString().trim();
-        if (bz.length() == 0) {
-            msg("请选择备注");
-            jieyabeizhu.requestFocus();
-            return;
-        }
+         bz = jieyabeizhu.getText().toString().trim();
+
     }
 
     /**
@@ -173,6 +219,7 @@ public class ScalingYaActivity extends AppCompatActivity {
     void btnqxfinsh() {
         this.finish();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detail_menu, menu);

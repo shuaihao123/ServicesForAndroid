@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -48,8 +49,16 @@ public class MedicalRegistrActivity extends AppCompatActivity {
     EditText guahaophone;
     @Bind(R.id.guahaodizhi)
     EditText guahaodizhi;
+    @Bind(R.id.zaixianguahao)
+    CheckBox zaixianguahao;
     Handler hd;
     ServicesItem info;
+    StringBuffer sb;
+    String bz;
+    String phone;
+    String name ;
+    String dizhi;
+    String shijian;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,9 +70,9 @@ public class MedicalRegistrActivity extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 if(msg.what==0){
-                    msg("登陆成功");
+                    msg("保存成功");
                 }else if(msg.what==1){
-                    msg("登陆失败");
+                    msg("保存失败");
                 }else{
                     msg("请检查网络");
                 }
@@ -105,20 +114,50 @@ public class MedicalRegistrActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
     private void save() {
-        HttpUtils.saveServiceItemYiLiao(info.id, "", info.serviceItem, "", "", "", "", new StringCallback() {
+      shijian=   guahaoshowshijian.getText().toString().trim();
+        sb = new StringBuffer();
+        if (zaixianguahao.isChecked()) {
+            sb.append("1:" + zaixianguahao.getText().toString().trim() + ";");
+        }
+        name = guahaoname.getText().toString().trim();
+        if (name.length() == 0) {
+            msg("请输入姓名");
+            guahaoname.requestFocus();
+            return;
+        }
+        phone = guahaophone.getText().toString().trim();
+        if (phone.length() == 0) {
+            msg("请输入手机号");
+            guahaophone.requestFocus();
+            return;
+        }
+        if (phone.length() !=11) {
+            msg("手机号输入错误");
+            guahaophone.requestFocus();
+            return;
+        }
+        dizhi = guahaodizhi.getText().toString().trim();
+        if (dizhi.length() == 0) {
+            msg("请选择地址");
+            guahaodizhi.requestFocus();
+            return;
+        }
+        bz = guahaobeizhu.getText().toString().trim();
+        HttpUtils.saveServiceItemYiLiao(info.type, "2016-5-5",shijian,sb.toString(),bz, name,dizhi,phone,new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
+                hd.sendEmptyMessage(2);
             }
             @Override
             public void onResponse(String response) {
                 Gson gson = new Gson();
                 HttpResult result = gson.fromJson(response, HttpResult.class);
                 if (result.success) {
-                    //保存成功
+                    hd.sendEmptyMessage(0);
+                    finish();
                 } else {
-                    //保存失败
+                    hd.sendEmptyMessage(1);
                 }
             }
         });
@@ -133,13 +172,13 @@ public class MedicalRegistrActivity extends AppCompatActivity {
      */
     @OnClick(R.id.guahaoadd)
     void btntijiao() {
-        String name = guahaoname.getText().toString().trim();
+         name = guahaoname.getText().toString().trim();
         if (name.length() == 0) {
             msg("请输入姓名");
             guahaoname.requestFocus();
             return;
         }
-        String phone = guahaophone.getText().toString().trim();
+         phone = guahaophone.getText().toString().trim();
         if (phone.length() == 0) {
             msg("请输入手机号");
             guahaophone.requestFocus();
@@ -150,13 +189,13 @@ public class MedicalRegistrActivity extends AppCompatActivity {
             guahaophone.requestFocus();
             return;
         }
-        String dizhi = guahaodizhi.getText().toString().trim();
+         dizhi = guahaodizhi.getText().toString().trim();
         if (dizhi.length() == 0) {
             msg("请选择地址");
             guahaodizhi.requestFocus();
             return;
         }
-        String bz = guahaobeizhu.getText().toString().trim();
+         bz = guahaobeizhu.getText().toString().trim();
 
     }
 

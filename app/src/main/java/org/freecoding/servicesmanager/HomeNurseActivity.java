@@ -24,6 +24,8 @@ import org.freecoding.servicesmanager.view.MultiLineEditText;
 import org.freecoding.servicesmanager.view.RoundLinearLayout;
 import org.freecoding.servicesmanager.view.SeekBarPressure;
 
+import java.text.SimpleDateFormat;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -87,7 +89,6 @@ public class HomeNurseActivity extends AppCompatActivity {
     }
 
     private String serviceTime;
-
     private void init() {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
@@ -129,17 +130,17 @@ public class HomeNurseActivity extends AppCompatActivity {
         if (serviceItem.contains("4")) {
             baomucheckzgbr.setChecked(true);
         }
-        String date=jiaZhengOrder.serviceTime;
-        String [] dates=date.split("---");
-        int kaishi=Integer.parseInt(dates[0].split(":")[0]);
-        int end=Integer.parseInt(dates[1].split(":")[0]);
+        String date = jiaZhengOrder.serviceTime;
+        String[] dates = date.split("---");
+        int kaishi = Integer.parseInt(dates[0].split(":")[0]);
+        int end = Integer.parseInt(dates[1].split(":")[0]);
         baomushijian.setProgressLow(kaishi);
         baomushijian.setProgressHigh(end);
-        textviewshijian.setText(kaishi+":00-"+end+":00");
+        textviewshijian.setText(kaishi + ":00-" + end + ":00");
         baomuname.setText(jiaZhengOrder.customerName);
         baomuphone.setText(jiaZhengOrder.custmerPhone);
         baomufuwudizhi.setText(jiaZhengOrder.address);
-        }
+    }
 
     /**
      * 返回
@@ -197,9 +198,10 @@ public class HomeNurseActivity extends AppCompatActivity {
         }
         bz = baomubeizhu.getText().toString().trim();
         shijian = textviewshijian.getText().toString().trim();
-        HttpUtils.saveServiceItemJiaZheng(info.id, shijian, sb.toString(), name, dizhi, phone, new StringCallback() {
+        HttpUtils.saveServiceItemJiaZheng(info.type,"2016-5-5", shijian, sb.toString(),bz, name, dizhi, phone,"","", new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
+                hd.sendEmptyMessage(2);
             }
 
             @Override
@@ -225,8 +227,19 @@ public class HomeNurseActivity extends AppCompatActivity {
      */
     @OnClick(R.id.baomuadd)
     void btntijiao() {
-
-
+        sb = new StringBuffer();
+        if (baomucheckzf.isChecked()) {
+            sb.append("1:" + baomucheckzf.getText().toString().trim() + ";");
+        }
+        if (baomucheckzgxh.isChecked()) {
+            sb.append("2:" + baomucheckzgxh.getText().toString().trim() + ";");
+        }
+        if (baomucheckzglr.isChecked()) {
+            sb.append("3:" + baomucheckzglr.getText().toString().trim() + ";");
+        }
+        if (baomucheckzgbr.isChecked()) {
+            sb.append("4:" + baomucheckzgbr.getText().toString().trim() + ";");
+        }
         name = baomuname.getText().toString().trim();
         if (name.length() == 0) {
             msg("请输入姓名");

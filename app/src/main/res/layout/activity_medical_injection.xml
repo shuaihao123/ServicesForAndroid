@@ -62,7 +62,43 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_next" />
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/chekbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <CheckBox
+                    android:id="@+id/yuyueshuye"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/checkbox_bg"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="输液"
+                    android:textColor="#4d5c70"
+                    android:textSize="28px" />
+
+
+                <CheckBox
+                    android:id="@+id/yuyuedazheng"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/checkbox_bg"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="打针"
+                    android:textColor="#4d5c70"
+                    android:textSize="28px" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"></View>
+
+            </LinearLayout>
             <LinearLayout
 
                 android:layout_width="match_parent"
@@ -128,6 +164,8 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="top"
+                    android:layout_marginTop="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -169,6 +207,7 @@
                     android:id="@+id/yuyuename"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@null"
                     android:layout_alignParentRight="true"
                     android:hint="联系人姓名："
                     android:minLines="2"
@@ -177,6 +216,7 @@
 
                 <EditText
                     android:id="@+id/yuyuephone"
+                    android:background="@null"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

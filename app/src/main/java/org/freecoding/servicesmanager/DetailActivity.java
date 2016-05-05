@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,23 +45,33 @@ public class DetailActivity extends AppCompatActivity {
     MultiLineEditText yuesaobeizhu;
     @Bind(R.id.seekBarAgeTextView)
     TextView seekBarAgeTextView;
+    @Bind(R.id.yuesaozheng)
+    CheckBox yuesaozheng;
+    @Bind(R.id.yuesaoshizheng)
+    CheckBox yuesaoshizheng;
     ServicesItem info;
     Handler hd;
+    StringBuffer sb;
+    String ysbz;
+    String showage;
+    String name;
+    String phone;
+    String dizhi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
         init();
-        hd=new Handler(){
+        hd = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                if(msg.what==0){
-                    msg("登陆成功");
-                }else if(msg.what==1){
-                    msg("登陆失败");
-                }else{
+                if (msg.what == 0) {
+                    msg("提交成功");
+                } else if (msg.what == 1) {
+                    msg("提交失败");
+                } else {
                     msg("请检查网络");
                 }
             }
@@ -103,43 +114,24 @@ public class DetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    private void save() {
-        HttpUtils.saveServiceItemJiaZheng(info.id, info.createTime, info.updateTime,info.serviceItem, info.name, info.remark, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e) {
-                 msg("请检查网络");
-            }
-
-            @Override
-            public void onResponse(String response) {
-                Gson gson = new Gson();
-                HttpResult result = gson.fromJson(response, HttpResult.class);
-                if (result.success) {
-                    //成功
-                } else {
-                    //保存失败
-                }
-            }
-        });
-    }
-
-    void msg(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-    }
-
     /**
-     * 提交
+     * 保存订单
      */
-    @OnClick(R.id.yuesaoadd)
-    void btntijiao() {
-        String name = yuesaoname.getText().toString().trim();
+    private void save() {
+        sb = new StringBuffer();
+        if (yuesaozheng.isChecked()) {
+            sb.append("1:" + yuesaozheng.getText().toString().trim() + ";");
+        }
+        if (yuesaoshizheng.isChecked()) {
+            sb.append("2:" + yuesaoshizheng.getText().toString().trim() + ";");
+        }
+         name = yuesaoname.getText().toString().trim();
         if (name.length() == 0) {
             msg("请输入姓名");
             yuesaoname.requestFocus();
             return;
         }
-        String phone = yuesaophone.getText().toString().trim();
+         phone = yuesaophone.getText().toString().trim();
         if (phone.length() == 0) {
             msg("请输入手机号");
             yuesaophone.requestFocus();
@@ -150,13 +142,67 @@ public class DetailActivity extends AppCompatActivity {
             yuesaophone.requestFocus();
             return;
         }
-        String dizhi = yuesaodizhi.getText().toString().trim();
+         dizhi = yuesaodizhi.getText().toString().trim();
         if (dizhi.length() == 0) {
             msg("请选择地址");
             yuesaodizhi.requestFocus();
             return;
         }
-        String ysbz = yuesaobeizhu.getText().toString().trim();
+         showage = seekBarAgeTextView.getText().toString().trim();
+         ysbz = yuesaobeizhu.getText().toString().trim();
+         HttpUtils.saveServiceItemJiaZheng(info.type,"2016-5-5","10:00-13:00",sb.toString(),ysbz,name,dizhi,phone,showage,"", new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e) {
+                hd.sendEmptyMessage(2);
+            }
+            @Override
+            public void onResponse(String response) {
+                Gson gson = new Gson();
+                HttpResult result = gson.fromJson(response, HttpResult.class);
+                if (result.success) {
+                    hd.sendEmptyMessage(0);
+                    finish();
+                } else {
+                    hd.sendEmptyMessage(1);
+                }
+            }
+        });
+    }
+
+    void msg(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * 提交订单
+     */
+    @OnClick(R.id.yuesaoadd)
+    void btntijiao() {
+         showage = seekBarAgeTextView.getText().toString().trim();
+         name = yuesaoname.getText().toString().trim();
+        if (name.length() == 0) {
+            msg("请输入姓名");
+            yuesaoname.requestFocus();
+            return;
+        }
+         phone = yuesaophone.getText().toString().trim();
+        if (phone.length() == 0) {
+            msg("请输入手机号");
+            yuesaophone.requestFocus();
+            return;
+        }
+        if (phone.length() != 11) {
+            msg("手机号输入错误");
+            yuesaophone.requestFocus();
+            return;
+        }
+         dizhi = yuesaodizhi.getText().toString().trim();
+        if (dizhi.length() == 0) {
+            msg("请选择地址");
+            yuesaodizhi.requestFocus();
+            return;
+        }
+         ysbz = yuesaobeizhu.getText().toString().trim();
 
     }
 

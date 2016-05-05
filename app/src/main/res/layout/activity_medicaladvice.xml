@@ -60,6 +60,35 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_next" />
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/yuesaocheck"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/zixunfuwu"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/checkbox_bg"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="医疗咨询"
+                    android:textColor="#4d5c70"
+                    android:textSize="28px" />
+
+                <CheckBox
+                    android:id="@+id/jinjizixun"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/checkbox_bg"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="紧急咨询"
+                    android:textColor="#4d5c70"
+                    android:textSize="28px" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -87,7 +116,7 @@
                     android:hint="需求更多服务请补充"
                     android:inputType="textMultiLine"
                     android:lineSpacingMultiplier="1.2"
-                    android:lines="3"
+                    android:lines="5"
                     android:scrollHorizontally="false"
                     android:textSize="13sp" />
 
@@ -116,6 +145,7 @@
                     android:layout_alignParentRight="true"
                     android:minLines="2"
                     android:textSize="24px"
+                    android:background="@null"
                     android:textColor="#b9bec4"
                     android:hint="联系人姓名：" />
 
@@ -125,6 +155,7 @@
                     android:layout_alignParentRight="true"
                     android:id="@+id/yiliaophone"
                     android:minLines="2"
+                    android:background="@null"
                     android:textSize="12sp"
                     android:hint="联系人电话：" />
 

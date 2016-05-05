@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -51,8 +52,21 @@ public class ChastityActivity extends AppCompatActivity {
     TextView qxfinsh;
     @Bind(R.id.addtijiao)
     TextView addtijiao;
+    @Bind(R.id.muyutaishixiyu)
+    CheckBox muyutaishixiyu;
+    @Bind(R.id.muyuanmo)
+    CheckBox muyuanmo;
+    @Bind(R.id.muyuyanyu)
+    CheckBox muyuyanyu;
     Handler hd;
     ServicesItem info;
+    StringBuffer sb;
+    String beizhu;
+    String shijian;
+    String name;
+    String phone;
+    String dizhi;
+    String remarks;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,9 +78,9 @@ public class ChastityActivity extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 if (msg.what == 0) {
-                    msg("登陆成功");
+                    msg("保存成功");
                 } else if (msg.what == 1) {
-                    msg("登陆失败");
+                    msg("保存失败");
                 } else {
                     msg("请检查网络");
                 }
@@ -80,6 +94,7 @@ public class ChastityActivity extends AppCompatActivity {
         muyujieshneshijian.setOnSeekBarChangeListener(new SeekBarPressure.OnSeekBarChangeListener() {
             @Override
             public void onProgressBefore() {
+
             }
 
             @Override
@@ -110,44 +125,27 @@ public class ChastityActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
     private void save() {
-        HttpUtils.saveServiceItemHuLi(info.id, "", "", "", "", "", "", new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e) {
-                msg("请检查网络");
-            }
-
-            @Override
-            public void onResponse(String response) {
-                Gson gson = new Gson();
-                HttpResult result = gson.fromJson(response, HttpResult.class);
-                if (result.success) {
-                    //成功
-                } else {
-                    //保存失败
-                }
-            }
-        });
-    }
-
-    void msg(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-    }
-
-    /**
-     * 提交
-     */
-    @OnClick(R.id.addtijiao)
-    void btntijiao() {
-        String remarks = jieshenbeizhu.getText().toString().trim();
-        String name = jieshnelianxiname.getText().toString().trim();
+        sb = new StringBuffer();
+        if (muyutaishixiyu.isChecked()) {
+            sb.append("1:" + muyutaishixiyu.getText().toString().trim() + ";");
+        }
+        if (muyuanmo.isChecked()) {
+            sb.append("2:" + muyuanmo.getText().toString().trim() + ";");
+        }
+        if (muyuyanyu.isChecked()) {
+            sb.append("3:" + muyuyanyu.getText().toString().trim() + ";");
+        }
+         shijian=muyujieshneshowshijian.getText().toString().trim();
+         beizhu = jieshenbeizhu.getText().toString().trim();
+         name = jieshnelianxiname.getText().toString().trim();
+         remarks = jieshenbeizhu.getText().toString().trim();
         if (name.length() == 0) {
             msg("请输入姓名");
             jieshnelianxiname.requestFocus();
             return;
         }
-        String phone = jieshnelianxiphone.getText().toString().trim();
+         phone = jieshnelianxiphone.getText().toString().trim();
         if (phone.length() == 0) {
             msg("请输入手机号");
             jieshnelianxiphone.requestFocus();
@@ -158,7 +156,58 @@ public class ChastityActivity extends AppCompatActivity {
             jieshnelianxiphone.requestFocus();
             return;
         }
-        String dizhi = jieshnedizhi.getText().toString().trim();
+         dizhi = jieshnedizhi.getText().toString().trim();
+        if (dizhi.length() == 0) {
+            msg("请选择地址");
+            jieshnedizhi.requestFocus();
+            return;
+        }
+          HttpUtils.saveServiceItemHuLi(info.id,"2016-5-5",shijian,sb.toString(),beizhu,name,dizhi,phone, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e) {
+                hd.sendEmptyMessage(2);
+            }
+
+            @Override
+            public void onResponse(String response) {
+                Gson gson = new Gson();
+                HttpResult result = gson.fromJson(response, HttpResult.class);
+                if (result.success) {
+                    hd.sendEmptyMessage(0);
+                    finish();
+                } else {
+                    hd.sendEmptyMessage(1);
+                }
+            }
+        });
+    }
+    void msg(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
+    /**
+     * 提交
+     */
+    @OnClick(R.id.addtijiao)
+    void btntijiao() {
+         remarks = jieshenbeizhu.getText().toString().trim();
+         name = jieshnelianxiname.getText().toString().trim();
+        if (name.length() == 0) {
+            msg("请输入姓名");
+            jieshnelianxiname.requestFocus();
+            return;
+        }
+         phone = jieshnelianxiphone.getText().toString().trim();
+        if (phone.length() == 0) {
+            msg("请输入手机号");
+            jieshnelianxiphone.requestFocus();
+            return;
+        }
+        if (phone.length() != 11) {
+            msg("手机号输入错误");
+            jieshnelianxiphone.requestFocus();
+            return;
+        }
+         dizhi = jieshnedizhi.getText().toString().trim();
         if (dizhi.length() == 0) {
             msg("请选择地址");
             jieshnedizhi.requestFocus();
