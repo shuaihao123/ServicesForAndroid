@@ -63,7 +63,7 @@ public class HousekeepingActivity extends AppCompatActivity implements AdapterVi
                 Gson gson = new Gson();
                 HttpResultList<ServicesItem> info = gson.fromJson(response,
                         new TypeToken<HttpResultList<ServicesItem>>() {
-                        }.getType());
+                }.getType());
                 if (info != null && info.totalCount > 0) {
                     List<ServicesItem> list = info.rows;
                     serviceAdapter.setData(list);

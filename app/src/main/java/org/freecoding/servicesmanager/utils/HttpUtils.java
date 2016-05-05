@@ -82,6 +82,20 @@ public class HttpUtils {
     }
 
     /**
+     * @param phoneNo
+     * @param type
+     * @param callback
+     */
+    public static void getOrderJiaZhengByTypeAndPhone(String phoneNo, String type, StringCallback callback) {
+        String url = BASE_URL + "member.do?method=getOrderJiaZhengByTypeAndPhone&phoneNo="+phoneNo+"&type="+type;
+        OkHttpUtils
+                .get()
+                .url(url)
+                .build()
+                .execute(callback);
+    }
+
+    /**
      * 生成家政订单
      *
      * @param phoneNo
@@ -221,4 +235,19 @@ public class HttpUtils {
                 .build()
                 .execute(callback);
     }
+
+    /**
+     * 取消家政订单
+     *
+     * @param callback
+     */
+    public static void cancelOrderJiaZheng(String phoneNo,String orderNos,int state,StringCallback callback) {
+        String url = BASE_URL + "member.do?method=cancelOrderJiaZheng&phoneNo="+phoneNo+"&orderNos="+orderNos+"&state="+state;
+        OkHttpUtils
+                .get()
+                .url(url)
+                .build()
+                .execute(callback);
+    }
+
 }
