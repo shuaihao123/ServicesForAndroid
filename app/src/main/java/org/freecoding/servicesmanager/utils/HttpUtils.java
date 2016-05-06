@@ -35,7 +35,7 @@ public class HttpUtils {
      * @param callback
      */
     public static void register(String loginId, String password, StringCallback callback) {
-        String url = BASE_URL + "member.do?method=register&loginId=" + loginId + "&password=" + password;
+        String url = BASE_URL2 + "member/register.do?loginId=" + loginId + "&password=" + password;
         OkHttpUtils
                 .get()
                 .url(url)
@@ -60,7 +60,7 @@ public class HttpUtils {
      * @param callback
      */
     public static void saveServiceItemJiaZheng(int servicetype, String serviceDate, String serviceTime, String serviceItem, String remark, String name, String address, String phone, String age, String jiguan,int state, StringCallback callback) {
-        String url = BASE_URL + "member.do?method=orderJiaZheng&type=" + servicetype + "&phoneNo=" + phone + "&serviceDate=" + serviceDate + "&serviceTime=" + serviceTime + "&serviceItem=" + serviceItem + ";&remark=" + remark + "&address=" + address + "&customerName=" + name + "&age=" + age + "&jiguan=" + jiguan + "&state="+state;
+        String url = BASE_URL2 + "member/orderJiaZheng.do?type=" + servicetype + "&phoneNo=" + phone + "&serviceDate=" + serviceDate + "&serviceTime=" + serviceTime + "&serviceItem=" + serviceItem + ";&remark=" + remark + "&address=" + address + "&customerName=" + name + "&age=" + age + "&jiguan=" + jiguan + "&state="+state;
         OkHttpUtils
                 .get()
                 .url(url)
@@ -76,7 +76,7 @@ public class HttpUtils {
      * @param callback
      */
     public static void getOrderJiaZhengByTypeAndPhone(String phoneNo, String type, StringCallback callback) {
-        String url = BASE_URL + "member.do?method=getOrderJiaZhengByTypeAndPhone&phoneNo="+phoneNo+"&type="+type;
+        String url = BASE_URL2 + "member/getOrderJiaZhengByTypeAndPhone.do?phoneNo="+phoneNo+"&type="+type;
         OkHttpUtils
                 .get()
                 .url(url)
@@ -92,7 +92,7 @@ public class HttpUtils {
      * @param callback
      */
     public static void orderJiaZheng(String phoneNo, int type, String serviceItem, StringCallback callback) {
-        String url = BASE_URL + "member.do?method=orderJiaZheng&phoneNo=" + phoneNo + "&type=" + type + "&serviceItem=" + serviceItem;
+        String url = BASE_URL2 + "member/orderJiaZheng.do?phoneNo=" + phoneNo + "&type=" + type + "&serviceItem=" + serviceItem;
         OkHttpUtils
                 .get()
                 .url(url)
@@ -105,7 +105,7 @@ public class HttpUtils {
      * @param callback
      */
     public static void cancelOrderJiaZheng(String phoneNo,String orderNos,int state,StringCallback callback) {
-        String url = BASE_URL + "member.do?method=cancelOrderJiaZheng&phoneNo="+phoneNo+"&orderNos="+orderNos+"&state="+state;
+        String url = BASE_URL + "member/cancelOrderJiaZheng.do?phoneNo="+phoneNo+"&orderNos="+orderNos+"&state="+state;
         OkHttpUtils
                 .get()
                 .url(url)
