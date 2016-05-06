@@ -105,7 +105,7 @@ public class HttpUtils {
      * @param callback
      */
     public static void cancelOrderJiaZheng(String phoneNo,String orderNos,int state,StringCallback callback) {
-        String url = BASE_URL + "member/cancelOrderJiaZheng.do?phoneNo="+phoneNo+"&orderNos="+orderNos+"&state="+state;
+        String url = BASE_URL2 + "member/cancelOrderJiaZheng.do?phoneNo="+phoneNo+"&orderNos="+orderNos+"&state="+state;
         OkHttpUtils
                 .get()
                 .url(url)
@@ -118,7 +118,7 @@ public class HttpUtils {
      * @param callback
      */
     public static void getAllJiazhengItem(StringCallback callback) {
-        String url = BASE_URL + "jiazhengitem.do?method=getAllJiazhengItem";
+        String url = BASE_URL2 + "member/getAllJiazhengItem.do";
         OkHttpUtils
                 .get()
                 .url(url)
