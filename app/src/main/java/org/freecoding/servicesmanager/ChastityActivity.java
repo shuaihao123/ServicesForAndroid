@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.freecoding.servicesmanager.model.HttpResult;
+import org.freecoding.servicesmanager.model.JiaZhengOrder;
 import org.freecoding.servicesmanager.model.ServicesItem;
 import org.freecoding.servicesmanager.utils.HttpUtils;
 import org.freecoding.servicesmanager.view.SeekBarPressure;
@@ -67,6 +68,7 @@ public class ChastityActivity extends AppCompatActivity {
     String phone;
     String dizhi;
     String remarks;
+    JiaZhengOrder jiaZhengOrder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,9 +80,9 @@ public class ChastityActivity extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 if (msg.what == 0) {
-                    msg("保存成功");
+                    msg("操作成功");
                 } else if (msg.what == 1) {
-                    msg("保存失败");
+                    msg("操作失败");
                 } else {
                     msg("请检查网络");
                 }
@@ -107,7 +109,37 @@ public class ChastityActivity extends AppCompatActivity {
 
             }
         });
-        info = (ServicesItem) getIntent().getSerializableExtra("info");
+        if (getIntent() != null && getIntent().getSerializableExtra("info") != null) {
+            info = (ServicesItem) getIntent().getSerializableExtra("info");
+        } else if (getIntent() != null && getIntent().getSerializableExtra("order") != null) {
+            jiaZhengOrder = (JiaZhengOrder) getIntent().getSerializableExtra("order");
+            loadOrder();
+        }
+    }
+
+    //显示我的订单传来的数据
+    private void loadOrder() {
+        String serviceItem = jiaZhengOrder.serviceItem;
+        if (serviceItem.contains("1")) {
+            muyutaishixiyu.setChecked(true);
+        }
+        if (serviceItem.contains("2")) {
+            muyuanmo.setChecked(true);
+        }
+        if (serviceItem.contains("3")) {
+            muyuyanyu.setChecked(true);
+        }
+        String date = jiaZhengOrder.serviceTime;
+        String[] dates = date.split("---");
+        int kaishi = Integer.parseInt(dates[0].split(":")[0]);
+        int end = Integer.parseInt(dates[1].split(":")[0]);
+        muyujieshneshijian.setProgressLow(kaishi);
+        muyujieshneshijian.setProgressHigh(end);
+        muyujieshneshowshijian.setText(kaishi + ":00-" + end + ":00");
+        jieshnelianxiname.setText(jiaZhengOrder.customerName);
+        jieshnelianxiphone.setText(jiaZhengOrder.custmerPhone);
+        jieshnedizhi.setText(jiaZhengOrder.address);
+        jieshenbeizhu.setText(jiaZhengOrder.remark);
     }
 
     /**
@@ -125,7 +157,9 @@ public class ChastityActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    //保存
     private void save() {
+        int state=1;
         sb = new StringBuffer();
         if (muyutaishixiyu.isChecked()) {
             sb.append("1:" + muyutaishixiyu.getText().toString().trim() + ";");
@@ -162,7 +196,7 @@ public class ChastityActivity extends AppCompatActivity {
             jieshnedizhi.requestFocus();
             return;
         }
-          HttpUtils.saveServiceItemHuLi(info.id,"2016-5-5",shijian,sb.toString(),beizhu,name,dizhi,phone, new StringCallback() {
+          HttpUtils.saveServiceItemHuLi(info.id,"2016-5-5",shijian,sb.toString(),beizhu,name,dizhi,phone,state, new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
                 hd.sendEmptyMessage(2);
@@ -189,8 +223,21 @@ public class ChastityActivity extends AppCompatActivity {
      */
     @OnClick(R.id.addtijiao)
     void btntijiao() {
-         remarks = jieshenbeizhu.getText().toString().trim();
-         name = jieshnelianxiname.getText().toString().trim();
+       int state=2;
+        sb = new StringBuffer();
+        if (muyutaishixiyu.isChecked()) {
+            sb.append("1:" + muyutaishixiyu.getText().toString().trim() + ";");
+        }
+        if (muyuanmo.isChecked()) {
+            sb.append("2:" + muyuanmo.getText().toString().trim() + ";");
+        }
+        if (muyuyanyu.isChecked()) {
+            sb.append("3:" + muyuyanyu.getText().toString().trim() + ";");
+        }
+        shijian=muyujieshneshowshijian.getText().toString().trim();
+        beizhu = jieshenbeizhu.getText().toString().trim();
+        name = jieshnelianxiname.getText().toString().trim();
+        remarks = jieshenbeizhu.getText().toString().trim();
         if (name.length() == 0) {
             msg("请输入姓名");
             jieshnelianxiname.requestFocus();
@@ -213,6 +260,24 @@ public class ChastityActivity extends AppCompatActivity {
             jieshnedizhi.requestFocus();
             return;
         }
+        HttpUtils.saveServiceItemHuLi(info.id,"2016-5-5",shijian,sb.toString(),beizhu,name,dizhi,phone, state,new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e) {
+                hd.sendEmptyMessage(2);
+            }
+
+            @Override
+            public void onResponse(String response) {
+                Gson gson = new Gson();
+                HttpResult result = gson.fromJson(response, HttpResult.class);
+                if (result.success) {
+                    hd.sendEmptyMessage(0);
+                    finish();
+                } else {
+                    hd.sendEmptyMessage(1);
+                }
+            }
+        });
     }
 
     /**

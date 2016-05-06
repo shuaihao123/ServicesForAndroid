@@ -40,42 +40,29 @@ import okhttp3.Call;
 
 
 /**
- * 家政服务/保姆订单
+ * 家政服务/保姆订单列表
  */
-public class HomeNurseOrderActivity extends AppCompatActivity{
+public class HomeNurseOrderActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.serviceorderitemid)
+    @Bind(R.id.servicddeorderitemid)
     ListView serviceorderitemid;
-
     ServiceorderAdapter serviceorderAdapter;
-    Handler hd;
+    JiaZhengOrder info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_nurse_order);
         ButterKnife.bind(this);
+        serviceorderAdapter = new ServiceorderAdapter(HomeNurseOrderActivity.this);
+        serviceorderitemid.setAdapter(serviceorderAdapter);
 
-        hd = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                if (msg.what == 0) {
-                    msg("提交成功");
-                } else if (msg.what == 1) {
-                    msg("提交失败");
-                } else {
-                    msg("请检查网络");
-                }
-            }
-        };
-        HttpUtils.getOrderJiaZhengByTypeAndPhone("13691731023", "1", new StringCallback() {
+        //查询保姆订单列表
+      HttpUtils.getOrderJiaZhengByTypeAndPhone(info.custmerPhone,"1", new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
-                hd.sendEmptyMessage(2);
             }
-
             @Override
             public void onResponse(String response) {
                 Gson gson = new Gson();
@@ -85,9 +72,8 @@ public class HomeNurseOrderActivity extends AppCompatActivity{
             }
         });
 
-        serviceorderAdapter = new ServiceorderAdapter(HomeNurseOrderActivity.this);
-        serviceorderitemid.setAdapter(serviceorderAdapter);
 
+        //listview下item点击事件
         serviceorderitemid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -139,7 +125,6 @@ public class HomeNurseOrderActivity extends AppCompatActivity{
     public class ServiceorderAdapter extends BaseAdapter {
         private LayoutInflater layoutInflater;
         private List<JiaZhengOrder> list;
-
         public ServiceorderAdapter(Context context) {
             this.layoutInflater = LayoutInflater.from(context);
         }
@@ -182,24 +167,24 @@ public class HomeNurseOrderActivity extends AppCompatActivity{
             } else {
                 viewHolder = (ViewHolder) view.getTag();
             }
-            //servicetouxiang.
-            viewHolder.baomuriqiorder.setText(order.orderTime);
-            viewHolder.baomutimeorder.setText(order.serviceTime);
-            viewHolder.baomubeizhuorder.setText(String.valueOf(order.remark));
-            viewHolder.baomudizhiorder.setText(order.address);
+
+            viewHolder.fuwuriqiorder.setText(order.orderTime);
+            viewHolder.fuwutimeorder.setText(order.serviceTime);
+            viewHolder.fuwubeizhuorder.setText(String.valueOf(order.remark));
+            viewHolder.fuwudizhiorder.setText(order.address);
 
             return view;
         }
 
         class ViewHolder {
-            @Bind(R.id.baomuriqiorder)
-            TextView baomuriqiorder;
-            @Bind(R.id.baomutimeorder)
-            TextView baomutimeorder;
-            @Bind(R.id.baomubeizhuorder)
-            TextView baomubeizhuorder;
-            @Bind(R.id.baomudizhiorder)
-            TextView baomudizhiorder;
+            @Bind(R.id.fuwuriqiorder)
+            TextView fuwuriqiorder;
+            @Bind(R.id.fuwutimeorder)
+            TextView fuwutimeorder;
+            @Bind(R.id.fuwudizhiorder)
+            TextView fuwudizhiorder;
+            @Bind(R.id.fuwubeizhuorder)
+            TextView fuwubeizhuorder;
 
             ViewHolder(View view) {
                 ButterKnife.bind(this, view);

@@ -8,6 +8,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
  */
 public class HttpUtils {
     private static final String BASE_URL = "http://139.196.230.64:8080/ouyang/";
+    private static final String BASE_URL2 = "http://139.196.230.64:8080/ouyang2/";
 
     /**
      * 登录
@@ -16,8 +17,9 @@ public class HttpUtils {
      * @param password
      * @param callback
      */
+
     public static void login(String loginId, String password, StringCallback callback) {
-        String url = BASE_URL + "member.do?method=login&loginId=" + loginId + "&password=" + password;
+        String url = BASE_URL2 + "member/login.do?loginId=" + loginId + "&password=" + password;
         OkHttpUtils
                 .get()
                 .url(url)
@@ -54,33 +56,20 @@ public class HttpUtils {
      * @param remark
      * @param age
      * @param jiguan
+     * @param state
      * @param callback
      */
-    public static void saveServiceItemJiaZheng(int servicetype, String serviceDate, String serviceTime, String serviceItem, String remark, String name, String address, String phone, String age, String jiguan, StringCallback callback) {
-        String url = BASE_URL + "member.do?method=orderJiaZheng&type=" + servicetype + "&phoneNo=" + phone + "&serviceDate=" + serviceDate + "&serviceTime=" + serviceTime + "&serviceItem=" + serviceItem + ";&remark=" + remark + "&address=" + address + "&customerName=" + name + "&age=" + age + "&jiguan=" + jiguan + "&state=1";
+    public static void saveServiceItemJiaZheng(int servicetype, String serviceDate, String serviceTime, String serviceItem, String remark, String name, String address, String phone, String age, String jiguan,int state, StringCallback callback) {
+        String url = BASE_URL + "member.do?method=orderJiaZheng&type=" + servicetype + "&phoneNo=" + phone + "&serviceDate=" + serviceDate + "&serviceTime=" + serviceTime + "&serviceItem=" + serviceItem + ";&remark=" + remark + "&address=" + address + "&customerName=" + name + "&age=" + age + "&jiguan=" + jiguan + "&state="+state;
         OkHttpUtils
                 .get()
                 .url(url)
                 .build()
                 .execute(callback);
     }
-
     /**
-     * 查询家政订单
+     * 查询家政订单列表
      *
-     * @param phoneNo
-     * @param orderNo
-     * @param callback
-     */
-    public static void getMemberOrderByNo(String phoneNo, String orderNo, StringCallback callback) {
-        String url = BASE_URL + "member.do?method=getMemberOrderByNo&phoneNo=" + phoneNo + "&orderNo=" + orderNo;
-        OkHttpUtils
-                .get()
-                .url(url)
-                .build()
-                .execute(callback);
-    }
-
     /**
      * @param phoneNo
      * @param type
@@ -94,7 +83,6 @@ public class HttpUtils {
                 .build()
                 .execute(callback);
     }
-
     /**
      * 生成家政订单
      *
@@ -111,7 +99,19 @@ public class HttpUtils {
                 .build()
                 .execute(callback);
     }
-
+    /**
+     * 取消家政订单
+     *
+     * @param callback
+     */
+    public static void cancelOrderJiaZheng(String phoneNo,String orderNos,int state,StringCallback callback) {
+        String url = BASE_URL + "member.do?method=cancelOrderJiaZheng&phoneNo="+phoneNo+"&orderNos="+orderNos+"&state="+state;
+        OkHttpUtils
+                .get()
+                .url(url)
+                .build()
+                .execute(callback);
+    }
     /**
      * 家政菜单
      *
@@ -124,6 +124,7 @@ public class HttpUtils {
                 .url(url)
                 .build()
                 .execute(callback);
+
     }
 
     /**
@@ -137,11 +138,12 @@ public class HttpUtils {
      * @param address
      * @param phone
      * @param bz
+     * @param state
      * @param callback
      */
 
-    public static void saveServiceItemHuLi(int type, String serviceDate, String serviceTime, String serviceItem, String bz, String name, String address, String phone, StringCallback callback) {
-        String url = BASE_URL + "member.do?method=orderHuLi&phoneNo=" + phone + "&type=" + type + "&serviceDate=" + serviceDate + "&serviceTime=" + serviceTime + "&serviceItem=" + serviceItem + "&remark=" + bz + "&customerName=" + name + "&address=" + address + "&state=1";
+    public static void saveServiceItemHuLi(int type, String serviceDate, String serviceTime, String serviceItem, String bz, String name, String address, String phone,int state, StringCallback callback) {
+        String url = BASE_URL + "member.do?method=orderHuLi&phoneNo=" + phone + "&type=" + type + "&serviceDate=" + serviceDate + "&serviceTime=" + serviceTime + "&serviceItem=" + serviceItem + "&remark=" + bz + "&customerName=" + name + "&address=" + address + "&state="+state;
         OkHttpUtils
                 .get()
                 .url(url)
@@ -236,18 +238,5 @@ public class HttpUtils {
                 .execute(callback);
     }
 
-    /**
-     * 取消家政订单
-     *
-     * @param callback
-     */
-    public static void cancelOrderJiaZheng(String phoneNo,String orderNos,int state,StringCallback callback) {
-        String url = BASE_URL + "member.do?method=cancelOrderJiaZheng&phoneNo="+phoneNo+"&orderNos="+orderNos+"&state="+state;
-        OkHttpUtils
-                .get()
-                .url(url)
-                .build()
-                .execute(callback);
-    }
 
 }

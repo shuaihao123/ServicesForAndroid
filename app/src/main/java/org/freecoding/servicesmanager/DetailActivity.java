@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.freecoding.servicesmanager.model.HttpResult;
+import org.freecoding.servicesmanager.model.JiaZhengOrder;
 import org.freecoding.servicesmanager.model.ServicesItem;
 import org.freecoding.servicesmanager.utils.HttpUtils;
 import org.freecoding.servicesmanager.view.MultiLineEditText;
@@ -49,6 +50,7 @@ public class DetailActivity extends AppCompatActivity {
     CheckBox yuesaozheng;
     @Bind(R.id.yuesaoshizheng)
     CheckBox yuesaoshizheng;
+    JiaZhengOrder jiaZhengOrder;
     ServicesItem info;
     Handler hd;
     StringBuffer sb;
@@ -68,9 +70,9 @@ public class DetailActivity extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 if (msg.what == 0) {
-                    msg("提交成功");
+                    msg("操作成功");
                 } else if (msg.what == 1) {
-                    msg("提交失败");
+                    msg("操作失败");
                 } else {
                     msg("请检查网络");
                 }
@@ -96,7 +98,29 @@ public class DetailActivity extends AppCompatActivity {
 
             }
         });
-        info = (ServicesItem) getIntent().getSerializableExtra("info");
+        if (getIntent() != null && getIntent().getSerializableExtra("info") != null) {
+            info = (ServicesItem) getIntent().getSerializableExtra("info");
+        } else if (getIntent() != null && getIntent().getSerializableExtra("order") != null) {
+            jiaZhengOrder = (JiaZhengOrder) getIntent().getSerializableExtra("order");
+            loadOrder();
+        }
+    }
+
+    private void loadOrder() {
+        String serviceItem = jiaZhengOrder.serviceItem;
+        if (serviceItem.contains("1")) {
+            yuesaozheng.setChecked(true);
+        }
+        if (serviceItem.contains("2")) {
+            yuesaoshizheng.setChecked(true);
+        }
+        //String date = jiaZhengOrder.age;
+        // String[] dates = date.split("---");
+        seekBarAgeTextView.setText("岁-" + "岁");
+        yuesaoname.setText(jiaZhengOrder.customerName);
+        yuesaophone.setText(jiaZhengOrder.custmerPhone);
+        yuesaodizhi.setText(jiaZhengOrder.address);
+        yuesaobeizhu.setText(jiaZhengOrder.remark);
     }
 
     /**
@@ -118,6 +142,7 @@ public class DetailActivity extends AppCompatActivity {
      * 保存订单
      */
     private void save() {
+        int state=1;
         sb = new StringBuffer();
         if (yuesaozheng.isChecked()) {
             sb.append("1:" + yuesaozheng.getText().toString().trim() + ";");
@@ -150,7 +175,7 @@ public class DetailActivity extends AppCompatActivity {
         }
          showage = seekBarAgeTextView.getText().toString().trim();
          ysbz = yuesaobeizhu.getText().toString().trim();
-         HttpUtils.saveServiceItemJiaZheng(info.type,"2016-5-5","10:00-13:00",sb.toString(),ysbz,name,dizhi,phone,showage,"", new StringCallback() {
+         HttpUtils.saveServiceItemJiaZheng(info.type,"2016-5-5","10:00-13:00",sb.toString(),ysbz,name,dizhi,phone,showage,"",state, new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
                 hd.sendEmptyMessage(2);
@@ -178,6 +203,13 @@ public class DetailActivity extends AppCompatActivity {
      */
     @OnClick(R.id.yuesaoadd)
     void btntijiao() {
+        int state=2;
+        if (yuesaozheng.isChecked()) {
+            sb.append("1:" + yuesaozheng.getText().toString().trim() + ";");
+        }
+        if (yuesaoshizheng.isChecked()) {
+            sb.append("2:" + yuesaoshizheng.getText().toString().trim() + ";");
+        }
          showage = seekBarAgeTextView.getText().toString().trim();
          name = yuesaoname.getText().toString().trim();
         if (name.length() == 0) {
@@ -202,7 +234,24 @@ public class DetailActivity extends AppCompatActivity {
             yuesaodizhi.requestFocus();
             return;
         }
-         ysbz = yuesaobeizhu.getText().toString().trim();
+        ysbz = yuesaobeizhu.getText().toString().trim();
+        HttpUtils.saveServiceItemJiaZheng(info.type,"2016-5-5","10:00-13:00",sb.toString(),ysbz,name,dizhi,phone,showage,"",state, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e) {
+                hd.sendEmptyMessage(2);
+            }
+            @Override
+            public void onResponse(String response) {
+                Gson gson = new Gson();
+                HttpResult result = gson.fromJson(response, HttpResult.class);
+                if (result.success) {
+                    hd.sendEmptyMessage(0);
+                    finish();
+                } else {
+                    hd.sendEmptyMessage(1);
+                }
+            }
+        });
 
     }
 

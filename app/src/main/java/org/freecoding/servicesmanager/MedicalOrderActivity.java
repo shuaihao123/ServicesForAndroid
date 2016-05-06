@@ -1,57 +1,75 @@
 package org.freecoding.servicesmanager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.freecoding.servicesmanager.model.HttpResultList;
+import org.freecoding.servicesmanager.model.JiaZhengOrder;
+import org.freecoding.servicesmanager.utils.HttpUtils;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 /**
  * 医疗订单
  */
-public class MedicalOrderActivity extends AppCompatActivity {
+public class MedicalOrderActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.yiliaoorder)
-    LinearLayout yiliaoorder;
-    @Bind(R.id.yiliaochaxun)
-    ImageView yiliaochaxun;
-    @Bind(R.id.yuyueorder)
-    LinearLayout yuyueorder;
-    @Bind(R.id.yuyuechaxun)
-    ImageView yuyuechaxun;
-    @Bind(R.id.guahaoorder)
-    LinearLayout guahaoorder;
-    @Bind(R.id.guahaochaxun)
-    ImageView guahaochaxun;
-    @Bind(R.id.peizhenorder)
-    LinearLayout peizhenorder;
-    @Bind(R.id.peizhenchaxun)
-    ImageView peizhenchaxun;
-    @Bind(R.id.zhenliaoorder)
-    LinearLayout zhenliaoorder;
-    @Bind(R.id.zhenliaochaxun)
-    ImageView zhenliaochaxun;
-    @Bind(R.id.xitouorder)
-    LinearLayout xitouorder;
-    @Bind(R.id.xitouchaxun)
-    ImageView xitouchaxun;
-
+    @Bind(R.id.homeyiliaoorderitemid)
+    ListView homeyiliaoorderitemid;
+    ServiceAdapter serviceAdapter;
+    JiaZhengOrder jiaZhengOrder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical_order);
         ButterKnife.bind(this);
-    }
+        serviceAdapter = new ServiceAdapter(MedicalOrderActivity.this);
+        homeyiliaoorderitemid.setAdapter(serviceAdapter);
+        homeyiliaoorderitemid.setOnItemClickListener(this);
 
+      /*  HttpUtils.getOrderJiaZhengByTypeAndPhone("13691731023","",new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e) {
+
+            }
+            @Override
+            public void onResponse(String response) {
+                Gson gson = new Gson();
+                HttpResultList<JiaZhengOrder> info = gson.fromJson(response,
+                        new TypeToken<HttpResultList<JiaZhengOrder>>() {
+                        }.getType());
+                if (info != null && info.totalCount > 0) {
+                    List<JiaZhengOrder> list = info.rows;
+                    serviceAdapter.setData(list);
+                }
+            }
+        });*/
+    }
     /**
      * 返回
      */
@@ -65,48 +83,100 @@ public class MedicalOrderActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * 医疗订单/我的医疗咨询订单
-     */
-    @OnClick(R.id.yiliaoorder)
-    void btnyiliaoorder() {
-        Intent intent = new Intent(this, HomeMedicaladviceOrderActivity.class);
-        startActivity(intent);
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        JiaZhengOrder info = serviceAdapter.getData().get(position);
+        switch (info.type) {
+            case 1:
+                Intent intent = new Intent(this, HomeMedicaladviceOrderActivity.class);
+                intent.putExtra("info", info);
+                startActivity(intent);
+                break;
+            case 2:
+                Intent inten= new Intent(this, HomeMedicalinjectionOrderActivity.class);
+                inten.putExtra("info", info);
+                startActivity(inten);
+                break;
+            case 3:
+                Intent inte = new Intent(this, HomeMedicalregistrOrderActivity.class);
+                inte.putExtra("info", info);
+                startActivity(inte);
+                break;
+            case 4:
+                Intent in= new Intent(this, HomeMedicalaccompanyOrderActivity.class);
+                in.putExtra("info", info);
+                startActivity(in);
+                break;
+            case 5:
+                Intent ie = new Intent(this, HomeMedicaltreatmentOrderActivity.class);
+                ie.putExtra("info", info);
+                startActivity(ie);
+                break;
+        }
+
+
     }
 
-    /**
-     * 医疗订单跳转到我的预约打针订单
-     */
-    @OnClick(R.id.yuyueorder)
-    void btnyuyueorder() {
-        Intent intent = new Intent(this, HomeMedicalinjectionOrderActivity.class);
-        startActivity(intent);
-    }
+    public class ServiceAdapter extends BaseAdapter {
+        private LayoutInflater layoutInflater;
+        private Context context;
+        private List<JiaZhengOrder> list;
+        private JiaZhengOrder servicesItem;
 
-    /**
-     * 医疗订单跳转到我的挂号订单
-     */
-    @OnClick(R.id.guahaoorder)
-    void btnguahaoorder() {
-        Intent intent = new Intent(this, HomeMedicalregistrOrderActivity.class);
-        startActivity(intent);
-    }
+        public ServiceAdapter(Context context) {
+            this.context = context;
+            this.layoutInflater = LayoutInflater.from(context);
+        }
 
-    /**
-     * 医疗订单跳转到我的陪诊订单
-     */
-    @OnClick(R.id.peizhenorder)
-    void btnpeizhenorder() {
-        Intent intent = new Intent(this, HomeMedicalaccompanyOrderActivity.class);
-        startActivity(intent);
-    }
+        @Override
+        public int getCount() {
+            if (list != null)
+                return list.size();
+            return 0;
+        }
 
-    /**
-     * 医疗订单跳转到我的上门诊疗订单
-     */
-    @OnClick(R.id.zhenliaoorder)
-    void btnzhenliaoorder() {
-        Intent intent = new Intent(this, HomeMedicaltreatmentOrderActivity.class);
-        startActivity(intent);
+        public List<JiaZhengOrder> getData() {
+            return list;
+        }
+        public void setData(List<JiaZhengOrder> data) {
+            list = data;
+
+        }
+        @Override
+        public Object getItem(int position) {
+            return list.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View view, ViewGroup parent) {
+            ViewHolder viewHolder;
+            JiaZhengOrder info = list.get(position);
+            if (view == null) {
+                view = layoutInflater.inflate(R.layout.order_item, null);
+                viewHolder = new ViewHolder(view);
+                view.setTag(viewHolder);
+            } else {
+                viewHolder = (ViewHolder) view.getTag();
+            }
+            viewHolder.serverorderid.setText(info.orderName);
+            return view;
+        }
+        class ViewHolder {
+            @Bind(R.id.homeserviceordertouxiang)
+            ImageView homeserviceordertouxiang;
+            @Bind(R.id.serverorderid)
+            TextView serverorderid;
+            @Bind(R.id.Noserverorder)
+            TextView Noserverorder;
+
+            ViewHolder(View view) {
+                ButterKnife.bind(this, view);
+            }
+        }
     }
 }

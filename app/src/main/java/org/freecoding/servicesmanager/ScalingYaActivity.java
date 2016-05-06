@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.freecoding.servicesmanager.model.HttpResult;
+import org.freecoding.servicesmanager.model.JiaZhengOrder;
 import org.freecoding.servicesmanager.model.ServicesItem;
 import org.freecoding.servicesmanager.utils.HttpUtils;
 import org.freecoding.servicesmanager.view.RoundLinearLayout;
@@ -56,6 +57,7 @@ public class ScalingYaActivity extends AppCompatActivity {
     CheckBox jieyazhengxing;
     Handler hd;
     ServicesItem info;
+    JiaZhengOrder jiaZhengOrder;
     StringBuffer sb;
     String shijian;
     String name;
@@ -73,9 +75,9 @@ public class ScalingYaActivity extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 if (msg.what == 0) {
-                    msg("保存成功");
+                    msg("操作成功");
                 } else if (msg.what == 1) {
-                    msg("保存失败");
+                    msg("操作失败");
                 } else {
                     msg("请检查网络");
                 }
@@ -101,7 +103,37 @@ public class ScalingYaActivity extends AppCompatActivity {
 
             }
         });
-        info = (ServicesItem) getIntent().getSerializableExtra("info");
+        if (getIntent() != null && getIntent().getSerializableExtra("info") != null) {
+            info = (ServicesItem) getIntent().getSerializableExtra("info");
+        } else if (getIntent() != null && getIntent().getSerializableExtra("order") != null) {
+            jiaZhengOrder = (JiaZhengOrder) getIntent().getSerializableExtra("order");
+            loadOrder();
+        }
+    }
+
+    private void loadOrder() {
+        String serviceItem = jiaZhengOrder.serviceItem;
+        if (serviceItem.contains("1")) {
+            jieyabaya.setChecked(true);
+        }
+        if (serviceItem.contains("2")) {
+            jieyabuya.setChecked(true);
+        }
+        if (serviceItem.contains("3")) {
+            jieyazhengxing.setChecked(true);
+        }
+
+        String date = jiaZhengOrder.serviceTime;
+        String[] dates = date.split("---");
+        int kaishi = Integer.parseInt(dates[0].split(":")[0]);
+        int end = Integer.parseInt(dates[1].split(":")[0]);
+        jieyatime.setProgressLow(kaishi);
+        jieyatime.setProgressHigh(end);
+        jieyashowtime.setText(kaishi + ":00-" + end + ":00");
+        jieyaname.setText(jiaZhengOrder.customerName);
+        jieyaphone.setText(jiaZhengOrder.custmerPhone);
+        jieyadizhi.setText(jiaZhengOrder.address);
+        jieyabeizhu.setText(jiaZhengOrder.remark);
     }
 
     /**
@@ -121,6 +153,7 @@ public class ScalingYaActivity extends AppCompatActivity {
     }
 
     private void save() {
+        int state=1;
          shijian=jieyashowtime.getText().toString().trim();
         sb = new StringBuffer();
         if (jieyabaya.isChecked()) {
@@ -156,7 +189,7 @@ public class ScalingYaActivity extends AppCompatActivity {
             return;
         }
          bz = jieyabeizhu.getText().toString().trim();
-        HttpUtils.saveServiceItemHuLi(info.id,"2016-5-5",shijian, sb.toString(),bz, name, dizhi, phone, new StringCallback() {
+        HttpUtils.saveServiceItemHuLi(info.id,"2016-5-5",shijian, sb.toString(),bz, name, dizhi, phone, state,new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
                 hd.sendEmptyMessage(2);
@@ -184,7 +217,18 @@ public class ScalingYaActivity extends AppCompatActivity {
      */
     @OnClick(R.id.jieyaadd)
     void btntijiao() {
+        int state=2;
         shijian=jieyashowtime.getText().toString().trim();
+        sb = new StringBuffer();
+        if (jieyabaya.isChecked()) {
+            sb.append("1:" + jieyabaya.getText().toString().trim() + ";");
+        }
+        if (jieyabuya.isChecked()) {
+            sb.append("2:" + jieyabuya.getText().toString().trim() + ";");
+        }
+        if (jieyazhengxing.isChecked()) {
+            sb.append("3:" + jieyazhengxing.getText().toString().trim() + ";");
+        }
          name = jieyaname.getText().toString().trim();
         if (name.length() == 0) {
             msg("请输入姓名");
@@ -208,7 +252,24 @@ public class ScalingYaActivity extends AppCompatActivity {
             jieyadizhi.requestFocus();
             return;
         }
-         bz = jieyabeizhu.getText().toString().trim();
+        bz = jieyabeizhu.getText().toString().trim();
+        HttpUtils.saveServiceItemHuLi(info.id,"2016-5-5",shijian, sb.toString(),bz, name, dizhi, phone,state, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e) {
+                hd.sendEmptyMessage(2);
+            }
+            @Override
+            public void onResponse(String response) {
+                Gson gson = new Gson();
+                HttpResult result = gson.fromJson(response, HttpResult.class);
+                if (result.success) {
+                    hd.sendEmptyMessage(0);
+                    finish();
+                } else {
+                    hd.sendEmptyMessage(1);
+                }
+            }
+        });
 
     }
 

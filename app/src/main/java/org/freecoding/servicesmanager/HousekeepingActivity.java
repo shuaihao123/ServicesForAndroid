@@ -135,7 +135,6 @@ public class HousekeepingActivity extends AppCompatActivity implements AdapterVi
         public List<ServicesItem> getData() {
             return list;
         }
-
         public void setData(List<ServicesItem> data) {
             list = data;
             notifyDataSetChanged();

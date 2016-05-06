@@ -29,7 +29,7 @@
         android:divider="@null"
         android:cacheColorHint="@null"
         android:listSelector="@android:color/transparent"
-        android:id="@+id/serviceorderitemid"
+        android:id="@+id/servicddeorderitemid"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

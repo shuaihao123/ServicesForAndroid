@@ -78,9 +78,9 @@ public class HomeNurseActivity extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 if (msg.what == 0) {
-                    msg("提交成功");
+                    msg("操作成功");
                 } else if (msg.what == 1) {
-                    msg("提交失败");
+                    msg("操作失败");
                 } else {
                     msg("请检查网络");
                 }
@@ -115,7 +115,7 @@ public class HomeNurseActivity extends AppCompatActivity {
             loadOrder();
         }
     }
-
+//显示我的订单传过来的数据
     public void loadOrder() {
         String serviceItem = jiaZhengOrder.serviceItem;
         if (serviceItem.contains("1")) {
@@ -140,6 +140,7 @@ public class HomeNurseActivity extends AppCompatActivity {
         baomuname.setText(jiaZhengOrder.customerName);
         baomuphone.setText(jiaZhengOrder.custmerPhone);
         baomufuwudizhi.setText(jiaZhengOrder.address);
+        baomubeizhu.setText(jiaZhengOrder.remark);
     }
 
     /**
@@ -159,6 +160,7 @@ public class HomeNurseActivity extends AppCompatActivity {
     }
 
     private void save() {
+        int  state=1;
         sb = new StringBuffer();
         if (baomucheckzf.isChecked()) {
             sb.append("1:" + baomucheckzf.getText().toString().trim() + ";");
@@ -198,7 +200,7 @@ public class HomeNurseActivity extends AppCompatActivity {
         }
         bz = baomubeizhu.getText().toString().trim();
         shijian = textviewshijian.getText().toString().trim();
-        HttpUtils.saveServiceItemJiaZheng(info.type,"2016-5-5", shijian, sb.toString(),bz, name, dizhi, phone,"","", new StringCallback() {
+        HttpUtils.saveServiceItemJiaZheng(info.type,"2016-5-5", shijian, sb.toString(),bz, name, dizhi, phone,"","",state,new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
                 hd.sendEmptyMessage(2);
@@ -227,6 +229,7 @@ public class HomeNurseActivity extends AppCompatActivity {
      */
     @OnClick(R.id.baomuadd)
     void btntijiao() {
+        int state=2;
         sb = new StringBuffer();
         if (baomucheckzf.isChecked()) {
             sb.append("1:" + baomucheckzf.getText().toString().trim() + ";");
@@ -265,7 +268,23 @@ public class HomeNurseActivity extends AppCompatActivity {
         }
         bz = baomubeizhu.getText().toString().trim();
         shijian = textviewshijian.getText().toString().trim();
-
+        HttpUtils.saveServiceItemJiaZheng(info.type,"2016-5-5", shijian, sb.toString(),bz, name, dizhi, phone,"","",state,new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e) {
+                hd.sendEmptyMessage(2);
+            }
+            @Override
+            public void onResponse(String response) {
+                Gson gson = new Gson();
+                HttpResult result = gson.fromJson(response, HttpResult.class);
+                if (result.success) {
+                    hd.sendEmptyMessage(0);
+                    finish();
+                } else {
+                    hd.sendEmptyMessage(1);
+                }
+            }
+        });
     }
 
     /**

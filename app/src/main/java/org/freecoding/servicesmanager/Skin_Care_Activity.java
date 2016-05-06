@@ -72,9 +72,9 @@ public class Skin_Care_Activity extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 if(msg.what==0){
-                    msg("保存成功");
+                    msg("操作成功");
                 }else if(msg.what==1){
-                    msg("保存失败");
+                    msg("操作失败");
                 }else{
                     msg("请检查网络");
                 }
@@ -117,8 +117,9 @@ public class Skin_Care_Activity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
+//保存
     private void save() {
+        int state=1;
         bz = pifuhulibeizhu.getText().toString().trim();
         shijian=pifuhulishowshijian.getText().toString().trim();
          name = pifuname.getText().toString().trim();
@@ -144,12 +145,11 @@ public class Skin_Care_Activity extends AppCompatActivity {
             pifudizhi.requestFocus();
             return;
         }
-
         sb = new StringBuffer();
         if (pifuhulifuwu.isChecked()) {
             sb.append("1:" + pifuhulifuwu.getText().toString().trim() + ";");
         }
-        HttpUtils.saveServiceItemHuLi(info.id,"2016-5-5",shijian,sb.toString(),bz,name,dizhi,phone,new StringCallback() {
+        HttpUtils.saveServiceItemHuLi(info.id,"2016-5-5",shijian,sb.toString(),bz,name,dizhi,phone,state,new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
                 hd.sendEmptyMessage(2);
@@ -178,6 +178,9 @@ public class Skin_Care_Activity extends AppCompatActivity {
      */
     @OnClick(R.id.pifuadd)
     void btntijiao() {
+       int state=2;
+        bz = pifuhulibeizhu.getText().toString().trim();
+        shijian=pifuhulishowshijian.getText().toString().trim();
          name = pifuname.getText().toString().trim();
         if (name.length() == 0) {
             msg("请输入姓名");
@@ -202,7 +205,28 @@ public class Skin_Care_Activity extends AppCompatActivity {
             return;
         }
          bz = pifuhulibeizhu.getText().toString().trim();
+         sb = new StringBuffer();
+        if (pifuhulifuwu.isChecked()) {
+            sb.append("1:" + pifuhulifuwu.getText().toString().trim() + ";");
+        }
+        HttpUtils.saveServiceItemHuLi(info.id,"2016-5-5",shijian,sb.toString(),bz,name,dizhi,phone,state,new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e) {
+                hd.sendEmptyMessage(2);
+            }
 
+            @Override
+            public void onResponse(String response) {
+                Gson gson = new Gson();
+                HttpResult result = gson.fromJson(response, HttpResult.class);
+                if (result.success) {
+                    hd.sendEmptyMessage(0);
+                    finish();
+                } else {
+                    hd.sendEmptyMessage(1);
+                }
+            }
+        });
     }
     /**
      * 取消

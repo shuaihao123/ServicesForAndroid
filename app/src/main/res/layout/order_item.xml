@@ -13,12 +13,12 @@
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:background="@drawable/ic_jiazhen_bg">
 
             <ImageView
+                android:id="@+id/homeserviceordertouxiang"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginLeft="16dp"
@@ -32,6 +32,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/serverorderid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
@@ -40,6 +41,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/Noserverorder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingRight="32dp"

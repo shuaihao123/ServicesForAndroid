@@ -12,5 +12,6 @@ public class ServicesItem implements Serializable {
     public String remark;
     public String name;
     public String serviceItem;
+    public int state;
     public int type;
 }

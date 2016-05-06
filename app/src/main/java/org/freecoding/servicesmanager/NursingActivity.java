@@ -34,7 +34,6 @@ import okhttp3.Call;
  * 护理
  */
 public class NursingActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
-
     @Bind(R.id.toolbar)
     Toolbar toolbar;
    @Bind(R.id.serviceitemid)
@@ -71,7 +70,6 @@ public class NursingActivity extends AppCompatActivity implements AdapterView.On
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
     }
-
 
     /**
      * 返回
