@@ -8,7 +8,8 @@ import com.zhy.http.okhttp.callback.StringCallback;
  */
 public class HttpUtils {
     private static final String BASE_URL = "http://139.196.230.64:8080/ouyang/";
-    private static final String BASE_URL2 = "http://139.196.230.64:8080/ouyang2/";
+    //private static final String BASE_URL2 = "http://139.196.230.64:8080/ouyang2/";
+    private static final String BASE_URL2 = "http://10.0.2.2:8080/ouyang2/";
 
     /**
      * 登录
@@ -75,8 +76,9 @@ public class HttpUtils {
      * @param type
      * @param callback
      */
-    public static void getOrderJiaZhengByTypeAndPhone(String phoneNo, String type, StringCallback callback) {
-        String url = BASE_URL2 + "member/getOrderJiaZhengByTypeAndPhone.do?phoneNo="+phoneNo+"&type="+type;
+    public static void getOrderJiaZhengByTypeAndPhone(String phoneNo, int type, StringCallback callback) {
+            String url = BASE_URL2 + "member/getOrderJiaZhengByTypeAndPhone.do?phoneNo="+phoneNo+"&type="+type;
+
         OkHttpUtils
                 .get()
                 .url(url)
@@ -143,7 +145,7 @@ public class HttpUtils {
      */
 
     public static void saveServiceItemHuLi(int type, String serviceDate, String serviceTime, String serviceItem, String bz, String name, String address, String phone,int state, StringCallback callback) {
-        String url = BASE_URL + "member.do?method=orderHuLi&phoneNo=" + phone + "&type=" + type + "&serviceDate=" + serviceDate + "&serviceTime=" + serviceTime + "&serviceItem=" + serviceItem + "&remark=" + bz + "&customerName=" + name + "&address=" + address + "&state="+state;
+        String url = BASE_URL2 + "member/orderHuLi.do?phoneNo=" + phone + "&type=" + type + "&serviceDate=" + serviceDate + "&serviceTime=" + serviceTime + "&serviceItem=" + serviceItem + "&remark=" + bz + "&customerName=" + name + "&address=" + address + "&state="+state;
         OkHttpUtils
                 .get()
                 .url(url)
@@ -159,7 +161,7 @@ public class HttpUtils {
      * @param callback
      */
     public static void getMemberOrderHuLiByNo(String phoneNo, String orderNo, StringCallback callback) {
-        String url = BASE_URL + "member.do?method=getMemberOrderHuLiByNo&phoneNo=" + phoneNo + "&orderNo=" + orderNo;
+        String url = BASE_URL2 + "member/getMemberOrderHuLiByNo.do?phoneNo=" + phoneNo + "&orderNo=" + orderNo;
         OkHttpUtils
                 .get()
                 .url(url)
@@ -179,7 +181,7 @@ public class HttpUtils {
      * @param callback
      */
     public static void orderHuLi(String phoneNo, int type, String serviceDate, String serviceTime, String serviceItem, String remark, StringCallback callback) {
-        String url = BASE_URL + "member.do?method=orderHuLi&phoneNo=" + phoneNo + "&type=" + type + "&serviceDate=" + serviceDate + "&serviceTime=" + serviceTime + "&serviceItem=" + serviceItem + "&remark=" + remark;
+        String url = BASE_URL2 + "member/orderHuLi.do?phoneNo=" + phoneNo + "&type=" + type + "&serviceDate=" + serviceDate + "&serviceTime=" + serviceTime + "&serviceItem=" + serviceItem + "&remark=" + remark;
         OkHttpUtils
                 .get()
                 .url(url)
@@ -193,7 +195,7 @@ public class HttpUtils {
      * @param callback
      */
     public static void getAllHuLiItem(StringCallback callback) {
-        String url = BASE_URL + "huliitem.do?method=getAllHuLiItem";
+        String url = BASE_URL2 + "member/getAllHuLiItem.do";
         OkHttpUtils
                 .get()
                 .url(url)
@@ -216,8 +218,23 @@ public class HttpUtils {
      * @param callback
      */
 
+
+    /**
+     * 保存医疗服务
+     *
+     * @param type
+     * @param serviceDate
+     * @param serviceTime
+     * @param serviceItem
+     * @param name
+     * @param bz
+     * @param address
+     * @param phone
+     * @param callback
+     */
+
     public static void saveServiceItemYiLiao(int type, String serviceDate, String serviceTime, String serviceItem,String bz, String name, String address, String phone, StringCallback callback) {
-        String url = BASE_URL + "member.do?method=orderYiLiao&phoneNo="+phone+"&type="+type+"&serviceDate="+serviceDate+"&serviceTime="+serviceTime+"&serviceItem="+serviceItem+"&remark="+bz+"&customerName="+name+"&address="+address+"&state=1";
+        String url = BASE_URL2 + "member/orderYiLiao.do?phoneNo="+phone+"&type="+type+"&serviceDate="+serviceDate+"&serviceTime="+serviceTime+"&serviceItem="+serviceItem+"&remark="+bz+"&customerName="+name+"&address="+address+"&state=1";
         OkHttpUtils
                 .get()
                 .url(url)
@@ -225,13 +242,14 @@ public class HttpUtils {
                 .execute(callback);
     }
 
+
     /**
      * 菜单医疗
      *
      * @param callback
      */
     public static void getAllYiLiaoItem(StringCallback callback) {
-        String url = BASE_URL + "yiliaoitem.do?method=getAllYiLiaoItem";
+        String url = BASE_URL2 + "member/getAllYiLiaoItem.do";
         OkHttpUtils
                 .get()
                 .url(url)

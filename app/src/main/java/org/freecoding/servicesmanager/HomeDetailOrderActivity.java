@@ -48,7 +48,7 @@ public class HomeDetailOrderActivity extends AppCompatActivity {
         serviceorderitemid.setAdapter(serviceorderAdapter);
 
         //查询保姆订单列表
-     HttpUtils.getOrderJiaZhengByTypeAndPhone(info.custmerPhone, "2", new StringCallback() {
+     HttpUtils.getOrderJiaZhengByTypeAndPhone(info.custmerPhone, 2, new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
             }

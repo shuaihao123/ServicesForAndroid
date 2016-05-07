@@ -53,7 +53,7 @@ public class HomeOrderActivity extends AppCompatActivity implements AdapterView.
         homeorderitemid.setAdapter(serviceAdapter);
         homeorderitemid.setOnItemClickListener(this);
 
-        HttpUtils.getOrderJiaZhengByTypeAndPhone("13691731023","",new StringCallback() {
+            HttpUtils.getOrderJiaZhengByTypeAndPhone("13691731023",0,new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
 
