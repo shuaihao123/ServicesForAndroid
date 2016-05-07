@@ -18,6 +18,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.freecoding.servicesmanager.model.HttpResult;
 import org.freecoding.servicesmanager.model.JiaZhengOrder;
+import org.freecoding.servicesmanager.model.JiaZhengServiceItem;
 import org.freecoding.servicesmanager.model.ServicesItem;
 import org.freecoding.servicesmanager.utils.HttpUtils;
 import org.freecoding.servicesmanager.view.MultiLineEditText;
@@ -51,7 +52,7 @@ public class DetailActivity extends AppCompatActivity {
     @Bind(R.id.yuesaoshizheng)
     CheckBox yuesaoshizheng;
     JiaZhengOrder jiaZhengOrder;
-    ServicesItem info;
+    JiaZhengServiceItem info;
     Handler hd;
     StringBuffer sb;
     String ysbz;
@@ -99,7 +100,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
         if (getIntent() != null && getIntent().getSerializableExtra("info") != null) {
-            info = (ServicesItem) getIntent().getSerializableExtra("info");
+            info = (JiaZhengServiceItem) getIntent().getSerializableExtra("info");
         } else if (getIntent() != null && getIntent().getSerializableExtra("order") != null) {
             jiaZhengOrder = (JiaZhengOrder) getIntent().getSerializableExtra("order");
             loadOrder();

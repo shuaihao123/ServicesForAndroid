@@ -18,6 +18,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.freecoding.servicesmanager.model.HttpResult;
 import org.freecoding.servicesmanager.model.JiaZhengOrder;
+import org.freecoding.servicesmanager.model.JiaZhengServiceItem;
 import org.freecoding.servicesmanager.model.ServicesItem;
 import org.freecoding.servicesmanager.utils.HttpUtils;
 import org.freecoding.servicesmanager.view.MultiLineEditText;
@@ -57,7 +58,7 @@ public class HomeNurseActivity extends AppCompatActivity {
             EditText baomuphone;
     @Bind(R.id.baomufuwudizhi)//地址
             EditText baomufuwudizhi;
-    ServicesItem info;
+    JiaZhengServiceItem info;
     JiaZhengOrder jiaZhengOrder;
     Handler hd;
     String shijian;
@@ -109,7 +110,7 @@ public class HomeNurseActivity extends AppCompatActivity {
             }
         });
         if (getIntent() != null && getIntent().getSerializableExtra("info") != null) {
-            info = (ServicesItem) getIntent().getSerializableExtra("info");
+            info = (JiaZhengServiceItem) getIntent().getSerializableExtra("info");
         } else if (getIntent() != null && getIntent().getSerializableExtra("order") != null) {
             jiaZhengOrder = (JiaZhengOrder) getIntent().getSerializableExtra("order");
             loadOrder();
@@ -158,7 +159,7 @@ public class HomeNurseActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
+//保存
     private void save() {
         int  state=1;
         sb = new StringBuffer();
