@@ -21,6 +21,7 @@ import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.freecoding.servicesmanager.model.HttpResultList;
+import org.freecoding.servicesmanager.model.JiaZhengServiceItem;
 import org.freecoding.servicesmanager.model.ServicesItem;
 import org.freecoding.servicesmanager.utils.HttpUtils;
 
@@ -61,11 +62,11 @@ public class HousekeepingActivity extends AppCompatActivity implements AdapterVi
             @Override
             public void onResponse(String response) {
                 Gson gson = new Gson();
-                HttpResultList<ServicesItem> info = gson.fromJson(response,
-                        new TypeToken<HttpResultList<ServicesItem>>() {
+                HttpResultList<JiaZhengServiceItem> info = gson.fromJson(response,
+                        new TypeToken<HttpResultList<JiaZhengServiceItem>>() {
                 }.getType());
                 if (info != null && info.totalCount > 0) {
-                    List<ServicesItem> list = info.rows;
+                    List<JiaZhengServiceItem> list = info.rows;
                     serviceAdapter.setData(list);
                 }
             }
@@ -92,7 +93,7 @@ public class HousekeepingActivity extends AppCompatActivity implements AdapterVi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ServicesItem info = serviceAdapter.getData().get(position);
+        JiaZhengServiceItem info = serviceAdapter.getData().get(position);
         switch (info.type) {
             case 1:
                 Intent inten = new Intent(this, HomeNurseActivity.class);
@@ -116,8 +117,8 @@ public class HousekeepingActivity extends AppCompatActivity implements AdapterVi
     public class ServiceAdapter extends BaseAdapter {
         private LayoutInflater layoutInflater;
         private Context context;
-        private List<ServicesItem> list;
-        private ServicesItem servicesItem;
+        private List<JiaZhengServiceItem> list;
+        private JiaZhengServiceItem servicesItem;
 
         public ServiceAdapter(Context context) {
             this.context = context;
@@ -132,10 +133,10 @@ public class HousekeepingActivity extends AppCompatActivity implements AdapterVi
             return 0;
         }
 
-        public List<ServicesItem> getData() {
+        public List<JiaZhengServiceItem> getData() {
             return list;
         }
-        public void setData(List<ServicesItem> data) {
+        public void setData(List<JiaZhengServiceItem> data) {
             list = data;
             notifyDataSetChanged();
         }
@@ -153,7 +154,7 @@ public class HousekeepingActivity extends AppCompatActivity implements AdapterVi
         @Override
         public View getView(int position, View view, ViewGroup parent) {
             ViewHolder viewHolder;
-            ServicesItem info = list.get(position);
+            JiaZhengServiceItem info = list.get(position);
             if (view == null) {
                 view = layoutInflater.inflate(R.layout.service_item, null);
                 viewHolder = new ViewHolder(view);

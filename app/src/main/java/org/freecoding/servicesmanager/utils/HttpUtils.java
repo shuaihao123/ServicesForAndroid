@@ -60,7 +60,7 @@ public class HttpUtils {
      * @param callback
      */
     public static void saveServiceItemJiaZheng(int servicetype, String serviceDate, String serviceTime, String serviceItem, String remark, String name, String address, String phone, String age, String jiguan,int state, StringCallback callback) {
-        String url = BASE_URL2 + "member/orderJiaZheng.do?type=" + servicetype + "&phoneNo=" + phone + "&serviceDate=" + serviceDate + "&serviceTime=" + serviceTime + "&serviceItem=" + serviceItem + ";&remark=" + remark + "&address=" + address + "&customerName=" + name + "&age=" + age + "&jiguan=" + jiguan + "&state="+state;
+        String url = BASE_URL2 + "member/orderJiaZheng.do?type=" + servicetype + "&phoneNo=" + phone + "&serviceDate=" + serviceDate + "&serviceTime=" + serviceTime + "&serviceItem=" + serviceItem + "&remark=" + remark + "&address=" + address + "&customerName=" + name + "&age=" + age + "&jiguan=" + jiguan + "&state="+state;
         OkHttpUtils
                 .get()
                 .url(url)
@@ -200,6 +200,7 @@ public class HttpUtils {
                 .build()
                 .execute(callback);
     }
+
 
     /**
      * 保存医疗服务

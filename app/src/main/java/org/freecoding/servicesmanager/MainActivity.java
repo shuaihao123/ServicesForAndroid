@@ -1,24 +1,17 @@
 package org.freecoding.servicesmanager;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Switch;
 import android.widget.TextView;
-
-import org.freecoding.servicesmanager.view.RoundRelativeLayout;
-import org.freecoding.servicesmanager.view.RoundTextView;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * 主页面
@@ -45,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         init();
+
     }
 
     @Override
@@ -91,6 +85,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MedicalActivity.class);
                 startActivity(intent);
+            }
+        });
+        gukefuwutai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri uri= Uri.parse("tel:"+"15771722086");
+                Intent call=new Intent(Intent.ACTION_CALL,uri);
+              // startActivity(call);
             }
         });
     }
