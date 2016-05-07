@@ -8,8 +8,8 @@ import com.zhy.http.okhttp.callback.StringCallback;
  */
 public class HttpUtils {
     private static final String BASE_URL = "http://139.196.230.64:8080/ouyang/";
-    //private static final String BASE_URL2 = "http://139.196.230.64:8080/ouyang2/";
-    private static final String BASE_URL2 = "http://10.0.2.2:8080/ouyang2/";
+    private static final String BASE_URL2 = "http://139.196.230.64:8080/ouyang2/";
+    //private static final String BASE_URL2 = "http://10.0.2.2:8080/ouyang2/";
 
     /**
      * 登录
